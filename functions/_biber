@@ -1,0 +1,10 @@
+#compdef biber
+
+_biber() {
+  _arguments \
+    '(- *)'--cache'[If running as a PAR::Packer binary, show the cache location and exit.]' \
+    {--configfile,-g}'[Use file as configuration file for biber]:file:_files -g "*"' \
+    '(- *)'{-v,--version}'[Display version number.]' \
+    '(- *)'{-h,--help}'[Show this help message.]' \
+    '*:BibLaTeX control file:_files -g "*.bcf"'
+}

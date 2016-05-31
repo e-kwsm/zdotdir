@@ -1,0 +1,45 @@
+#compdef inkscape
+
+_inkscape() {
+  _arguments \
+    '(- *)'{-V,--version}'[Print the Inkscape version number]' \
+    {-z,--without-gui}'[Do not use X server (only process files from console)]' \
+    {-g,--with-gui}'[Try to use X server (even if $DISPLAY is not set)]' \
+    {-f,--file=}'[Open specified document(s) (option string may be excluded)]:file:_files' \
+    {-p,--print=}'[Print document(s) to specified output file (use | program for pipe)]:file:_files' \
+    {-e,--export-png=}'[Export document to a PNG file]:file:_files -g "*.png"' \
+    {-d,--export-dpi=}'[Resolution for exporting to bitmap and for rasterization of filters in PS/EPS/PDF (default 90)]:arguments' \
+    {-a,--export-area=}'[Exported area in SVG user units (default is the page; 0,0 is lower-left corner)]:arguments' \
+    {-D,--export-area-drawing}'[Exported area is the entire drawing (not page)]' \
+    {-C,--export-area-page}'[Exported area is the entire page]' \
+    --export-area-snap'[Snap the bitmap export area outwards to the nearest integer values (in SVG user units)]' \
+    {-w,--export-width=}'[The width of exported bitmap in pixels (overrides export-dpi)]:arguments' \
+    {-h,--export-height=}'[The height of exported bitmap in pixels (overrides export-dpi)]:arguments' \
+    {-i,--export-id=}'[The ID of the object to export]:arguments' \
+    {-j,--export-id-only}'[Export just the object with export-id, hide all others (only with export-id)]' \
+    {-t,--export-use-hints}'[Use stored filename and DPI hints when exporting (only with export-id)]' \
+    {-b,--export-background}'[Background color of exported bitmap (any SVG-supported color string)]:arguments' \
+    {-y,--export-background-opacity=}'[Background opacity of exported bitmap (either 0.0 to 1.0, or 1 to 255)]:arguments' \
+    {-l,--export-plain-svg=}'[Export document to plain SVG file (no sodipodi or inkscape namespaces)]:file:_files -g "*.svg"' \
+    {-P,--export-ps=}'[Export document to a PS file]:file:_files -g "*.ps"' \
+    {-E,--export-eps=}'[Export document to an EPS file]:file:_files -g "*.eps"' \
+    {-A,--export-pdf=}'[Export document to a PDF file]:file:_files -g "*.pdf"' \
+    --export-latex'[Export PDF/PS/EPS without text. Besides the PDF/PS/EPS, a LaTeX file is exported, putting the text on top of the PDF/PS/EPS file. Include the result in LaTeX like: \input{latexfile.tex}]' \
+    {-T,--export-text-to-path}'[Convert text object to paths on export (PS, EPS, PDF)]' \
+    --export-ignore-filters'[Render filtered objects without filters, instead of rasterizing (PS, EPS, PDF)]' \
+    {-X,--query-x}'[Query the X coordinate of the drawing or, if specified, of the object with --query-id]' \
+    {-Y,--query-y}'[Query the Y coordinate of the drawing or, if specified, of the object with --query-id]' \
+    {-W,--query-width}'[Query the width of the drawing or, if specified, of the object with --query-id]' \
+    {-H,--query-height}'[Query the height of the drawing or, if specified, of the object with --query-id]' \
+    {-S,--query-all}'[List id,x,y,w,h for all objects]' \
+    {-I,--query-id=}'[The ID of the object whose dimensions are queried]:arguments' \
+    {-x,--extension-directory}'[Print out the extension directory and exit]' \
+    --vacuum-defs'[Remove unused definitions from the defs section(s) of the document]' \
+    --verb-list'[List the IDs of all the verbs in Inkscape]' \
+    --verb='[Verb to call when Inkscape opens.]:VERB-ID' \
+    --select='[Object ID to select when Inkscape opens.]:OBJECT-ID' \
+    --shell'[Start Inkscape in interactive shell mode.]' \
+    '(- *)'--help'[Show this help message]' \
+    '(- *)'--usage'[Display brief usage message]' \
+    '*:file:_files -g "*.svg"'
+}

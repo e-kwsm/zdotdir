@@ -1,0 +1,20 @@
+#compdef dropbox
+
+_dropbox() {
+  _values \
+    'commands' \
+    'status[get current status of the dropboxd]' \
+    'throetle[set bandwidth limits for Dropbox]' \
+    'help[provide help]' \
+    'puburl[public url of a file in your dropboxs public folder]' \
+    'stop[stop dropboxd]' \
+    'running[return whether dropbox is running]' \
+    'start[start dropboxd]' \
+    'filestatus[get current sync status of one or more files]' \
+    'ls[list directory contents with current sync status]' \
+    'autostart[automatically start dropbox at login]' \
+    'exclude[ignores/excludes a directory from syncing]' \
+    'lansync[enables or disables LAN sync]' \
+    'sharelink[get a shared link for a file in your dropbox]' \
+    'proxy[set proxy settings for Dropbox]'
+}

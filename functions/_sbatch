@@ -1,0 +1,10 @@
+#compdef sbatch
+
+_sbatch(){
+  _arguments \
+    '(- *)'{-h,--help}'[Display help information and exit.]' \
+    {-H,--hold}'[Specifies that a user hold be applied to the job at submission time]' \
+    '(- *)'{-u,--usage}'[ Display brief help message and exit.]' \
+    '(- *)'{-V,--version}'[ Display version information and exit.]' \
+    '*:script:_files -g "*.sh"'
+}
