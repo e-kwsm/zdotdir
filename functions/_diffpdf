@@ -1,0 +1,7 @@
+#compdef diffpdf
+
+_diffpdf(){
+  _arguments \
+    '1:pdf1:_files -g "*.pdf"' \
+    '2:pdf2:_files -g "*.pdf"'
+}
