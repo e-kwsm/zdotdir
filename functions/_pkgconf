@@ -1,0 +1,13 @@
+#compdef pkgconf
+
+_pkgconf() {
+  _arguments \
+    '--cflags[print required CFLAGS to stdout]' \
+    '--cflags-only-I[print required include-dir CFLAGS to stdout]' \
+    '--cflags-only-other[print required non-include-dir CFLAGS to stdout]' \
+    '--libs[print required linker flags to stdout]' \
+    '--libs-only-L[print required LDPATH linker flags to stdout]' \
+    '--libs-only-l[print required LIBNAME linker flags to stdout]' \
+    '--libs-only-other[print required other linker flags to stdout]' \
+    '*:LIBRARIES:_files -g "*.pc"'
+}
