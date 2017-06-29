@@ -1,0 +1,13 @@
+#compdef pbsnodes
+
+_arguments \
+  -a'[All attributes of a node or all nodes are listed.]:node' \
+  -x'[Same as -a, but the output has an XML-like format.]:node' \
+  -c'[Clear OFFLINE from listed nodes.]:node' \
+  -o'[Add the OFFLINE state.]:node' \
+  -r'[Reset the listed nodes by clearing OFFLINE and adding DOWN state.]:node' \
+  -l'[List node names and their state.]:state:(free offline down reserve job-exclusive job-sharing busy time-shared state-unknown)' \
+  -N'[Specify a "note" attribute.]:note' \
+  -n'[Show the "note" attribute for nodes that are DOWN, OFFLINE, or UNKNOWN. This option requires -l.]' \
+  -q'[Supress all error messages.]' \
+  -s'[Specify the PBS server’s hostname or IP address.]'
