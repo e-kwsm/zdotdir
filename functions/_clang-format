@@ -1,0 +1,14 @@
+#compdef clang-format
+
+_clang-format() {
+  _arguments \
+    -dump-config'[Dump configuration options to stdout and exit]' \
+    -i'[Inplace edit <file>s, if specified.]' \
+    -style='[Coding style, currently supports]:style:(LLVM Google Chromium Mozilla WebKit)' \
+    '(- *)'-help'[Display available options]' \
+    '(- *)'-help-hidden'[Display available options]' \
+    '(- *)'-help-list'[Display list of available options]' \
+    '(- *)'-help-list-hidden'[Display list of available options]' \
+    '(- *)'-version'[Display the version of this program]' \
+    '*:file:_files -g "*.(cc|cpp|h)"'
+}
