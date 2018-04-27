@@ -14,7 +14,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 # Keep 10000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.zsh_history
+HISTFILE=$XDG_DATA_HOME/zsh/history
 setopt hist_expire_dups_first
 setopt hist_find_no_dups
 setopt hist_ignore_dups
@@ -25,7 +25,7 @@ setopt inc_append_history
 
 # Use modern completion system
 autoload -Uz compinit
-compinit
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -47,16 +47,15 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 TERM=xterm-256color
 
-: ${XDG_CONFIG_HOME:=$HOME/.config}
-[ -f $XDG_CONFIG_HOME/zsh/zsh_aliases ] && . $XDG_CONFIG_HOME/zsh/zsh_aliases
+[ -r $ZDOTDIR/zsh_aliases ] && . $ZDOTDIR/zsh_aliases
 
-[ -d $XDG_CONFIG_HOME/zsh/functions ] && fpath=($XDG_CONFIG_HOME/zsh/functions $fpath)
+[ -d $ZDOTDIR/functions ] && fpath=($ZDOTDIR/functions $fpath)
 autoload -U compinit
-compinit
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump
 
-[ -f ~/.zshrc_local ] && . ~/.zshrc_local
+[ -r ~/.zshrc_local ] && . ~/.zshrc_local
 
-[ -f ~/.ssh/config ] && _cache_hosts=($(grep '^Host[[:space:]]' ~/.ssh/config | cut -d' ' -f2-))
+[ -r ~/.ssh/config ] && _cache_hosts=($(grep '^Host[[:space:]]' ~/.ssh/config | cut -d' ' -f2-))
 
 function precmd() { print -n "\e]2;$USER@$HOST:${PWD/~HOME/~}\a" }
 function preexec() { print -n "\e]2;$USER@$HOST:${PWD/~HOME/~}\a" }
