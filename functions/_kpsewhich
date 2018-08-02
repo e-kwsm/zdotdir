@@ -1,0 +1,42 @@
+#compdef kpsewhich
+
+_kpsewhich() {
+  _arguments \
+    -all'[output all matches, one per line]' \
+    -debug='[debugging flags]:num' \
+    {-D,-dpi}='[resolution]:num' \
+    -expand-path='[complete path expansion]:string' \
+    -expand-var='[variable expansion]:string' \
+    -format='[file type]:name' \
+    '(- *)'-help'[help]' \
+    '(- *)'-help-formats'[display information about all supported file formats]' \
+    -show-path='[]:name' \
+    -var-value='[]:variable:(
+      TEXCONFIG
+      TEXDOCS
+      TEXFORMATS
+      TEXMF
+      TEXMFCACHE
+      TEXMFCNF
+      TEXMFCONFIG
+      TEXMFDIST
+      TEXMFHOME
+      TEXMFLOCAL
+      TEXMFMAIN
+      TEXMFROOT
+      TEXMFSCRIPTS
+      TEXMFSYSCONFIG
+      TEXMFSYSVAR
+      TEXMFVAR
+      buf_size
+      font_max
+      font_mem_size
+      main_memory
+      max_in_open
+      max_print_line
+      max_strings
+      stack_size
+    )' \
+    '(- *)'-version'[version]' \
+    '*:file:_files'
+}
