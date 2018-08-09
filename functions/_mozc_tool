@@ -1,0 +1,13 @@
+#compdef /usr/lib/mozc/mozc_tool
+
+_mozc_tool() {
+  _arguments \
+    --mode='[]:mode:(
+      about_dialog
+      character_palette
+      config_dialog
+      dictionary_tool
+      hand_writing
+      word_register_dialog
+    )'
+}
