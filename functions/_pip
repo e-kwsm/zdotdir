@@ -1,0 +1,176 @@
+#compdef pip pip3
+
+# main {{{1
+_pip3(){
+  local curcontext=$curcontext state lstate line
+
+
+  _arguments \
+    '(- *)'{-h,--help}'[Show help]' \
+    --isolated'[Run pip in an isolated mode, ignoring environment variables and user configuration.]' \
+    {-v,--verbose}'[Give more output. Option is additive, and can be used up to 3 times.]' \
+    '(- *)'{-V,--version}'[Show version and exit.]' \
+    {-q,--quiet}'[Give less output. (WARNING logging levels).]' \
+    -qq'[Give less output. (ERROR logging levels).]' \
+    -qqq'[Give less output. (CRITICAL logging levels).]' \
+    --log'[Path to a verbose appending log.]: :_files' \
+    --proxy'[Specify a proxy in the form \[user:passwd@\]proxy.server:port.]:proxy ' \
+    --retries'[Maximum number of retries each connection should attempt (default 5 times).]: ' \
+    --timeout'[Set the socket timeout (default 15 seconds).]:sec' \
+    --exists-action'[Default action when a path already exists]: :(s\:witch i\:gnore w\:ipe b\:ackup a\:bort)' \
+    --trusted-host'[Mark this host as trusted, even though it does not have valid or any HTTPS.]:hostname:' \
+    --cert'[Path to alternate CA bundle.]: :_files' \
+    --client-cert'[Path to SSL client certificate, a single file containing the private key and the certificate in PEM format.]: :_files' \
+    --cache-dir'[Store the cache data in <dir>.]:dir:_path_files -/' \
+    --no-cache-dir'[Disable the cache.]' \
+    --disable-pip-version-check"[Don't periodically check PyPI to determine whether a new version of pip is available for download. Implied with --no-index.]" \
+    --no-color'[Suppress colored output]' \
+    '*::pip3 command:_pip3_command'
+}
+
+# _pip3-command {{{1
+(( $+functions[_pip3_command] )) || _pip3_command() {
+  local -a _pip3_cmds=(
+    'install:Install packages.'
+    'download:Download packages.'
+    'uninstall:Uninstall packages.'
+    'freeze:Output installed packages in requirements format.'
+    'list:List installed packages.'
+    'show:Show information about installed packages.'
+    'check:Verify installed packages have compatible dependencies.'
+    'config:Manage local and global configuration.'
+    'search:Search PyPI for packages.'
+    'wheel:Build wheels from your requirements.'
+    'hash:Compute hashes of package archives.'
+    'completion:A helper command used for command completion.'
+    'help:Show help for commands.'
+  )
+
+  if (( CURRENT == 1 )); then
+    _describe -t commands 'pip3 command' _pip3_cmds
+  else
+    local curcontext="$curcontext" ret=1
+
+    cmd="${${_pip3_cmds[(r)$words[1]:*]%%:*}}"
+
+    if (( $#cmd )); then
+      curcontext="${curcontext%:*:*}:pip3-${cmd}:"
+
+      if [ $cmd = 'help' ]; then
+        _message 'no more arguments'
+      elif ! _call_function ret _pip3-$cmd; then
+	_default && ret=0
+      fi
+    else
+      _default && ret=0
+    fi
+    return ret
+  fi
+}
+
+# install {{{1
+(( $+functions[_pip3-install] )) || _pip3-install(){
+  _arguments \
+    {-r,--requirement}'[Install from the given requirements file.]:file:_files' \
+    --no-deps"[Don't install package dependencies.]" \
+    --user'[Install to the Python user install directory for your platform.]' \
+    --root'[Install everything relative to this alternate root directory.]:dir:_path_files -/' \
+    --prefix'[Installation prefix where lib, bin and other top-level folders are placed]:dir:_path_files -/' \
+    {-b,--build}'[Directory to unpack packages into and build in.]:dir:_path_files -/' \
+    {-U,--upgrade}'[Upgrade all specified packages to the newest available version.]' \
+    --upgrade-strategy'[Determines how dependency upgrading should be handled]:upgrade_strategy:(eager only-if-needed)' \
+    --force-reinstall'[Reinstall all packages even if they are already up-to-date.]' \
+    '(- *)'--help'[Show help.]' \
+    '*:package' \
+    && return 0
+}
+
+# download {{{1
+(( $+functions[_pip3-download] )) || _pip3-download(){
+  _arguments \
+    '(- *)'--help'[Show help.]' \
+    && return 0
+}
+
+# uninstall {{{1
+(( $+functions[_pip3-uninstall] )) || _pip3-uninstall(){
+  _arguments \
+    {-r,--requirement}'[Uninstall all the packages listed in the given requirements file.]:file:_files' \
+    {-y,--yes}"[Don't ask for confirmation of uninstall deletions.]" \
+    '(- *)'--help'[Show help.]' \
+    '*:package' \
+    && return 0
+}
+
+# freeze {{{1
+(( $+functions[_pip3-freeze] )) || _pip3-freeze(){
+  _arguments \
+    {-r,--requirement}'[Use the order in the given requirements file and its comments when generating output.]:file:_files' \
+    {-f,--find-links}'[URL for finding packages, which will be added to the output.]:url' \
+    {-l,--local}'[If in a virtualenv that has global access, do not output globally-installed packages.]' \
+    --user'[Only output packages installed in user-site.]' \
+    --all'[Do not skip these packages in the output: pip, setuptools, distribute, wheel]' \
+    '(- *)'--help'[Show help.]' \
+    && return 0
+}
+# }}}1
+# list {{{1
+(( $+functions[_pip3-list] )) || _pip3-list(){
+  _arguments \
+    {-o,--outdated}'[List outdated packages]' \
+    {-u,--uptodate}'[List uptodate packages]' \
+    {-e,--editable}'[List editable projects.]' \
+    {-l,--local}'[If in a virtualenv that has global access, do not list globally-installed packages.]' \
+    --user'[Only output packages installed in user-site.]' \
+    --format'[Select the output format]:list_format:(columns freeze json)' \
+    '(- *)'--help'[Show help.]' \
+    && return 0
+}
+
+# show {{{1
+(( $+functions[_pip3-show] )) || _pip3-show(){
+  _arguments \
+    {-f,--files}'[Show the full list of installed files for each package.]' \
+    '(- *)'--help'[Show help.]' \
+    '*:package' \
+    && return 0
+}
+
+# check {{{1
+(( $+functions[_pip3-check] )) || _pip3-check(){
+  _arguments \
+    '(- *)'--help'[Show help.]' \
+    && return 0
+}
+
+# config {{{1
+(( $+functions[_pip3-config] )) || _pip3-config(){
+  _arguments \
+    '(- *)'--help'[Show help.]' \
+    && return 0
+}
+
+# search {{{1
+(( $+functions[_pip3-search] )) || _pip3-search(){
+  _arguments \
+    '(- *)'--help'[Show help.]' \
+    && return 0
+}
+
+# wheel {{{1
+(( $+functions[_pip3-wheel] )) || _pip3-wheel(){
+  _arguments \
+    '(- *)'--help'[Show help.]' \
+    && return 0
+}
+
+# hash {{{1
+(( $+functions[_pip3-hash] )) || _pip3-hash(){
+  _arguments \
+    '(- *)'--help'[Show help.]' \
+    && return 0
+}
+
+# }}}1
+
+# vi:fdm=marker
