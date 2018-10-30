@@ -1,7 +1,7 @@
 #compdef pip pip3
 
 # main {{{1
-_pip3(){
+_pip(){
   local curcontext=$curcontext state lstate line
 
 
@@ -25,12 +25,12 @@ _pip3(){
     --no-cache-dir'[Disable the cache.]' \
     --disable-pip-version-check"[Don't periodically check PyPI to determine whether a new version of pip is available for download. Implied with --no-index.]" \
     --no-color'[Suppress colored output]' \
-    '*::pip3 command:_pip3_command'
+    '*::pip command:_pip_command'
 }
 
-# _pip3-command {{{1
-(( $+functions[_pip3_command] )) || _pip3_command() {
-  local -a _pip3_cmds=(
+# _pip-command {{{1
+(( $+functions[_pip_command] )) || _pip_command() {
+  local -a _pip_cmds=(
     'install:Install packages.'
     'download:Download packages.'
     'uninstall:Uninstall packages.'
@@ -47,18 +47,18 @@ _pip3(){
   )
 
   if (( CURRENT == 1 )); then
-    _describe -t commands 'pip3 command' _pip3_cmds
+    _describe -t commands 'pip command' _pip_cmds
   else
     local curcontext="$curcontext" ret=1
 
-    cmd="${${_pip3_cmds[(r)$words[1]:*]%%:*}}"
+    cmd="${${_pip_cmds[(r)$words[1]:*]%%:*}}"
 
     if (( $#cmd )); then
-      curcontext="${curcontext%:*:*}:pip3-${cmd}:"
+      curcontext="${curcontext%:*:*}:pip-${cmd}:"
 
       if [ $cmd = 'help' ]; then
         _message 'no more arguments'
-      elif ! _call_function ret _pip3-$cmd; then
+      elif ! _call_function ret _pip-$cmd; then
 	_default && ret=0
       fi
     else
@@ -69,7 +69,7 @@ _pip3(){
 }
 
 # install {{{1
-(( $+functions[_pip3-install] )) || _pip3-install(){
+(( $+functions[_pip-install] )) || _pip-install(){
   _arguments \
     {-r,--requirement}'[Install from the given requirements file.]:file:_files' \
     --no-deps"[Don't install package dependencies.]" \
@@ -86,14 +86,14 @@ _pip3(){
 }
 
 # download {{{1
-(( $+functions[_pip3-download] )) || _pip3-download(){
+(( $+functions[_pip-download] )) || _pip-download(){
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
 }
 
 # uninstall {{{1
-(( $+functions[_pip3-uninstall] )) || _pip3-uninstall(){
+(( $+functions[_pip-uninstall] )) || _pip-uninstall(){
   _arguments \
     {-r,--requirement}'[Uninstall all the packages listed in the given requirements file.]:file:_files' \
     {-y,--yes}"[Don't ask for confirmation of uninstall deletions.]" \
@@ -103,7 +103,7 @@ _pip3(){
 }
 
 # freeze {{{1
-(( $+functions[_pip3-freeze] )) || _pip3-freeze(){
+(( $+functions[_pip-freeze] )) || _pip-freeze(){
   _arguments \
     {-r,--requirement}'[Use the order in the given requirements file and its comments when generating output.]:file:_files' \
     {-f,--find-links}'[URL for finding packages, which will be added to the output.]:url' \
@@ -115,7 +115,7 @@ _pip3(){
 }
 # }}}1
 # list {{{1
-(( $+functions[_pip3-list] )) || _pip3-list(){
+(( $+functions[_pip-list] )) || _pip-list(){
   _arguments \
     {-o,--outdated}'[List outdated packages]' \
     {-u,--uptodate}'[List uptodate packages]' \
@@ -128,7 +128,7 @@ _pip3(){
 }
 
 # show {{{1
-(( $+functions[_pip3-show] )) || _pip3-show(){
+(( $+functions[_pip-show] )) || _pip-show(){
   _arguments \
     {-f,--files}'[Show the full list of installed files for each package.]' \
     '(- *)'--help'[Show help.]' \
@@ -137,35 +137,35 @@ _pip3(){
 }
 
 # check {{{1
-(( $+functions[_pip3-check] )) || _pip3-check(){
+(( $+functions[_pip-check] )) || _pip-check(){
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
 }
 
 # config {{{1
-(( $+functions[_pip3-config] )) || _pip3-config(){
+(( $+functions[_pip-config] )) || _pip-config(){
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
 }
 
 # search {{{1
-(( $+functions[_pip3-search] )) || _pip3-search(){
+(( $+functions[_pip-search] )) || _pip-search(){
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
 }
 
 # wheel {{{1
-(( $+functions[_pip3-wheel] )) || _pip3-wheel(){
+(( $+functions[_pip-wheel] )) || _pip-wheel(){
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
 }
 
 # hash {{{1
-(( $+functions[_pip3-hash] )) || _pip3-hash(){
+(( $+functions[_pip-hash] )) || _pip-hash(){
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
