@@ -14,7 +14,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 # Keep 10000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=$XDG_DATA_HOME/zsh/history
+HISTFILE=$XDG_DATA_HOME/zsh_history
 setopt hist_expire_dups_first
 setopt hist_find_no_dups
 setopt hist_ignore_dups

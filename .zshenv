@@ -4,7 +4,6 @@ echo "$XDG_DATA_HOME"   | grep -vq "\b$USER\b" && export XDG_DATA_HOME=$HOME/.lo
 
 ZDOTDIR=$XDG_CONFIG_HOME/zsh
 [ -r ~/.zshenv_local ] && . ~/.zshenv_local
-#MANPATH=:$MANPATH
 
 if [ -r /etc/profile.d/modules.sh ]; then
   . /etc/profile.d/modules.sh
