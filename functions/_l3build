@@ -1,0 +1,51 @@
+#compdef l3build
+
+# main {{{1
+_l3build(){
+  local curcontext=$curcontext state lstate line
+
+  _arguments '*::l3build command:_l3build_command'
+}
+
+# _l3build-command {{{1
+(( $+functions[_l3build_command] )) || _l3build_command() {
+  local -a _l3build_cmds=(
+    'check:Run all automated tests'
+    'clean:Clean out directory tree'
+    'ctan:Create CTAN-ready archive'
+    'doc:Typesets all documentation files'
+    'install:Installs files into the local textmf tree'
+    'manifest:Creates a manifest file'
+    'save:Saves test validation log'
+    'tag:Updates release tags in files'
+    'uninstall:Uninstalls files from the local textmf tree'
+    'unpack:Unpacks the source files into the build tree'
+    'upload:Send archive to CTAN for public release'
+  )
+
+  if (( CURRENT == 1 )); then
+    _describe -t commands 'l3build command' _l3build_cmds
+  else
+    local curcontext="$curcontext" ret=1
+
+    cmd="${${_l3build_cmds[(r)$words[1]:*]%%:*}}"
+
+    if (( $#cmd )); then
+      curcontext="${curcontext%:*:*}:l3build-${cmd}:"
+
+      if [ $cmd = 'help' ]; then
+        _message 'no more arguments'
+      elif ! _call_function ret _l3build-$cmd; then
+	_default && ret=0
+      fi
+    else
+      _default && ret=0
+    fi
+    return ret
+  fi
+}
+
+
+# }}}1
+
+# vi:fdm=marker
