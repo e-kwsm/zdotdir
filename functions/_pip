@@ -1,4 +1,4 @@
-#compdef pip pip3
+#compdef pip pip3 pip3.5 pip3.6 pip3.7
 
 # main {{{1
 _pip(){
