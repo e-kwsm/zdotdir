@@ -6,12 +6,15 @@ _babel(){
     --addformula'[Append the molecular formula after the current molecule title]' \
     -c'[Center atomic coordinates at (0,0,0)]' \
     ---errorlevel'[Filter the level of errors and warnings displayed]:level:(1 2 3 4 5)' \
-    '(- *)'-H+'[Output usage information]:format-ID:(cml fchk gjf smi xyz)' \
+    '(- *)'-H+'[Output usage information]:format-ID:(ascii can cif cml com fchk gjf gzmat inchi inchikey png smi xyz)' \
     '(- *)'-Hall'[Output formatting information and options for all formats]' \
-    -i+'[Specifies input format]:format-ID:(cml fchk smi xyz)' \
-    -o+'[Specifies output format]:format-ID:(cml gjf smi xyz)' \
-    --title'[Add or replace molecular title]:title' \
+    '(- *)'-L'[Lists plugin classes of this category]:category:(charges descriptors fingerprints forcefields formats loaders ops)' \
     '(- *)'-V'[Output version number and exit]' \
-    '1:infile:_files -g "*.(cml|fchk|smi|xyz)"' \
-    '2:oufile:_files -g "*.(cml|gjf|smi|xyz)"'
+    --title'[Add or replace molecular title]:title' \
+    -a+'[Read option]:read option' \
+    -x+'[Write option]:write option' \
+    -i+'[Specifies input format]:format-ID:(can cif cml fchk inchi smi xyz)' \
+    -o+'[Specifies output format]:format-ID:(ascii cif can cml gjf gzmat inchi inchikey smi svg xyz)' \
+    '1:infile:_files -g "*.(can|cif|cml|com|fchk|inchi|smi|xyz)"' \
+    '2:oufile:_files -g "*.(can|cif|cml|com|gjf|inchi|png|smi|svg|xyz)"'
 }
