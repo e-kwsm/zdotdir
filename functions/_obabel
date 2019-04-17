@@ -1,6 +1,6 @@
-#compdef babel
+#compdef obabel
 
-_babel(){
+_obabel(){
   _arguments -s -S \
     --addtotitle'[Append text to the current molecule title]:title' \
     --addformula'[Append the molecular formula after the current molecule title]' \
