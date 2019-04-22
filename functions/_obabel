@@ -11,10 +11,11 @@ _obabel(){
     '(- *)'-L'[Lists plugin classes of this category]:category:(charges descriptors fingerprints forcefields formats loaders ops)' \
     '(- *)'-V'[Output version number and exit]' \
     --title'[Add or replace molecular title]:title' \
+    --gen3D'' \
     -a+'[Read option]:read option' \
     -x+'[Write option]:write option' \
     -i+'[Specifies input format]:format-ID:(can cif cml fchk inchi smi xyz)' \
-    -o+'[Specifies output format]:format-ID:(ascii cif can cml gjf gzmat inchi inchikey smi svg xyz)' \
     '1:infile:_files -g "*.(can|cif|cml|com|fchk|inchi|smi|xyz)"' \
-    '2:oufile:_files -g "*.(can|cif|cml|com|gjf|inchi|png|smi|svg|xyz)"'
+    -o+'[Specifies output format]:format-ID:(ascii cif can cml gjf gzmat inchi inchikey smi svg xyz)' \
+    -O+'[oufile]:outfile:_files -g "*.(can|cif|cml|com|gjf|inchi|png|smi|svg|xyz)"'
 }
