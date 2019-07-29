@@ -4,5 +4,5 @@ _avogadro(){
   _arguments \
     '(- *)'{-h,--help}'[Show help options]' \
     '(- *)'{-v,--version}'[Show version information]' \
-    '*:files:_files -g "*.(cml|fchk|xyz)"'
+    '*:files:_files -g "*.(cif|cml|com|fchk|gjf|gzmat|xyz)"'
 }

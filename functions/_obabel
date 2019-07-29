@@ -17,5 +17,5 @@ _obabel(){
     -i+'[Specifies input format]:format-ID:(can cif cml fchk inchi smi xyz)' \
     '1:infile:_files -g "*.(can|cif|cml|com|fchk|inchi|smi|xyz)"' \
     -o+'[Specifies output format]:format-ID:(ascii cif can cml gjf gzmat inchi inchikey smi svg xyz)' \
-    -O+'[oufile]:outfile:_files -g "*.(can|cif|cml|com|gjf|inchi|png|smi|svg|xyz)"'
+    -O+'[oufile]:outfile:_files -g "*.(can|cif|cml|com|gjf|gzmat|inchi|png|smi|svg|xyz)"'
 }
