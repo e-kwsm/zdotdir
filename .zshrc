@@ -4,7 +4,7 @@ autoload -Uz promptinit
 promptinit
 prompt adam1
 
-#setopt histignorealldups sharehistory
+unsetopt beep
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
@@ -24,6 +24,7 @@ setopt hist_reduce_blanks
 setopt inc_append_history
 
 # Use modern completion system
+if [ -d $ZDOTDIR/functions ]; then fpath=($ZDOTDIR/functions $fpath); fi
 autoload -Uz compinit
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump
 
@@ -45,32 +46,20 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-TERM=xterm-256color
-
-[ -r $ZDOTDIR/zsh_aliases ] && . $ZDOTDIR/zsh_aliases
-
-[ -d $ZDOTDIR/functions ] && fpath=($ZDOTDIR/functions $fpath)
-autoload -U compinit
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump
-
-[ -r ~/.zshrc_local ] && . ~/.zshrc_local
-
-[ -r ~/.ssh/config ] && _cache_hosts=($(grep '^Host[[:space:]]' ~/.ssh/config | cut -d' ' -f2-))
-
+function chpwd() { ls --color }
 function precmd() { print -n "\e]2;$USER@$HOST:${PWD/~HOME/~}\a" }
 function preexec() { print -n "\e]2;$USER@$HOST:${PWD/~HOME/~}\a" }
-setopt auto_cd
-function chpwd() { ls }
 
-PATH=$PATH:$HOME/bin
-export PYTHONDONTWRITEBYTECODE=1
-export TIME_STYLE=long-iso
+if [ -r $ZDOTDIR/zsh_aliases ]; then . $ZDOTDIR/zsh_aliases; fi
+if [ -r ~/.zshrc_local ]; then . ~/.zshrc_local; fi
+
+if [ -r ~/.ssh/config ]; then _cache_hosts=($(grep '^Host\s' ~/.ssh/config | sed -e 's/^Host\s//' -e 's/\*//')); fi
 
 autoload -Uz vcs_info
 setopt prompt_subst
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:*' unstagedstr "%F{red}+"
 zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 precmd () { vcs_info }
