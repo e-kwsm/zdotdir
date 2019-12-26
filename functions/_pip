@@ -72,7 +72,9 @@ _pip(){
 (( $+functions[_pip-install] )) || _pip-install(){
   _arguments \
     {-r,--requirement}'[Install from the given requirements file.]:file:_files' \
+    {-c,--constraint}'[Constrain versions using the given constraints file. This option can be used multiple times.]:file:_files' \
     --no-deps"[Don't install package dependencies.]" \
+    {-e,--editable}'[Install a project in editable mode (i.e. setuptools "develop mode") from a local project path or a VCS url.]:path/url:_path_files -/' \
     --user'[Install to the Python user install directory for your platform.]' \
     --root'[Install everything relative to this alternate root directory.]:dir:_path_files -/' \
     --prefix'[Installation prefix where lib, bin and other top-level folders are placed]:dir:_path_files -/' \
