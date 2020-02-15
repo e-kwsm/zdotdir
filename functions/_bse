@@ -1,0 +1,285 @@
+#compdef bse
+
+# main {{{1
+_bse(){
+  local curcontext=$curcontext state lstate line
+
+  _arguments \
+    '(- *)'{-h,--help}'[show this help message and exit]' \
+    '(- *)'-V"[show program's version number and exit]" \
+    {-d,--data}'[Override which data directory to use]:PATH:_files -/' \
+    {-o,--output}'[Output to given file rather than stdout]:PATH:_files' \
+    '*::bse command:_bse_command'
+}
+
+# _bse-command {{{1
+(( $+functions[_bse_command] )) || _bse_command() {
+  local -a _bse_cmds=(
+    'convert-basis:Convert basis set files from one format to another'
+    'create-bundle:Create a bundle of basis sets'
+    'get-basis:Output a formatted basis set'
+    'get-data-dir:Output the default data directory of this package'
+    'get-family-notes:Get the notes of a family of basis sets'
+    'get-family:Output the family of a basis set'
+    'get-info:Output general info and metadata for a basis set'
+    'get-notes:Output the notes for a basis set'
+    'get-refs:Output references for a basis set'
+    'get-versions:Output a list all available versions of a basis set'
+    'list-basis-sets:Output a list all available basis sets and descriptions'
+    'list-families:Output a list all available basis set families'
+    'list-formats:Output a list all available basis set formats and descriptions'
+    'list-ref-formats:Output a list all available reference formats and descriptions'
+    'list-roles:Output a list all available roles and descriptions'
+    'list-writer-formats:Output a list available basis set formats that can be written'
+    'lookup-by-role:Lookup a companion/auxiliary basis by primary basis and role'
+  )
+
+  if (( CURRENT == 1 )); then
+    _describe -t commands 'bse command' _bse_cmds
+  else
+    local curcontext="$curcontext" ret=1
+
+    cmd="${${_bse_cmds[(r)$words[1]:*]%%:*}}"
+
+    if (( $#cmd )); then
+      curcontext="${curcontext%:*:*}:bse-${cmd}:"
+
+      if [ $cmd = 'help' ]; then
+        _message 'no more arguments'
+      elif ! _call_function ret _bse-$cmd; then
+	_default && ret=0
+      fi
+    else
+      _default && ret=0
+    fi
+    return ret
+  fi
+}
+
+(( $+functions[_bse-get-basis] )) || _bse-get-basis(){  # {{{1
+  _arguments \
+    '(- *)'{-h,--help} \
+    --elements'[Which elements of the basis set to output. Default is all defined in the given basis]:elements:_values -s , ELEMENT
+      H B C N O F P S Cl Br I' \
+    --version'[Which version of the basis set to output. Default is the latest version]:VERSION' \
+    --noheader'[Do not output the header at the top]' \
+    --unc-gen'[Remove general contractions]' \
+    --unc-spdf'[Remove combined sp, spd, ... contractions]' \
+    --unc-seg'[Remove general contractions]' \
+    --opt-gen'[Optimize general contractions]' \
+    --make-gen'[Make the basis set as generally-contracted as possible]' \
+    '1:basis:_values basis
+      6-31G
+      LANL2DZ
+      LANL2DZ\ ECP
+      STO-3G
+      aug-cc-pVDZ
+      aug-cc-pVQZ
+      aug-cc-pVTZ
+      cc-pVDZ
+      cc-pVQZ
+      cc-pVTZ
+      def2-ECP
+      def2-SVP
+      def2-SVPD
+      def2-TZVP
+      def2-TZVPD
+      def2-TZVPP
+      def2-TZVPPD
+      ' \
+    '2:fmt:_values fmt
+      cp2k
+      dalton
+      gaussian94
+      nwchem
+      orca
+      ' \
+    && return 0
+}
+
+(( $+functions[_bse-get-family] )) || _bse-get-family(){  # {{{1
+  _arguments \
+    '(- *)'{-h,--help} \
+    '1:basis:_values basis
+      6-31G
+      LANL2DZ
+      LANL2DZ\ ECP
+      STO-3G
+      aug-cc-pVDZ
+      aug-cc-pVQZ
+      aug-cc-pVTZ
+      cc-pVDZ
+      cc-pVQZ
+      cc-pVTZ
+      def2-ECP
+      def2-SVP
+      def2-SVPD
+      def2-TZVP
+      def2-TZVPD
+      def2-TZVPP
+      def2-TZVPPD
+      ' \
+    && return 0
+}
+
+(( $+functions[_bse-get-family-notes] )) || _bse-get-family-notes(){  # {{{1
+  _arguments \
+    '(- *)'{-h,--help} \
+    '1:family:_values family
+      acvxz-j
+      ahlrichs
+      ahlrichs_dhf
+      ahlrichs_fit
+      ahlrichs_x2c
+      ano
+      ano_claudino
+      aug_mcc
+      binning
+      blaudeau
+      ccj
+      cologne
+      crenb
+      dfo
+      dgauss
+      dunning
+      dunning_dk
+      dunning_dk3
+      dunning_f12
+      dunning_f12_fit
+      dunning_fit
+      dunning_hay
+      dunning_pp
+      dunning_pp_fit
+      dunning_sf
+      dunning_x2c
+      huzinaga
+      iglo
+      jensen
+      jgauss
+      jorge
+      lanl
+      lehtola_emd
+      nasa
+      orp
+      partridge
+      paschoal
+      pople
+      pople_mod
+      ranasinghe
+      sadlej
+      sapporo
+      sarc
+      sauer_j
+      sbkjc
+      sto
+      stuttgart
+      truhlar
+      ugbs
+      wachters
+      zorilla
+      ' \
+    && return 0
+}
+
+(( $+functions[_bse-get-info] )) || _bse-get-info(){  # {{{1
+  _arguments \
+    '(- *)'{-h,--help} \
+    '1:basis:_values basis
+      6-31G
+      LANL2DZ
+      LANL2DZ\ ECP
+      STO-3G
+      aug-cc-pVDZ
+      aug-cc-pVQZ
+      aug-cc-pVTZ
+      cc-pVDZ
+      cc-pVQZ
+      cc-pVTZ
+      def2-ECP
+      def2-SVP
+      def2-SVPD
+      def2-TZVP
+      def2-TZVPD
+      def2-TZVPP
+      def2-TZVPPD
+      ' \
+    && return 0
+}
+
+(( $+functions[_bse-get-notes] )) || _bse-get-notes(){  # {{{1
+  _arguments \
+    '(- *)'{-h,--help} \
+    '1:basis:_values basis
+      6-31G
+      LANL2DZ
+      LANL2DZ\ ECP
+      STO-3G
+      aug-cc-pVDZ
+      aug-cc-pVQZ
+      aug-cc-pVTZ
+      cc-pVDZ
+      cc-pVQZ
+      cc-pVTZ
+      def2-ECP
+      def2-SVP
+      def2-SVPD
+      def2-TZVP
+      def2-TZVPD
+      def2-TZVPP
+      def2-TZVPPD
+      ' \
+    && return 0
+}
+
+(( $+functions[_bse-get-refs] )) || _bse-get-refs(){  # {{{1
+  _arguments \
+    '(- *)'{-h,--help} \
+    '1:basis' \
+    '2:reffmt:_values reffmt bib json txt' \
+    && return 0
+}
+
+(( $+functions[_bse-get-versions] )) || _bse-get-versions(){  # {{{1
+  _arguments \
+    '(- *)'{-h,--help} \
+    '1:basis' \
+    && return 0
+}
+
+(( $+functions[_bse-list-basis-sets] )) || _bse-list-basis-sets(){  # {{{1
+  _arguments \
+    '(- *)'{-h,--help} \
+        {-n,--no-description}'[Print only the basis set names]' \
+        {-f,--family}'[Limit the basis set list to only the specified family]:FAMILY' \
+        {-r,--role}'[Limit the basis set list to only the specified role]:ROLE' \
+        {-s,--substr}'[Limit the basis set list to only basis sets whose name contains the specified substring]:SUBSTR' \
+        {-e,--elements}'[Limit the basis set list to only basis sets that contain all the given elements]:elements:_values -s , ELEMENT
+          H C N O S' \
+    && return 0
+}
+
+(( $+functions[_bse-list-formats] )) || _bse-list-formats(){  # {{{1
+  _arguments \
+      '(- *)'{-h,--help}'[show this help message and exit]' \
+      '(- *)'{-n,--no-description}'[Print only the format names]' \
+    && return 0
+}
+
+(( $+functions[_bse-list-ref-formats] )) || _bse-list-ref-formats(){  # {{{1
+  _arguments \
+      '(- *)'{-h,--help}'[show this help message and exit]' \
+      '(- *)'{-n,--no-description}'[Print only the format names]' \
+    && return 0
+}
+
+(( $+functions[_bse-list-roles] )) || _bse-list-roles(){  # {{{1
+  _arguments \
+      '(- *)'{-h,--help}'[show this help message and exit]' \
+      '(- *)'{-n,--no-description}'[Print only the format names]' \
+    && return 0
+}
+
+
+# }}}1
+
+# vi:fdm=marker
