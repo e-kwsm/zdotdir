@@ -64,3 +64,7 @@ zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 precmd () { vcs_info }
 RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+
+if ! [ -f $ZDOTDIR/.zshrc.zwc ] || [ $ZDOTDIR/.zshrc.zwc -ot $ZDOTDIR/.zshrc ]; then
+  zcompile -U -M $ZDOTDIR/.zshrc
+fi
