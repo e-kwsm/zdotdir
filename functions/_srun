@@ -1,0 +1,26 @@
+#compdef srun
+
+_srun(){
+  _arguments \
+    '(-b --begin)'{-b,--begin=}'[Defer initiation of this job until the specified time.]:time' \
+    --comment='[An arbitrary comment.]:string' \
+    --deadline='[remove the job if no ending is possible before this deadline]:deadline' \
+    '(-d --dependency)'{-d,--dependency=}'[Defer the start of this job until the specified dependencies have been satisfied completed.]:dependency_list' \
+    '(-D --chdir)'{-D,--chdir=}'[Have the remote processes do a chdir to path before beginning execution.]:path:_path_files -/' \
+    '(-e --error)'{-e,--error=}'[Specify how stderr is to be redirected.]:file:_files' \
+    '(-E --preserve-env)'{-E,--preserve-env}'[Pass the current values of environment variables SLURM_JOB_NODES and SLURM_NTASKS through to the executable, rather than computing them from commandline parameters.]' \
+    --export='[Identify which environment variables from the submission environment are propagated to the launched application.]:spec:_values -s, spec ALL NONE' \
+    '(-H --hold)'{-H,--hold}'[Specify the job is to be submitted in a held state (priority of zero).]' \
+    '(- *)'{-h,--help}'[Display help information and exit.]' \
+    '(-J --job-name)'{-J,--job-name=}'[Specify a name for the job.]:jobname' \
+    '(-N --nodes)'{-N,--nodes=}'[Request that a minimum of minnodes nodes be allocated to this job.]:minnodes[-maxnodes]' \
+    '(-o --output)'{-o,--output=}'[Specify the "filename pattern" for stdout redirection.]:file:_files' \
+    '(-p --partition)'{-p,--partition=}'[Request a specific partition for the resource allocation.]:partition_names' \
+    --pty'[Execute task zero in pseudo terminal mode.]' \
+    '(-t --time)'{-t,--time=}'[Set a limit on the total run time of the job allocation.]:time' \
+    '(- *)'--usage'[Display brief help message and exit.]' \
+    '(- *)'{-V,--version}'[Display version information and exit.]' \
+    '(-v --verbose)'{-v,--verbose}"[Increase the verbosity of srun's informational messages.]" \
+    '(-w --nodelist)'{-w,--nodelist=}'[Request a specific list of hosts.]:host1,host2,... or filename' \
+    '*::args: _normal'
+}
