@@ -3,13 +3,13 @@
 _biber() {
   _arguments \
     '(- *)'--cache'[If running as a PAR::Packer binary, show the cache location and exit.]' \
-    {--configfile,-g}'[Use file as configuration file for "biber".]:file:_files -g "*"' \
-    {--debug,-D}'[Turn on debugging for "biber".]' \
+    '(--configfile -g)'{--configfile,-g}'[Use file as configuration file for "biber".]:file:_files -g "*"' \
+    '(--debug -D)'{--debug,-D}'[Turn on debugging for "biber".]' \
     '(- *)'{-h,--help}'[Show this help message.]' \
-    --input-directory'[.bcf and data files will be looked for first in the directory.]:dir:_path_files -/' \
-    --output-directory'[Output files (including log files) are output to directory instead of the current directory.]:dir:_path_files -/' \
+    --input-directory'[.bcf and data files will be looked for first in the directory.]:directory:_path_files -/' \
+    --output-directory'[Output files (including log files) are output to directory instead of the current directory.]:directory:_path_files -/' \
     --output-format'[Biber output format.]:format:(dot bibtex biblatexml bbl bblxml)' \
-    {--quiet,-q}'[Log only errors.]' \
+    '(--quiet -q)'{--quiet,-q}'[Log only errors.]' \
     '(- *)'{-v,--version}'[Display version number.]' \
     '*:BibLaTeX control file:_files -g "*.bcf"'
 }

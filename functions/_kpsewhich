@@ -1,42 +1,50 @@
 #compdef kpsewhich
 
 _kpsewhich() {
+  typeset -a variables=(
+    FONTCONFIG_FILE
+    FONTCONFIG_PATH
+    FONTFEATURES
+    LUAINPUTS
+    TEXCONFIG
+    TEXDOCS
+    TEXFORMATS
+    TEXINPUTS
+    TEXMF
+    TEXMFCACHE
+    TEXMFCNF
+    TEXMFCONFIG
+    TEXMFDIST
+    TEXMFHOME
+    TEXMFLOCAL
+    TEXMFMAIN
+    TEXMFROOT
+    TEXMFSCRIPTS
+    TEXMFSYSCONFIG
+    TEXMFSYSVAR
+    TEXMFVAR
+    buf_size
+    font_max
+    font_mem_size
+    main_memory
+    max_strings
+    param_size
+    stack_size
+  )
+
   _arguments \
-    -all'[output all matches, one per line]' \
-    -debug='[debugging flags]:num' \
-    {-D,-dpi}='[resolution]:num' \
-    -expand-path='[complete path expansion]:string' \
-    -expand-var='[variable expansion]:string' \
-    -format='[file type]:name' \
-    '(- *)'-help'[help]' \
-    '(- *)'-help-formats'[display information about all supported file formats]' \
-    -show-path='[]:name' \
-    -var-value='[]:variable:(
-      TEXCONFIG
-      TEXDOCS
-      TEXFORMATS
-      TEXMF
-      TEXMFCACHE
-      TEXMFCNF
-      TEXMFCONFIG
-      TEXMFDIST
-      TEXMFHOME
-      TEXMFLOCAL
-      TEXMFMAIN
-      TEXMFROOT
-      TEXMFSCRIPTS
-      TEXMFSYSCONFIG
-      TEXMFSYSVAR
-      TEXMFVAR
-      buf_size
-      font_max
-      font_mem_size
-      main_memory
-      max_in_open
-      max_print_line
-      max_strings
-      stack_size
-    )' \
-    '(- *)'-version'[version]' \
+    -all'[output all matches, one per line (no effect with pk/gf).]' \
+    -debug='[set debugging flags.]:NUM' \
+    '(-D -dpi)'{-D,-dpi}='[use a base resolution of NUM; default 600.]:NUM' \
+    -expand-braces='[output variable and brace expansion of STRING.]:STRING' \
+    -expand-path='[output complete path expansion of STRING.]:STRING' \
+    -expand-var='[output variable expansion of STRING.]:STRING' \
+    -format='[use file type NAME (list shown by -help-formats).]:NAME' \
+    '(- *)'-help'[display this message and exit.]' \
+    '(- *)'-help-formats'[display information about all supported file formats.]' \
+    -show-path='[output search path for file type TYPE]:TYPE' \
+    -var-brace-value="[output brace-expanded value of variable \$STRING.]:STRING:($variables)" \
+    -var-value="[output variable-expanded value of variable \$STRING.]:STRING:($variables)" \
+    '(- *)'-version'[display version information number and exit.]' \
     '*:file:_files'
 }
