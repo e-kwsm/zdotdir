@@ -7,7 +7,7 @@ if [ -r ~/.zshenv_local ]; then
   . ~/.zshenv_local
 fi
 
-[ -r /etc/profile.d/modules.sh ] && ! type module > /dev/null && {
+if [ -r /etc/profile.d/modules.sh ] && ! type module > /dev/null 2>&1; then
   . /etc/profile.d/modules.sh
   module refresh
-}
+fi
