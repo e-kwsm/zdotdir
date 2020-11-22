@@ -9,11 +9,13 @@ _bse(){
     '3-21G'
     '6-31{,1}{,+,++}G{,\*,\*\*}'
     '{,aug-}cc-pV{D,T,Q,5,6}Z'
+    '{,aug-}cc-pwCV{D,T,Q,5}Z'
     'apr-cc-pV\(Q+d\)Z'
     '{jun,jul}-cc-pV\({D,T,Q}+d\)Z'
     'LANL2DZ{,\ ECP}'
     'def2-{ECP,SVP{,D},{T,Q}ZVP{,D,P,PD}}'
     'Sapporo-{,DKH3-}{D,T,Q}ZP'
+    'Stuttgart\ RLC{,\ ECP}'
   )
   local -a families=(
     acvxz-j
@@ -49,6 +51,8 @@ _bse(){
     jorge
     lanl
     lehtola_emd
+    lehtola_hgbs
+    lehtola_sap
     nasa
     orp
     partridge
@@ -69,20 +73,24 @@ _bse(){
     zorilla
   )
   local -a elements=(
-    H
-    Li B C N O F
-    Na Mg Al Si P S Cl
-    K Ca Br
-    I
+    H                    He
+    Li Be B  C  N  O  F  Ne
+    Na Mg Al Si P  S  Cl Ar
+    K  Ca             Br Kr
+                      I  Xe
   )
   local -a formats=(
     cp2k
-    dalton
+    gamess_uk
+    gamess_us
     gaussian94
+    molcas
+    molpro
     nwchem
     orca
     psi4
     qchem
+    turbomole
   )
 
   _arguments \
