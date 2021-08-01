@@ -46,6 +46,19 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
+zstyle ':completion:*' fake-parameters \
+  CPATH:string \
+  CPLUS_INCLUDE_PATH:string \
+  C_INCLUDE_PATH:string \
+  LD_LIBRARY_PATH:string \
+  LIBRARY_PATH:string \
+  OMP_DISPLAY_AFFINITY:string \
+  OMP_DISPLAY_ENV:string \
+  OMP_NUM_THREADS:string \
+  OMP_STACKSIZE:string \
+  PKG_CONFIG_PATH:string \
+  PYTHONPATH:string \
+
 function chpwd() { ls --color }
 function precmd() { print -n "\e]2;$USER@$HOST:${PWD/~HOME/~}\a" }
 function preexec() { print -n "\e]2;$USER@$HOST:${PWD/~HOME/~}\a" }
