@@ -1,0 +1,51 @@
+#compdef cmake
+
+_cmake(){
+  _arguments \
+    -S'[Explicitly specify a source directory.]:path-to-source:_path_files -/' \
+    -B'[Explicitly specify a build directory.]:path-to-build:_path_files -/' \
+    '*'-D'[Create or update a cmake cache entry.]:var' \
+    -G'[Specify a build system generator.]:generator-name:_values generator Unix\ Makefiles Ninja' \
+    -Wdev'[Enable developer warnings.]' \
+    -Wno-dev'[Suppress developer warnings.]' \
+    -Werror=dev'[Make developer warnings errors.]' \
+    -Wno-error=dev'[Make developer warnings not errors.]' \
+    -Wdeprecated'[Enable deprecation warnings.]' \
+    -Wno-deprecated'[Suppress deprecation warnings.]' \
+    -Werror=deprecated'[Make deprecated macro and function warnings errors.]' \
+    -Wno-error=deprecated'[Make deprecated macro and function warnings not errors.]' \
+    -E'[CMake command mode.]:command' \
+    '(-L -LA -LAH -LH)'{-L,-LA,-LAH,-LH}'[List non-advanced cached variables.]' \
+    --build'[Build a CMake-generated project binary tree.]:dir:_path_files -/' \
+    --install'[Install a CMake-generated project binary]:dir:_path_files -/' \
+    -N'[View mode only.]' \
+    -P'[Process script mode.]:file:_files -g "*.cmake"' \
+    '(- *)'--system-information'[Dump information about this system.]' \
+    --debug-trycompile'[Do not delete the try_compile build tree. Only useful on one try_compile at a time.]' \
+    --debug-output'[Put cmake in a debug mode.]' \
+    --debug-find'[Put cmake find in a debug mode.]' \
+    --trace'[Put cmake in trace mode.]' \
+    --trace-expand'[Put cmake in trace mode with variable expansion.]' \
+    '(- *)'{-h,--help}'[Print usage information and exit.]' \
+    '(- *)'--version'[Print version number and exit.]' \
+    '(- *)'--help-full'[Print all help manuals and exit.]' \
+    '(- *)'--help-manual'[Print one help manual and exit.]:man:_values man $(cmake --help-manual-list | sed -e s/"[^a-z-].*"//)' \
+    '(- *)'--help-manual-list'[List help manuals available and exit.]' \
+    '(- *)'--help-command'[Print help for one command and exit.]:cmd:_values cmd $(cmake --help-command-list)' \
+    '(- *)'--help-command-list'[List commands with help available and exit.]' \
+    '(- *)'--help-commands'[Print cmake-commands manual and exit.]' \
+    '(- *)'--help-module'[Print help for one module and exit.]:mod:_values mod $(cmake --help-module-list)' \
+    '(- *)'--help-module-list'[List modules with help available and exit.]' \
+    '(- *)'--help-modules'[Print cmake-modules manual and exit.]' \
+    '(- *)'--help-policy'[Print help for one policy and exit.]:cmp:_values cmp $(cmake --help-policy-list)' \
+    '(- *)'--help-policy-list'[List policies with help available and exit.]' \
+    '(- *)'--help-policies'[Print cmake-policies manual and exit.]' \
+    '(- *)'--help-property'[Print help for one property and exit.]:prop:_values prop $(cmake --help-property-list)' \
+    '(- *)'--help-property-list'[List properties with help available and exit.]' \
+    '(- *)'--help-properties'[Print cmake-properties manual and exit.]' \
+    '(- *)'--help-variable'[Print help for one variable and exit.]:var:_values mod $(cmake --help-variable-list)' \
+    '(- *)'--help-variable-list'[List variables with help available and exit.]' \
+    '(- *)'--help-variables'[Print cmake-variables manual and exit.]' \
+    '1:dir:_path_files -/' \
+    && :
+}
