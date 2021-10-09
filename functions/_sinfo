@@ -46,5 +46,6 @@ _sinfo(){
     ' \
     '(- *)'--usage'[Print a brief message listing the sinfo options.]' \
     '(-v --verbose)'{-v,--verbose}'[Provide detailed event logging through program execution.]' \
-    '(- *)'{-V,--version}'[Print version information and exit.]'
+    '(- *)'{-V,--version}'[Print version information and exit.]' \
+    && :
 }

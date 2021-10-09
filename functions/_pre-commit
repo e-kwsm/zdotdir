@@ -54,10 +54,10 @@ _pre-commit(){
   _arguments \
     '(- *)'{-h,--help}'[show this help message and exit]' \
     --color'[Whether to use color in output. Defaults to `auto`.]: :(auto always never)' \
-    {-c,--config}'[Path to alternate config file]:CONFIG:_files' \
-    {-f,--overwrite}'[Overwrite existing hooks / remove migration mode.]' \
+    '(-c --config)'{-c,--config}'[Path to alternate config file]:CONFIG:_files' \
+    '(-f --overwrite)'{-f,--overwrite}'[Overwrite existing hooks / remove migration mode.]' \
     --install-hooks'[Whether to install hook environments for all environments in the config file.]' \
-    {-t,--hook-type}'[ ]:hook-type:(pre-commit pre-merge-commit pre-push prepare-commit-msg commit-msg post-checkout)' \
+    '(-t --hook-type)'{-t,--hook-type}'[ ]:hook-type:(pre-commit pre-merge-commit pre-push prepare-commit-msg commit-msg post-checkout)' \
     --allow-missing-config'[Whether to allow a missing `pre-commit` configuration file or exit with a failure code.]' \
     && return 0
 }
@@ -67,14 +67,14 @@ _pre-commit(){
   _arguments \
     '(- *)'{-h,--help}'[show this help message and exit]' \
     --color'[Whether to use color in output. Defaults to `auto`.]: :(auto always never)' \
-    {-c,--config}'[Path to alternate config file]:CONFIG:_files' \
-    {--verbose,-v}'[]' \
-    {--all-files,-a}'[Run on all the files in the repo.]' \
+    '(-c --config)'{-c,--config}'[Path to alternate config file]:CONFIG:_files' \
+    '(--verbose -v)'{--verbose,-v}'[]' \
+    '(--all-files -a)'{--all-files,-a}'[Run on all the files in the repo.]' \
     --files'[Specific filenames to run hooks on.]:file:_files' \
     --show-diff-on-failure'[When hooks fail, run `git diff` directly afterward.]' \
     --hook-stage'[The stage during which the hook is fired.]:stage:(commit merge-commit prepare-commit-msg commit-msg manual post-checkout push)' \
-    {--from-ref,--source,-s}'[this option represents the original ref in a `from_ref...to_ref` diff expression.]:FROM_REF' \
-    {--to-ref,--origin,-o}'[this option represents the destination ref in a `from_ref...to_ref` diff expression.]:TO_REF' \
+    '(--from-ref --source -s)'{--from-ref,--source,-s}'[this option represents the original ref in a `from_ref...to_ref` diff expression.]:FROM_REF' \
+    '(--to-ref --origin -o)'{--to-ref,--origin,-o}'[this option represents the destination ref in a `from_ref...to_ref` diff expression.]:TO_REF' \
     --commit-msg-filename'[Filename to check when running during `commit-msg`]:COMMIT_MSG_FILENAME:_files' \
     --remote-name'[Remote name used by `git push`.]:REMOTE_NAME:_files' \
     --remote-url'[Remote url used by `git push`.]:REMOTE_URL' \

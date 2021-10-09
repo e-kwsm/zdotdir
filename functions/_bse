@@ -12,12 +12,14 @@ _bse(){
     '{,aug-}cc-pwCV{D,T,Q,5}Z{,-RIFIT}'
     'apr-cc-pV\(Q+d\)Z'
     '{jun,jul}-cc-pV\({D,T,Q}+d\)Z'
+    'may-cc-pV\({T,Q}+d\)Z'
     'LANL2DZ{,\ ECP}'
     'def2-ECP'
     'def2-{SVP{,D},{T,Q}ZVP{,D,P,PD}}{,-RIFIT}'
     'Sapporo-{,DKH3-}{D,T,Q}ZP'
     'Stuttgart\ RLC{,\ ECP}'
   )
+
   local -a families=(
     acvxz-j
     ahlrichs
@@ -32,6 +34,7 @@ _bse(){
     ccj
     cologne
     crenb
+    demon2k
     dfo
     dgauss
     dunning
@@ -50,6 +53,7 @@ _bse(){
     jensen
     jgauss
     jorge
+    koga
     lanl
     lehtola_emd
     lehtola_hgbs
@@ -72,7 +76,9 @@ _bse(){
     ugbs
     wachters
     zorilla
+    zorrilla
   )
+
   local -a elements=(
     H                    He
     Li Be B  C  N  O  F  Ne
@@ -80,11 +86,14 @@ _bse(){
     K  Ca             Br Kr
                       I  Xe
   )
+
   local -a formats=(
+    bsedebug
     cp2k
     gamess_uk
     gamess_us
     gaussian94
+    json
     molcas
     molpro
     nwchem
@@ -92,6 +101,18 @@ _bse(){
     psi4
     qchem
     turbomole
+  )
+
+  local -a roles=(
+    orbital
+    jfit
+    jkfit
+    rifit
+    optri
+    admmfit
+    dftxfit
+    dftjfit
+    guess
   )
 
   _arguments \
@@ -208,11 +229,11 @@ _bse(){
 (( $+functions[_bse-list-basis-sets] )) || _bse-list-basis-sets(){  # {{{1
   _arguments \
     '(- *)'{-h,--help} \
-    {-n,--no-description}'[Print only the basis set names]' \
-    {-f,--family}"[Limit the basis set list to only the specified family]:FAMILY:_values $families" \
-    {-r,--role}'[Limit the basis set list to only the specified role]:ROLE' \
-    {-s,--substr}'[Limit the basis set list to only basis sets whose name contains the specified substring]:SUBSTR' \
-    {-e,--elements}"[Limit the basis set list to only basis sets that contain all the given elements]:elements:_values -s, ELEMENT $elements" \
+    '(-n --no-description)'{-n,--no-description}'[Print only the basis set names]' \
+    '(-f --family)'{-f,--family}"[Limit the basis set list to only the specified family]:FAMILY:($families)" \
+    '(-r --role)'{-r,--role}"[Limit the basis set list to only the specified role]:ROLE:($roles)" \
+    '(-s --substr)'{-s,--substr}'[Limit the basis set list to only basis sets whose name contains the specified substring]:SUBSTR' \
+    '(-e --elements)'{-e,--elements}"[Limit the basis set list to only basis sets that contain all the given elements]:elements:_values -s, ELEMENT $elements" \
     && return 0
 }
 

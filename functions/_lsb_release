@@ -9,5 +9,6 @@ _lsb_release() {
     '(- *)'{-c,--codename}'[Display the code name of the currently installed distribution.]' \
     '(- *)'{-a,--all}'[Display all of the above information.]' \
     '(- *)'{-s,--short}'[Use the short output format for any information displayed.  This format omits the leading header(s).]' \
-    '(- *)'{-h,--help}'[Show summary of options.]'
+    '(- *)'{-h,--help}'[Show summary of options.]' \
+    && :
 }

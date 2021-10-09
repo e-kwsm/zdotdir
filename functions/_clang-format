@@ -8,7 +8,7 @@ _clang-format() {
     --fcolor-diagnostics'[If set, and on a color-capable terminal controls whether or not to print diagnostics in color]' \
     -i'[Inplace edit <file>s, if specified.]' \
     --sort-includes'[If set, overrides the include sorting behavior determined by the SortIncludes style flag]' \
-    --style='[Coding style]:style:(LLVM Google Chromium Mozilla WebKit)' \
+    --style='[Coding style]:style:(LLVM Google Chromium Microsoft Mozilla WebKit)' \
     --verbose'[If set, shows the list of processed files]' \
     '(- *)'--help'[Display available options (--help-hidden for more)]' \
     '(- *)'--help-hidden'[Display all available options]' \

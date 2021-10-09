@@ -1,0 +1,15 @@
+#compdef keychain
+
+_keychain(){
+  _arguments \
+    --clear"[Delete all of ssh-agent's keys.]" \
+    --query'[Keychain will print lines in KEY=value format representing the values which are set by the agents.]' \
+    --eval'[Keychain will print lines to be evaluated in the shell on stdout.]' \
+    '(- *)'{-h,--help}'[Show help that looks remarkably like this man-page.]' \
+    '(- *)'{-l,--list}'[List signatures of all active SSH keys, and exit, similar to "ssh-add -l".]' \
+    '(- *)'{-L,--list-fp}'[List fingerprints of all active SSH keys, and exit, similar to "ssh-add -L".]' \
+    '(-Q --quick)'{-Q,--quick}'[If an ssh-agent process is running then use it.]' \
+    '(-q --quiet)'{-q,--quiet}'[Only print messages in case of warning, error or required interactivity.]' \
+    '(- *)'{-V,--version}'[Show version information.]' \
+    && :
+}
