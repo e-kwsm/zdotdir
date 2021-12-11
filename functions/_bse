@@ -1,10 +1,10 @@
 #compdef bse
 
 # main {{{1
-_bse(){
-  local curcontext=$curcontext state lstate line
+_bse() {
+  typeset curcontext=$curcontext state lstate line
 
-  local -a basissets=(
+  typeset -a basissets=(
     'STO-3G'
     '3-21G'
     '6-31{,1}{,+,++}G{,\*,\*\*}'
@@ -20,7 +20,15 @@ _bse(){
     'Stuttgart\ RLC{,\ ECP}'
   )
 
-  local -a families=(
+  typeset -a elements=(
+    H                    He
+    Li Be B  C  N  O  F  Ne
+    Na Mg Al Si P  S  Cl Ar
+    K  Ca             Br Kr
+                      I  Xe
+  )
+
+  typeset -a families=(
     acvxz-j
     ahlrichs
     ahlrichs_dhf
@@ -63,6 +71,7 @@ _bse(){
     partridge
     paschoal
     pople
+    pople_fit
     pople_mod
     ranasinghe
     sadlej
@@ -79,15 +88,7 @@ _bse(){
     zorrilla
   )
 
-  local -a elements=(
-    H                    He
-    Li Be B  C  N  O  F  Ne
-    Na Mg Al Si P  S  Cl Ar
-    K  Ca             Br Kr
-                      I  Xe
-  )
-
-  local -a formats=(
+  typeset -a formats=(
     bsedebug
     cp2k
     gamess_uk
@@ -103,7 +104,13 @@ _bse(){
     turbomole
   )
 
-  local -a roles=(
+  typeset -a reffmts=(
+    bib
+    json
+    txt
+  )
+
+  typeset -a roles=(
     orbital
     jfit
     jkfit
@@ -125,7 +132,9 @@ _bse(){
 
 # _bse-command {{{1
 (( $+functions[_bse_command] )) || _bse_command() {
-  local -a _bse_cmds=(
+  typeset -a _bse_cmds=(
+    'autoabs-basis:Form AutoABS auxiliary basis'
+    'autoaux-basis:Form AutoAux auxiliary basis'
     'convert-basis:Convert basis set files from one format to another'
     'create-bundle:Create a bundle of basis sets'
     'get-basis:Output a formatted basis set'
@@ -139,6 +148,7 @@ _bse(){
     'list-basis-sets:Output a list all available basis sets and descriptions'
     'list-families:Output a list all available basis set families'
     'list-formats:Output a list all available basis set formats and descriptions'
+    'list-reader-formats:Output a list of basis set formats that can be read'
     'list-ref-formats:Output a list all available reference formats and descriptions'
     'list-roles:Output a list all available roles and descriptions'
     'list-writer-formats:Output a list available basis set formats that can be written'
@@ -148,7 +158,7 @@ _bse(){
   if (( CURRENT == 1 )); then
     _describe -t commands 'bse command' _bse_cmds
   else
-    local curcontext="$curcontext" ret=1
+    typeset curcontext="$curcontext" ret=1
 
     cmd="${${_bse_cmds[(r)$words[1]:*]%%:*}}"
 
@@ -167,10 +177,10 @@ _bse(){
   fi
 }
 
-(( $+functions[_bse-get-basis] )) || _bse-get-basis(){  # {{{1
+(( $+functions[_bse-get-basis] )) || _bse-get-basis() {  # {{{1
   _arguments \
     '(- *)'{-h,--help} \
-    --elements"[Which elements of the basis set to output. Default is all defined in the given basis]:elements:_values -s, ELEMENT $elements" \
+    --elements"[Which elements of the basis set to output. Default is all defined in the given basis]:ELEMENTS:_values -s, ELEMENTS $elements" \
     --version'[Which version of the basis set to output. Default is the latest version]:VERSION' \
     --noheader'[Do not output the header at the top]' \
     --unc-gen'[Remove general contractions]' \
@@ -178,80 +188,85 @@ _bse(){
     --unc-seg'[Remove general contractions]' \
     --opt-gen'[Optimize general contractions]' \
     --make-gen'[Make the basis set as generally-contracted as possible]' \
+    --aug-steep'[Augment with n steep functions]:AUG_STEEP' \
+    --aug-diffuse'[Augment with n diffuse functions]:AUG_DIFFUSE' \
+    --get-aux'[Instead of the orbital basis, get an automatically formed auxiliary basis]:GET_AUX' \
     "1:basis:_values basis $basissets" \
     "2:fmt:_values fmt $formats" \
     && return 0
 }
 
-(( $+functions[_bse-get-family] )) || _bse-get-family(){  # {{{1
+(( $+functions[_bse-get-family] )) || _bse-get-family() {  # {{{1
   _arguments \
     '(- *)'{-h,--help} \
     "1:basis:_values basis $basissets" \
     && return 0
 }
 
-(( $+functions[_bse-get-family-notes] )) || _bse-get-family-notes(){  # {{{1
+(( $+functions[_bse-get-family-notes] )) || _bse-get-family-notes() {  # {{{1
   _arguments \
     '(- *)'{-h,--help} \
     "1:family:_values family $families" \
     && return 0
 }
 
-(( $+functions[_bse-get-info] )) || _bse-get-info(){  # {{{1
+(( $+functions[_bse-get-info] )) || _bse-get-info() {  # {{{1
   _arguments \
     '(- *)'{-h,--help} \
     "1:basis:_values basis $basissets" \
     && return 0
 }
 
-(( $+functions[_bse-get-notes] )) || _bse-get-notes(){  # {{{1
+(( $+functions[_bse-get-notes] )) || _bse-get-notes() {  # {{{1
   _arguments \
     '(- *)'{-h,--help} \
     "1:basis:_values basis $basissets" \
     && return 0
 }
 
-(( $+functions[_bse-get-refs] )) || _bse-get-refs(){  # {{{1
+(( $+functions[_bse-get-refs] )) || _bse-get-refs() {  # {{{1
   _arguments \
     '(- *)'{-h,--help} \
+    --elements"[Which elements to output the references for. Default is all defined in the given basis.]:ELEMENTS:_values -s, ELEMENTS $elements" \
+    --version'[Which version of the basis set to get the references for]:VERSION' \
     "1:basis:_values basis $basissets" \
-    '2:reffmt:_values reffmt bib json txt' \
+    "2:reffmt:_values reffmt $reffmts" \
     && return 0
 }
 
-(( $+functions[_bse-get-versions] )) || _bse-get-versions(){  # {{{1
+(( $+functions[_bse-get-versions] )) || _bse-get-versions() {  # {{{1
   _arguments \
     '(- *)'{-h,--help} \
     "1:basis:_values basis $basissets" \
     && return 0
 }
 
-(( $+functions[_bse-list-basis-sets] )) || _bse-list-basis-sets(){  # {{{1
+(( $+functions[_bse-list-basis-sets] )) || _bse-list-basis-sets() {  # {{{1
   _arguments \
     '(- *)'{-h,--help} \
     '(-n --no-description)'{-n,--no-description}'[Print only the basis set names]' \
     '(-f --family)'{-f,--family}"[Limit the basis set list to only the specified family]:FAMILY:($families)" \
     '(-r --role)'{-r,--role}"[Limit the basis set list to only the specified role]:ROLE:($roles)" \
     '(-s --substr)'{-s,--substr}'[Limit the basis set list to only basis sets whose name contains the specified substring]:SUBSTR' \
-    '(-e --elements)'{-e,--elements}"[Limit the basis set list to only basis sets that contain all the given elements]:elements:_values -s, ELEMENT $elements" \
+    '(-e --elements)'{-e,--elements}"[Limit the basis set list to only basis sets that contain all the given elements]:ELEMENTS:_values -s, ELEMENTS $elements" \
     && return 0
 }
 
-(( $+functions[_bse-list-formats] )) || _bse-list-formats(){  # {{{1
+(( $+functions[_bse-list-formats] )) || _bse-list-formats() {  # {{{1
   _arguments \
     '(- *)'{-h,--help}'[show this help message and exit]' \
     '(- *)'{-n,--no-description}'[Print only the format names]' \
     && return 0
 }
 
-(( $+functions[_bse-list-ref-formats] )) || _bse-list-ref-formats(){  # {{{1
+(( $+functions[_bse-list-ref-formats] )) || _bse-list-ref-formats() {  # {{{1
   _arguments \
     '(- *)'{-h,--help}'[show this help message and exit]' \
     '(- *)'{-n,--no-description}'[Print only the format names]' \
     && return 0
 }
 
-(( $+functions[_bse-list-roles] )) || _bse-list-roles(){  # {{{1
+(( $+functions[_bse-list-roles] )) || _bse-list-roles() {  # {{{1
   _arguments \
     '(- *)'{-h,--help}'[show this help message and exit]' \
     '(- *)'{-n,--no-description}'[Print only the format names]' \
@@ -260,4 +275,4 @@ _bse(){
 
 # }}}1
 
-# vi:fdm=marker
+# vi:fdm=marker ft=zsh

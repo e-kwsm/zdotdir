@@ -1,8 +1,8 @@
 #compdef pre-commit
 
 # main {{{1
-_pre-commit(){
-  local curcontext=$curcontext state lstate line
+_pre-commit() {
+  typeset curcontext=$curcontext state lstate line
 
   _arguments \
     '(- *)'{-h,--help}'[show this help message and exit]' \
@@ -12,7 +12,7 @@ _pre-commit(){
 
 # _pre-commit-command {{{1
 (( $+functions[_pre-commit_command] )) || _pre-commit_command() {
-  local -a _pre_commit_cmds=(
+  typeset -a _pre_commit_cmds=(
     "autoupdate:Auto-update pre-commit config to the latest repos' versions."
     'clean:Clean out pre-commit files.'
     'gc:Clean unused cached repos.'
@@ -30,7 +30,7 @@ _pre-commit(){
   if (( CURRENT == 1 )); then
     _describe -t commands 'pre-commit command' _pre_commit_cmds
   else
-    local curcontext="$curcontext" ret=1
+    typeset curcontext="$curcontext" ret=1
 
     cmd="${${_pre_commit_cmds[(r)$words[1]:*]%%:*}}"
 
@@ -50,7 +50,7 @@ _pre-commit(){
 }
 
 # install {{{1
-(( $+functions[_pre-commit-install] )) || _pre-commit-install(){
+(( $+functions[_pre-commit-install] )) || _pre-commit-install() {
   _arguments \
     '(- *)'{-h,--help}'[show this help message and exit]' \
     --color'[Whether to use color in output. Defaults to `auto`.]: :(auto always never)' \
@@ -63,7 +63,7 @@ _pre-commit(){
 }
 
 # run {{{1
-(( $+functions[_pre-commit-run] )) || _pre-commit-run(){
+(( $+functions[_pre-commit-run] )) || _pre-commit-run() {
   _arguments \
     '(- *)'{-h,--help}'[show this help message and exit]' \
     --color'[Whether to use color in output. Defaults to `auto`.]: :(auto always never)' \
@@ -83,4 +83,4 @@ _pre-commit(){
 }
 # }}}1
 
-# vi:fdm=marker
+# vi:fdm=marker ft=zsh

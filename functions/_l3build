@@ -1,15 +1,15 @@
 #compdef l3build
 
 # main {{{1
-_l3build(){
-  local curcontext=$curcontext state lstate line
+_l3build() {
+  typeset curcontext=$curcontext state lstate line
 
   _arguments '*::l3build command:_l3build_command'
 }
 
 # _l3build-command {{{1
 (( $+functions[_l3build_command] )) || _l3build_command() {
-  local -a _l3build_cmds=(
+  typeset -a _l3build_cmds=(
     'check:Run all automated tests'
     'clean:Clean out directory tree'
     'ctan:Create CTAN-ready archive'
@@ -26,7 +26,7 @@ _l3build(){
   if (( CURRENT == 1 )); then
     _describe -t commands 'l3build command' _l3build_cmds
   else
-    local curcontext="$curcontext" ret=1
+    typeset curcontext="$curcontext" ret=1
 
     cmd="${${_l3build_cmds[(r)$words[1]:*]%%:*}}"
 
@@ -48,4 +48,4 @@ _l3build(){
 
 # }}}1
 
-# vi:fdm=marker
+# vi:fdm=marker ft=zsh

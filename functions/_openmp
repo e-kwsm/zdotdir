@@ -1,18 +1,21 @@
 #compdef -value-,OMP_DISPLAY_AFFINITY,-default- -value-,OMP_DISPLAY_ENV,-default- -value-,OMP_NUM_THREADS,-default- -value-,OMP_STACKSIZE,-default-
 
 case $service in
-  *OMP_DISPLAY_AFFINITY*)
-    compadd -- true false
-    ;;
-  *OMP_DISPLAY_ENV*)
-    compadd -- true false verbose
-    ;;
-  *OMP_NUM_THREADS*)
-    compadd -- 1 $(nproc --all)
-    ;;
-  *OMP_STACKSIZE*)
-    _wanted -V values expl 'size' compadd -- 128M 256M 512M 1G
-    ;;
-  *)
-    return 1;;
+*OMP_DISPLAY_AFFINITY*)
+  compadd -- true false
+  ;;
+*OMP_DISPLAY_ENV*)
+  compadd -- true false verbose
+  ;;
+*OMP_NUM_THREADS*)
+  compadd -- 1 "$(nproc --all)"
+  ;;
+*OMP_STACKSIZE*)
+  _wanted -V values expl 'size' compadd -- 128M 256M 512M 1G
+  ;;
+*)
+  return 1
+  ;;
 esac
+
+# vim:ft=zsh

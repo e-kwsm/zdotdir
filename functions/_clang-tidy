@@ -1,7 +1,7 @@
 #compdef clang-tidy clang-tidy-10 clang-tidy-11
 
 _clang-tidy() {
-  local -a checks=(
+  typeset -a checks=(
     abseil-duration-addition
     abseil-duration-comparison
     abseil-duration-conversion-cast
@@ -461,3 +461,5 @@ _clang-tidy() {
     --warnings-as-errors="[Upgrades warnings to errors.]:string:_values -s, string $checks" \
     '*:file:_files -g "*.(cc|cpp|h|hpp)"'
 }
+
+# vim:ft=zsh

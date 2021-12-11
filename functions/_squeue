@@ -1,23 +1,23 @@
 #compdef squeue
 
-_squeue(){
-  _arguments \
-    '(-A --account)'{-A,--account=}'[Specify the accounts of the jobs to view.]:account_list' \
-    '(-a --all)'{-a,--all}'[Display information about jobs and job steps in all partitions.]' \
-    '(-h --noheader)'{-h,--noheader}'[Do not print a header on the output.]' \
-    '(- *)'--help'[Print a help message describing all options squeue.]' \
-    '(-j --jobs)'{-j,--jobs=}'[Requests a comma separated list of job IDs to display.]:job_id_list' \
-    '(-l --long)'{-l,--long}'[Report more of the available information for the selected jobs or job steps, subject to any constraints specified.]' \
-    '(-u --user --me)'--me"[Equivalent to --user=$USER.]" \
-    '(-n --name)'{-n,--name=}'[Request jobs or job steps having one of the specified names.]:name_list' \
-    '(-o --format -O --Format)'{-o,--format=}'[Specify the information to be displayed, its size and position (right or left justified).]:output_format' \
-    '(-O --Format -o --format)'{-O,--Format=}'[Specify the information to be displayed.]:output_format' \
-    '(-p --partition)'{-p,--partition=}'[Specify the partitions of the jobs or steps to view.]:part_list' \
-    --start'[Report the expected start time and resources to be allocated for pending jobs in order of increasing start time.]' \
-    '(-u --user --me)'{-u,--user=}'[Request jobs or job steps from a comma separated list of users.]:user_list' \
-    '(- *)'--usage'[Print a brief help message listing the squeue options.]' \
-    '(-v --verbose)'{-v,--verbose}'[Report details of squeues actions.]' \
-    '(- *)'{-V,--version}'[Print version information and exit.]' \
-    '(-w --nodelist)'{-w,--nodelist=}'[Report only on jobs allocated to the specified node or list of nodes.]:hostlist' \
-    && :
-}
+_arguments \
+  '(-A --account)'{-A,--account=}'[Specify the accounts of the jobs to view.]:account_list' \
+  '(-a --all)'{-a,--all}'[Display information about jobs and job steps in all partitions.]' \
+  '(-h --noheader)'{-h,--noheader}'[Do not print a header on the output.]' \
+  '(- *)'--help'[Print a help message describing all options squeue.]' \
+  '(-j --jobs)'{-j,--jobs=}'[Requests a comma separated list of job IDs to display.]:job_id_list' \
+  '(-l --long)'{-l,--long}'[Report more of the available information for the selected jobs or job steps, subject to any constraints specified.]' \
+  '(-u --user --me)'--me"[Equivalent to --user=$USER.]" \
+  '(-n --name)'{-n,--name=}'[Request jobs or job steps having one of the specified names.]:name_list' \
+  '(-o --format -O --Format)'{-o,--format=}'[Specify the information to be displayed, its size and position (right or left justified).]:output_format' \
+  '(-O --Format -o --format)'{-O,--Format=}'[Specify the information to be displayed.]:output_format' \
+  '(-p --partition)'{-p,--partition=}'[Specify the partitions of the jobs or steps to view.]:part_list' \
+  --start'[Report the expected start time and resources to be allocated for pending jobs in order of increasing start time.]' \
+  '(-u --user --me)'{-u,--user=}'[Request jobs or job steps from a comma separated list of users.]:user_list' \
+  '(- *)'--usage'[Print a brief help message listing the squeue options.]' \
+  '(-v --verbose)'{-v,--verbose}'[Report details of squeues actions.]' \
+  '(- *)'{-V,--version}'[Print version information and exit.]' \
+  '(-w --nodelist)'{-w,--nodelist=}'[Report only on jobs allocated to the specified node or list of nodes.]:hostlist' \
+  && :
+
+# vim:ft=zsh

@@ -1,51 +1,51 @@
 #compdef sinfo
 
-_sinfo(){
-  _arguments \
-    '(-a --all)'{-a,--all}'[Display information about all partitions.]' \
-    '(-d --dead)'{-d,--dead}'[If set only report state information for non-responding (dead) nodes.]' \
-    '(-e --exact)'{-e,--exact}'[If set, do not group node information on multiple nodes unless their configurations to be reported are identical.]' \
-    '(-h --noheader)'{-h,--noheader}'[Do not print a header on the output.]' \
-    '(- *)'--help'[Print a message describing all sinfo options.]' \
-    '(-l --long)'{-l,--long}'[Print more detailed information.]' \
-    '(-n --nodes)'{-n,--nodes=}'[Print information only about the specified node(s).]:nodes' \
-    '(-N --Node)'{-N,--Node}'[Print information in a node-oriented format with one line per node and partition.]' \
-    '(-o --format -O --Format)'{-o,--format=}'[Specify the information to be displayed using an sinfo format string.]:output_format' \
-    '(-O --Format -o --format)'{-O,--Format=}'[Specify the information to be displayed.]:output_format' \
-    '(-p --partition)'{-p,--partition=}'[Print information only about the specified partition(s).]:partition' \
-    '(-r --responding)'{-r,--responding}'[If set only report state information for responding nodes.]' \
-    '(-R --list-reasons)'{-R,--list-reasons}'[List reasons nodes are in the down, drained, fail or failing state.]' \
-    '(-s --summarize)'{-s,--summarize}'[List only a partition state summary with no node state details.]' \
-    '(-S --sort)'{-S,--sort=}'[Specification of the order in which records should be reported.]:sort_list' \
-    '(-t --states)'{-t,--states=}'[List nodes only having the given state(s).]:states:_values -s, state
-      ALLOC
-      ALLOCATED
-      COMP
-      COMPLETING
-      DOWN
-      DRAIN
-      DRAINED
-      DRAINING
-      FAIL
-      FUTURE
-      FUTR
-      IDLE
-      MAINT
-      MIX
-      MIXED
-      NO_RESPOND
-      NPC
-      PERFCTRS
-      POWER_DOWN
-      POWERING_DOWN
-      POWER_UP
-      RESV
-      RESERVED
-      UNK
-      UNKNOWN
-    ' \
-    '(- *)'--usage'[Print a brief message listing the sinfo options.]' \
-    '(-v --verbose)'{-v,--verbose}'[Provide detailed event logging through program execution.]' \
-    '(- *)'{-V,--version}'[Print version information and exit.]' \
-    && :
-}
+_arguments \
+  '(-a --all)'{-a,--all}'[Display information about all partitions.]' \
+  '(-d --dead)'{-d,--dead}'[If set only report state information for non-responding (dead) nodes.]' \
+  '(-e --exact)'{-e,--exact}'[If set, do not group node information on multiple nodes unless their configurations to be reported are identical.]' \
+  '(-h --noheader)'{-h,--noheader}'[Do not print a header on the output.]' \
+  '(- *)'--help'[Print a message describing all sinfo options.]' \
+  '(-l --long)'{-l,--long}'[Print more detailed information.]' \
+  '(-n --nodes)'{-n,--nodes=}'[Print information only about the specified node(s).]:nodes' \
+  '(-N --Node)'{-N,--Node}'[Print information in a node-oriented format with one line per node and partition.]' \
+  '(-o --format -O --Format)'{-o,--format=}'[Specify the information to be displayed using an sinfo format string.]:output_format' \
+  '(-O --Format -o --format)'{-O,--Format=}'[Specify the information to be displayed.]:output_format' \
+  '(-p --partition)'{-p,--partition=}'[Print information only about the specified partition(s).]:partition' \
+  '(-r --responding)'{-r,--responding}'[If set only report state information for responding nodes.]' \
+  '(-R --list-reasons)'{-R,--list-reasons}'[List reasons nodes are in the down, drained, fail or failing state.]' \
+  '(-s --summarize)'{-s,--summarize}'[List only a partition state summary with no node state details.]' \
+  '(-S --sort)'{-S,--sort=}'[Specification of the order in which records should be reported.]:sort_list' \
+  '(-t --states)'{-t,--states=}'[List nodes only having the given state(s).]:states:_values -s, state
+    ALLOC
+    ALLOCATED
+    COMP
+    COMPLETING
+    DOWN
+    DRAIN
+    DRAINED
+    DRAINING
+    FAIL
+    FUTURE
+    FUTR
+    IDLE
+    MAINT
+    MIX
+    MIXED
+    NO_RESPOND
+    NPC
+    PERFCTRS
+    POWER_DOWN
+    POWERING_DOWN
+    POWER_UP
+    RESV
+    RESERVED
+    UNK
+    UNKNOWN
+  ' \
+  '(- *)'--usage'[Print a brief message listing the sinfo options.]' \
+  '(-v --verbose)'{-v,--verbose}'[Provide detailed event logging through program execution.]' \
+  '(- *)'{-V,--version}'[Print version information and exit.]' \
+  && :
+
+# vim:ft=zsh

@@ -1,0 +1,21 @@
+#compdef shfmt
+
+_arguments \
+  -l"[list files whose formatting differs from shfmt's]" \
+  -w'[write result to file instead of stdout]' \
+  -d'[error with a diff when the formatting differs]' \
+  -s'[simplify the code]' \
+  -mn'[minify the code to reduce its size (implies -s)]' \
+  '(-p)'-ln'[language variant to parse (bash/posix/mksh/bats, default "bash")]:sh:(bash posix)' \
+  '(-ln)'-p'[shorthand for -ln=posix]' \
+  -i'[indent: 0 for tabs (default), >0 for number of spaces]:uint' \
+  -bn'[binary ops like && and | may start a line]' \
+  -ci'[switch cases will be indented]' \
+  -sr'[redirect operators will be followed by a space]' \
+  -kp'[keep column alignment paddings]' \
+  -fn'[function opening braces are placed on a separate line]' \
+  -f'[recursively find all shell files and print the paths]' \
+  -tojson'[print syntax tree to stdout as a typed JSON]' \
+  '*:file:_files -g "*.(bash|sh)"'
+
+# vim:ft=zsh
