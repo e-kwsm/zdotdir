@@ -1,1 +1,3 @@
 *.zwc
+/functions/_deno
+/functions/_spack

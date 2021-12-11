@@ -1,9 +1,8 @@
-#compdef pip pip3 pip3.5 pip3.6 pip3.7 pip3.8
+#compdef pip pip3 pip3.5 pip3.6 pip3.7 pip3.8 pip3.9 pip3.10
 
 # main {{{1
-_pip(){
-  local curcontext=$curcontext state lstate line
-
+_pip() {
+  typeset curcontext=$curcontext state lstate line
 
   _arguments \
     '(- *)'{-h,--help}'[Show help]' \
@@ -30,7 +29,7 @@ _pip(){
 
 # _pip-command {{{1
 (( $+functions[_pip_command] )) || _pip_command() {
-  local -a _pip_cmds=(
+  typeset -a _pip_cmds=(
     'install:Install packages.'
     'download:Download packages.'
     'uninstall:Uninstall packages.'
@@ -49,7 +48,7 @@ _pip(){
   if (( CURRENT == 1 )); then
     _describe -t commands 'pip command' _pip_cmds
   else
-    local curcontext="$curcontext" ret=1
+    typeset curcontext="$curcontext" ret=1
 
     cmd="${${_pip_cmds[(r)$words[1]:*]%%:*}}"
 
@@ -69,7 +68,7 @@ _pip(){
 }
 
 # install {{{1
-(( $+functions[_pip-install] )) || _pip-install(){
+(( $+functions[_pip-install] )) || _pip-install() {
   _arguments \
     {-r,--requirement}'[Install from the given requirements file.]:file:_files' \
     {-c,--constraint}'[Constrain versions using the given constraints file. This option can be used multiple times.]:file:_files' \
@@ -88,14 +87,14 @@ _pip(){
 }
 
 # download {{{1
-(( $+functions[_pip-download] )) || _pip-download(){
+(( $+functions[_pip-download] )) || _pip-download() {
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
 }
 
 # uninstall {{{1
-(( $+functions[_pip-uninstall] )) || _pip-uninstall(){
+(( $+functions[_pip-uninstall] )) || _pip-uninstall() {
   _arguments \
     {-r,--requirement}'[Uninstall all the packages listed in the given requirements file.]:file:_files' \
     {-y,--yes}"[Don't ask for confirmation of uninstall deletions.]" \
@@ -105,7 +104,7 @@ _pip(){
 }
 
 # freeze {{{1
-(( $+functions[_pip-freeze] )) || _pip-freeze(){
+(( $+functions[_pip-freeze] )) || _pip-freeze() {
   _arguments \
     {-r,--requirement}'[Use the order in the given requirements file and its comments when generating output.]:file:_files' \
     {-f,--find-links}'[URL for finding packages, which will be added to the output.]:url' \
@@ -117,7 +116,7 @@ _pip(){
 }
 # }}}1
 # list {{{1
-(( $+functions[_pip-list] )) || _pip-list(){
+(( $+functions[_pip-list] )) || _pip-list() {
   _arguments \
     {-o,--outdated}'[List outdated packages]' \
     {-u,--uptodate}'[List uptodate packages]' \
@@ -130,7 +129,7 @@ _pip(){
 }
 
 # show {{{1
-(( $+functions[_pip-show] )) || _pip-show(){
+(( $+functions[_pip-show] )) || _pip-show() {
   _arguments \
     {-f,--files}'[Show the full list of installed files for each package.]' \
     '(- *)'--help'[Show help.]' \
@@ -139,35 +138,35 @@ _pip(){
 }
 
 # check {{{1
-(( $+functions[_pip-check] )) || _pip-check(){
+(( $+functions[_pip-check] )) || _pip-check() {
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
 }
 
 # config {{{1
-(( $+functions[_pip-config] )) || _pip-config(){
+(( $+functions[_pip-config] )) || _pip-config() {
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
 }
 
 # search {{{1
-(( $+functions[_pip-search] )) || _pip-search(){
+(( $+functions[_pip-search] )) || _pip-search() {
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
 }
 
 # wheel {{{1
-(( $+functions[_pip-wheel] )) || _pip-wheel(){
+(( $+functions[_pip-wheel] )) || _pip-wheel() {
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
 }
 
 # hash {{{1
-(( $+functions[_pip-hash] )) || _pip-hash(){
+(( $+functions[_pip-hash] )) || _pip-hash() {
   _arguments \
     '(- *)'--help'[Show help.]' \
     && return 0
@@ -175,4 +174,4 @@ _pip(){
 
 # }}}1
 
-# vi:fdm=marker
+# vi:fdm=marker ft=zsh

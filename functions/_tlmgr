@@ -1,7 +1,7 @@
 #compdef tlmgr
 
 # main {{{1
-_tlmgr(){
+_tlmgr() {
   local curcontext=$curcontext state lstate line
   _arguments \
     '(- *)'--help'[Display this help information and exit]' \
@@ -96,13 +96,13 @@ _tlmgr(){
 }
 
 # TODO _tlmgr-backup {{{1
-(( $+functions[_tlmgr-backup] )) || _tlmgr-backup(){
+(( $+functions[_tlmgr-backup] )) || _tlmgr-backup() {
   _arguments \
     && return 0
 }
 
 # _tlmgr-check {{{1
-(( $+functions[_tlmgr-check] )) || _tlmgr-check(){
+(( $+functions[_tlmgr-check] )) || _tlmgr-check() {
   _arguments \
     --use-svn'[svn status]' \
     '1: :(
@@ -116,20 +116,20 @@ _tlmgr(){
 }
 
 # TODO _tlmgr-candidates {{{1
-(( $+functions[_tlmgr-candidates] )) || _tlmgr-candidates(){
+(( $+functions[_tlmgr-candidates] )) || _tlmgr-candidates() {
   _arguments \
     '1:pkg:' \
     && return 0
 }
 
 # TODO _tlmgr-conf {{{1
-(( $+functions[_tlmgr-conf] )) || _tlmgr-conf(){
+(( $+functions[_tlmgr-conf] )) || _tlmgr-conf() {
   _arguments \
     && return 0
 }
 
 # TODO _tlmgr-dump-tlpdb {{{1
-(( $+functions[_tlmgr-dump-tlpdb] )) || _tlmgr-dump-tlpdb(){
+(( $+functions[_tlmgr-dump-tlpdb] )) || _tlmgr-dump-tlpdb() {
   _arguments \
     '(--remote)--local[]' \
     '(--local)--remote[]' \
@@ -138,7 +138,7 @@ _tlmgr(){
 }
 
 # _tlmgr-generate {{{1
-(( $+functions[_tlmgr-generate] )) || _tlmgr-generate(){
+(( $+functions[_tlmgr-generate] )) || _tlmgr-generate() {
   _arguments \
     --dest'[]:output_file:_files' \
     --localcfg'[]:local_conf_file:_files' \
@@ -148,7 +148,7 @@ _tlmgr(){
 }
 
 # TODO _tlmgr-info {{{1
-(( $+functions[_tlmgr-info] )) || _tlmgr-info(){
+(( $+functions[_tlmgr-info] )) || _tlmgr-info() {
   _arguments \
     --list'[]' \
     '(--only-remote)--only-installed[]' \
@@ -174,7 +174,7 @@ _tlmgr(){
 }
 
 # TODO _tlmgr-install {{{1
-(( $+functions[_tlmgr-install] )) || _tlmgr-install(){
+(( $+functions[_tlmgr-install] )) || _tlmgr-install() {
   _arguments \
     --dry-run'[]' \
     --file'[]' \
@@ -189,35 +189,35 @@ _tlmgr(){
 }
 
 # TODO _tlmgr-key {{{1
-(( $+functions[_tlmgr-key] )) || _tlmgr-key(){
+(( $+functions[_tlmgr-key] )) || _tlmgr-key() {
   _arguments \
     && return 0
 }
 
 # TODO _tlmgr-option {{{1
-(( $+functions[_tlmgr-option] )) || _tlmgr-option(){
+(( $+functions[_tlmgr-option] )) || _tlmgr-option() {
   _arguments \
     && return 0
 }
 
 # TODO _tlmgr-paper {{{1
-(( $+functions[_tlmgr-paper] )) || _tlmgr-paper(){
+(( $+functions[_tlmgr-paper] )) || _tlmgr-paper() {
   _arguments \
     && return 0
 }
 
 # TODO _tlmgr-path {{{1
-(( $+functions[_tlmgr-path] )) || _tlmgr-path(){
+(( $+functions[_tlmgr-path] )) || _tlmgr-path() {
   _arguments '1: :(add remove)' && return 0
 }
 
 # TODO _tlmgr-pinning {{{1
-(( $+functions[_tlmgr-pinning] )) || _tlmgr-pinning(){
+(( $+functions[_tlmgr-pinning] )) || _tlmgr-pinning() {
   _arguments '1: :(show add remove)' && return 0
 }
 
 # TODO _tlmgr-platform {{{1
-(( $+functions[_tlmgr-platform] )) || _tlmgr-platform(){
+(( $+functions[_tlmgr-platform] )) || _tlmgr-platform() {
   _arguments \
     --dry-run'[]' \
     '1: :(list add remove set)' \
@@ -225,7 +225,7 @@ _tlmgr(){
 }
 
 # TODO _tlmgr-postaction {{{1
-(( $+functions[_tlmgr-postaction] )) || _tlmgr-postaction(){
+(( $+functions[_tlmgr-postaction] )) || _tlmgr-postaction() {
   _arguments \
     --fileassocmode'[]: :(1 2)' \
     '1: :(install remove)' \
@@ -235,7 +235,7 @@ _tlmgr(){
 }
 
 # TODO _tlmgr-remove {{{1
-(( $+functions[_tlmgr-remove] )) || _tlmgr-remove(){
+(( $+functions[_tlmgr-remove] )) || _tlmgr-remove() {
   _arguments \
     --all'[]' \
     --backup'[]' \
@@ -249,13 +249,13 @@ _tlmgr(){
 }
 
 # TODO _tlmgr-repository {{{1
-(( $+functions[_tlmgr-repository] )) || _tlmgr-repository(){
+(( $+functions[_tlmgr-repository] )) || _tlmgr-repository() {
   _arguments \
     && return 0
 }
 
 # TODO _tlmgr-restore {{{1
-(( $+functions[_tlmgr-restore] )) || _tlmgr-restore(){
+(( $+functions[_tlmgr-restore] )) || _tlmgr-restore() {
   _arguments \
     '(- *)'--all'[]' \
     --backupdir'[]:directory:_path_files -/' \
@@ -268,7 +268,7 @@ _tlmgr(){
 }
 
 # TODO _tlmgr-search {{{1
-(( $+functions[_tlmgr-search] )) || _tlmgr-search(){
+(( $+functions[_tlmgr-search] )) || _tlmgr-search() {
   _arguments \
     '(--all)--file[]' \
     '(--file)--all[]' \
@@ -279,7 +279,7 @@ _tlmgr(){
 }
 
 # TODO _tlmgr-update {{{1
-(( $+functions[_tlmgr-update] )) || _tlmgr-update(){
+(( $+functions[_tlmgr-update] )) || _tlmgr-update() {
   _arguments \
     --all'[]' \
     --backup'[]' \
@@ -303,4 +303,4 @@ _tlmgr(){
 
 _tlmgr "$@"
 
-# vi:fdm=marker
+# vi:fdm=marker ft=zsh

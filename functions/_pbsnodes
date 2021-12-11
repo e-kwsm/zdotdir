@@ -12,3 +12,5 @@ _arguments \
   -q'[Supress all error messages.]' \
   -s'[Specify the PBS server’s hostname or IP address.]' \
   && :
+
+# vim:ft=zsh

@@ -1,14 +1,14 @@
 #compdef lsb_release
 
-_lsb_release() {
-  _arguments \
-    '(- *)'{-v,--version}'[Show the version of the LSB against which your current installation is compliant.]' \
-    '(- *)'{-i,--id}"[Display the distributor's ID.]" \
-    '(- *)'{-d,--description}'[Display a description of the currently installed distribution.]' \
-    '(- *)'{-r,--release}'[Display the release number of the currently installed distribution.]' \
-    '(- *)'{-c,--codename}'[Display the code name of the currently installed distribution.]' \
-    '(- *)'{-a,--all}'[Display all of the above information.]' \
-    '(- *)'{-s,--short}'[Use the short output format for any information displayed.  This format omits the leading header(s).]' \
-    '(- *)'{-h,--help}'[Show summary of options.]' \
-    && :
-}
+_arguments \
+  '(- *)'{-v,--version}'[Show the version of the LSB against which your current installation is compliant.]' \
+  '(- *)'{-i,--id}"[Display the distributor's ID.]" \
+  '(- *)'{-d,--description}'[Display a description of the currently installed distribution.]' \
+  '(- *)'{-r,--release}'[Display the release number of the currently installed distribution.]' \
+  '(- *)'{-c,--codename}'[Display the code name of the currently installed distribution.]' \
+  '(- *)'{-a,--all}'[Display all of the above information.]' \
+  '(- *)'{-s,--short}'[Use the short output format for any information displayed.  This format omits the leading header(s).]' \
+  '(- *)'{-h,--help}'[Show summary of options.]' \
+  && :
+
+# vim:ft=zsh

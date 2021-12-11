@@ -1,26 +1,26 @@
 #compdef ctest
 
-_ctest(){
-  _arguments \
-    '(-V -VV --verbose --extra-verbose)'{-V,--verbose}'[Enable verbose output from tests.]' \
-    '(-V -VV --verbose --extra-verbose)'{-VV,--extra-verbose}'[Enable more verbose output from tests.]' \
-    --output-on-failure'[Output anything outputted by the test program if the test should fail.]' \
-    --stop-on-failure'[Stop running the tests after one has failed.]' \
-    -F'[Enable failover.]' \
-    '(-j --parallel)'{-j,--parallel}'[Run the tests in parallel using the given]:jobs' \
-    '(-Q --quiet)'{-Q,--quiet}'[Make ctest quiet.]' \
-    '(-O --output-log)'{-O,--output-log}'[Output to log file.]:file:_files' \
-    '(-N --show-only)'{-N,--show-only}'[Disable actual execution of tests.]' \
-    '(-L --label-regex)'{-L,--label-regex}'[Run tests with labels matching regular expression.]:regex' \
-    '(-R --tests-regex)'{-R,--tests-regex}'[Run tests matching regular expression.]:regex' \
-    '(-E --exclude-regex)'{-E,--exclude-regex}'[Exclude tests matching regular expression.]:regex' \
-    '(-LE --label-exclude)'{-LE,--label-exclude}'[Exclude tests with labels matching regular expression.]:regex' \
-    --rerun-failed'[Run only the tests that failed previously.]' \
-    --test-load'[CPU load threshold for starting new parallel tests.]' \
-    --schedule-random'[Use a random order for scheduling tests.]' \
-    --print-labels'[Print all available test labels.]' \
-    '(- *)'{-h,--help}'[Show help options]' \
-    '(- *)'--version'[Show version information]' \
-    '(- *)'--help-full'[Print all help manuals and exit.]' \
-    && :
-}
+_arguments \
+  '(-V -VV --verbose --extra-verbose)'{-V,--verbose}'[Enable verbose output from tests.]' \
+  '(-V -VV --verbose --extra-verbose)'{-VV,--extra-verbose}'[Enable more verbose output from tests.]' \
+  --output-on-failure'[Output anything outputted by the test program if the test should fail.]' \
+  --stop-on-failure'[Stop running the tests after one has failed.]' \
+  -F'[Enable failover.]' \
+  '(-j --parallel)'{-j,--parallel}'[Run the tests in parallel using the given]:jobs' \
+  '(-Q --quiet)'{-Q,--quiet}'[Make ctest quiet.]' \
+  '(-O --output-log)'{-O,--output-log}'[Output to log file.]:file:_files' \
+  '(-N --show-only)'{-N,--show-only}'[Disable actual execution of tests.]' \
+  '(-L --label-regex)'{-L,--label-regex}'[Run tests with labels matching regular expression.]:regex' \
+  '(-R --tests-regex)'{-R,--tests-regex}'[Run tests matching regular expression.]:regex' \
+  '(-E --exclude-regex)'{-E,--exclude-regex}'[Exclude tests matching regular expression.]:regex' \
+  '(-LE --label-exclude)'{-LE,--label-exclude}'[Exclude tests with labels matching regular expression.]:regex' \
+  --rerun-failed'[Run only the tests that failed previously.]' \
+  --test-load'[CPU load threshold for starting new parallel tests.]' \
+  --schedule-random'[Use a random order for scheduling tests.]' \
+  --print-labels'[Print all available test labels.]' \
+  '(- *)'{-h,--help}'[Show help options]' \
+  '(- *)'--version'[Show version information]' \
+  '(- *)'--help-full'[Print all help manuals and exit.]' \
+  && :
+
+# vim:ft=zsh

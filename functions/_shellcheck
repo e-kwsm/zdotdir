@@ -1,0 +1,12 @@
+#compdef shellcheck
+
+_arguments \
+  '(-a --check-sourced)'{-a,--check-sourced}'[Include warnings from sourced files]' \
+  '(-f --format)'{-f,--format=}'[Output format]:FORMAT:(checkstyle diff gcc json json1 quiet tty)' \
+  --list-optional'[List checks disabled by default]' \
+  '(-s --shell)'{-s,--shell=}'[Specify dialect]:SHELLNAME:(sh bash dash ksh)' \
+  '(- *)'{-V,--version}'[Print version information]' \
+  '(- *)'--help'[Show this usage summary and exit]' \
+  '*:files:_files -g "*.(bash|sh)"'
+
+# vim:ft=zsh

@@ -48,3 +48,5 @@ _kpsewhich() {
     '(- *)'-version'[display version information number and exit.]' \
     '*:file:_files'
 }
+
+# vim:ft=zsh

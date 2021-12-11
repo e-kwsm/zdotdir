@@ -1,6 +1,6 @@
 #compdef pjsub
 
-_pjsub(){
-  _arguments \
-    '*:script:_files -g "*.(bash|sh)"'
-}
+_arguments \
+  '*:script:_files -g "*.(bash|sh)"'
+
+# vim:ft=zsh

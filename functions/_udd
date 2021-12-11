@@ -1,0 +1,11 @@
+#compdef udd
+
+_arguments \
+  '(- *)'{-h,--help}'[show this help text]' \
+  --dry-run'[test what dependencies can be updated]' \
+  --test'[command to run after each dependency update e.g. "deno test"]:TEST' \
+  '(- *)'--upgrade'[update udd to the latest version]' \
+  '(- *)'--version'[print the version of udd]' \
+  '*:file:_files -g "*.ts"'
+
+# vim:ft=zsh

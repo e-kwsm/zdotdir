@@ -1,8 +1,8 @@
 #compdef avogadro
 
-_avogadro(){
-  _arguments \
-    '(- *)'{-h,--help}'[Show help options]' \
-    '(- *)'{-v,--version}'[Show version information]' \
-    '*:files:_files -g "*.(cif|cml|com|fchk|gjf|gzmat|xyz)"'
-}
+_arguments \
+  '(- *)'{-h,--help}'[Show help options]' \
+  '(- *)'{-v,--version}'[Show version information]' \
+  '*:files:_files -g "*.(cif|cml|com|fchk|gjf|gzmat|xyz)"'
+
+# vim:ft=zsh
