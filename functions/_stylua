@@ -1,0 +1,20 @@
+#compdef stylua
+
+_arguments \
+  '(-c --check)'{-c,--check}"[Runs in 'check' mode]" \
+  '(-f --config-path)'{-f,--config-path}'[Specify path to stylua.toml configuration file]:CONFIG_PATH:_files -g "*.toml"' \
+  '(-g --glob)'{-g,--glob}'[Glob patterns to test against which files to check.]:GLOB' \
+  '(- *)'{-h,--help}'[Prints help information]' \
+  --num-threads'[The number of threads to use to format files in parallel]:NUM_THREADS' \
+  --output-format"[Configures the diff output when using 'check' mode.]:OUTPUT_FORMAT:(Standard Unified Json)" \
+  '(-v --verbose)'{-v,--verbose}'[Enables verbose output]' \
+  '(- *)'{-V,--version}'[Prints version information]' \
+  --verify'[Verifies the output correctness after formatting]' \
+  --call-parentheses'[Specify whether to apply parentheses on function calls with signle string or table arg]:CALL_PARENTHESES:(Always NoSingleString NoSingleTable None)' \
+  --column-width'[The column width to use to attempt to wrap lines]:COLUMN_WIDTH' \
+  --indent-type'[The type of indents to use]:INDENT_TYPE:(Tabs Spaces)' \
+  --indent-width'[The width of a single indentation level]:INDENT_WIDTH' \
+  --quote-style'[The style of quotes to use in string literals]:QUOTE_STYLE:(AutoPreferDouble AutoPreferSingle ForceDouble ForceSingle)' \
+  '*:file:_files -g "*.lua"'
+
+# vim:ft=zsh
