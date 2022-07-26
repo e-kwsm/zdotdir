@@ -5,15 +5,14 @@
 
 ZDOTDIR=$XDG_CONFIG_HOME/zsh
 
-if [ -r ~/.zshenv_local ]; then
-  . ~/.zshenv_local
-fi
-
 if ! type module > /dev/null 2>&1; then
   if [ -r /etc/profile.d/modules.sh ]; then
     . /etc/profile.d/modules.sh
-    module refresh
   elif [ -r /etc/profile.d/lmod.sh ]; then
     . /etc/profile.d/lmod.sh
   fi
+fi
+
+if [ -r ~/.zshenv_local ]; then
+  . ~/.zshenv_local
 fi

@@ -33,7 +33,7 @@ zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
+if [ ! "$LS_COLORS" ]; then eval "$(dircolors -b)"; fi
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
@@ -59,14 +59,10 @@ zstyle ':completion:*' fake-parameters \
   PKG_CONFIG_PATH:string \
   PYTHONPATH:string \
 
-function chpwd() { ls --color }
-function precmd() { print -n "\e]2;$USER@$HOST:${PWD/~HOME/~}\a" }
-function preexec() { print -n "\e]2;$USER@$HOST:${PWD/~HOME/~}\a" }
-
-if [ -r $ZDOTDIR/zsh_aliases ]; then . $ZDOTDIR/zsh_aliases; fi
-if [ -r ~/.zshrc_local ]; then . ~/.zshrc_local; fi
-
-if [ -r ~/.ssh/config ]; then _cache_hosts=($(grep '^Host\s' ~/.ssh/config | sed -e 's/^Host\s//' -e 's/\*//')); fi
+mychpwd() { ls --color; }
+chpwd_functions+=(mychpwd)
+mypreexec() { print -n "\e]2;$USER@$HOST:${PWD/~HOME/~}\a"; }
+preexec_functions+=(mypreexec)
 
 autoload -Uz vcs_info
 setopt prompt_subst
@@ -75,9 +71,15 @@ zstyle ':vcs_info:*' stagedstr "%F{yellow}!"
 zstyle ':vcs_info:*' unstagedstr "%F{red}+"
 zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () { vcs_info }
+precmd_functions+=(vcs_info)
 RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+
+if [ -r ~/.ssh/config ]; then
+  _cache_hosts=($(sed -n -e '/^\s*Host\s/ { s///; /\*/d; p }' ~/.ssh/config))
+fi
 
 if ! [ -f $ZDOTDIR/.zshrc.zwc ] || [ $ZDOTDIR/.zshrc.zwc -ot $ZDOTDIR/.zshrc ]; then
   zcompile -U -M $ZDOTDIR/.zshrc
 fi
+
+if [ -r ~/.zshrc_local ]; then . ~/.zshrc_local; fi
