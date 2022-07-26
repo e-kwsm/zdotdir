@@ -1,1 +1,1 @@
-[ -r ~/.zlogout_local ] && . ~/.zlogout_local
+if [ -r ~/.zlogout_local ]; then . ~/.zlogout_local; fi
