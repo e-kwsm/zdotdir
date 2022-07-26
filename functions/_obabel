@@ -5,7 +5,7 @@ _arguments -s -S \
   --addformula'[Append the molecular formula after the current molecule title]' \
   -c'[Center atomic coordinates at (0,0,0)]' \
   ---errorlevel'[Filter the level of errors and warnings displayed]:level:(1 2 3 4 5)' \
-  '(- *)'-H+'[Output usage information]:format-ID:(ascii can cif cml com fchk gjf gzmat inchi inchikey png smi xyz)' \
+  '(- *)'-H+'[Output usage information]:format-ID:(ascii can cif cjson cml com fchk gjf gzmat inchi inchikey png smi xyz)' \
   '(- *)'-Hall'[Output formatting information and options for all formats]' \
   '(- *)'-L'[Lists plugin classes of this category]:category:(charges descriptors fingerprints forcefields formats loaders ops)' \
   '(- *)'-V'[Output version number and exit]' \
@@ -13,10 +13,10 @@ _arguments -s -S \
   --gen3D'' \
   -a+'[Read option]:read option' \
   -x+'[Write option]:write option' \
-  -i+'[Specifies input format]:format-ID:(can cif cml fchk inchi smi xyz)' \
-  '1:infile:_files -g "*.(can|cif|cml|com|fchk|gzmat|inchi|smi|xyz)"' \
-  -o+'[Specifies output format]:format-ID:(ascii cif can cml gjf gzmat inchi inchikey smi svg xyz)' \
-  -O+'[oufile]:outfile:_files -g "*.(can|cif|cml|com|gjf|gzmat|inchi|png|smi|svg|xyz)"' \
+  -i+'[Specifies input format]:format-ID:(can cif cml fchk gzmat inchi smi xyz)' \
+  '1:infile:_files -g "*.(can|cif|cml|fchk|gzmat|inchi|smi|xyz)"' \
+  -o+'[Specifies output format]:format-ID:(ascii can cif cjson cml gjf gzmat inchi inchikey smi svg xyz)' \
+  -O+'[oufile]:outfile:_files -g "*.(can|cif|cjson|cml|com|gjf|gzmat|inchi|png|smi|svg|xyz)"' \
   && :
 
 # vim:ft=zsh
