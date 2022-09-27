@@ -1,6 +1,10 @@
 #compdef ctest
 
 _arguments \
+  --preset='[Read arguments from a test preset.]:preset:_files' \
+  '(- *)'--list-presets'[List available test presets.]' \
+  '(-C --build-config)'{-C,--build-config}'[Choose configuration to test.]:cfg:_files' \
+  --progress'[Enable short progress output from tests.]' \
   '(-V -VV --verbose --extra-verbose)'{-V,--verbose}'[Enable verbose output from tests.]' \
   '(-V -VV --verbose --extra-verbose)'{-VV,--extra-verbose}'[Enable more verbose output from tests.]' \
   --output-on-failure'[Output anything outputted by the test program if the test should fail.]' \
@@ -15,6 +19,7 @@ _arguments \
   '(-E --exclude-regex)'{-E,--exclude-regex}'[Exclude tests matching regular expression.]:regex' \
   '(-LE --label-exclude)'{-LE,--label-exclude}'[Exclude tests with labels matching regular expression.]:regex' \
   --rerun-failed'[Run only the tests that failed previously.]' \
+  --test-dir'[Specify the directory in which to look for tests.]:dir:_path_files -/' \
   --test-load'[CPU load threshold for starting new parallel tests.]' \
   --schedule-random'[Use a random order for scheduling tests.]' \
   --print-labels'[Print all available test labels.]' \
