@@ -1,21 +1,27 @@
 #compdef shfmt
 
+# v3.6.0
+
 _arguments \
-  -l"[list files whose formatting differs from shfmt's]" \
-  -w'[write result to file instead of stdout]' \
-  -d'[error with a diff when the formatting differs]' \
-  -s'[simplify the code]' \
-  -mn'[minify the code to reduce its size (implies -s)]' \
-  '(-p)'-ln'[language variant to parse (bash/posix/mksh/bats, default "bash")]:sh:(bash posix)' \
-  '(-ln)'-p'[shorthand for -ln=posix]' \
-  -i'[indent: 0 for tabs (default), >0 for number of spaces]:uint' \
-  -bn'[binary ops like && and | may start a line]' \
-  -ci'[switch cases will be indented]' \
-  -sr'[redirect operators will be followed by a space]' \
-  -kp'[keep column alignment paddings]' \
-  -fn'[function opening braces are placed on a separate line]' \
-  -f'[recursively find all shell files and print the paths]' \
-  -tojson'[print syntax tree to stdout as a typed JSON]' \
+  '(- *)'--version'[show version and exit]' \
+  '(- *)'--help \
+  '(-l --list)'{-l,--list}"[list files whose formatting differs from shfmt's]" \
+  '(-w --write)'{-w,--write}'[write result to file instead of stdout]' \
+  '(-d --diff)'{-d,--diff}'[error with a diff when the formatting differs]' \
+  '(-s --simplify)'{-s,--simplify}'[simplify the code]' \
+  '(-mn --minify)'{-mn,--minify}'[minify the code to reduce its size (implies -s)]' \
+  '(-p -ln --language-dialect)'{-ln,--language-dialect}'[language variant to parse (bash/posix/mksh/bats, default "bash")]:sh:(bash posix)' \
+  '(-ln --language-dialect)'-p'[shorthand for -ln=posix]' \
+  --filename'[provide a name for the standard input file]:str' \
+  '(-i --indent)'{-i,--indent}'[indent: 0 for tabs (default), >0 for number of spaces]:uint' \
+  '(-bn --binary-next-line)'{-bn,--binary-next-line}'[binary ops like && and | may start a line]' \
+  '(-ci --case-indent)'{-ci,--case-indent}'[switch cases will be indented]' \
+  '(-sr --space-redirects)'{-sr,--space-redirects}'[redirect operators will be followed by a space]' \
+  '(-kp --keep-padding)'{-kp,--keep-padding}'[keep column alignment paddings]' \
+  '(-fn --func-next-line)'{-fn,--func-next-line}'[function opening braces are placed on a separate line]' \
+  '(-f --find)'{-f,--find}'[recursively find all shell files and print the paths]' \
+  --to-json'[print syntax tree to stdout as a typed JSON]' \
+  --from-json'[read syntax tree from stdin as a typed JSON]' \
   '*:file:_files -g "*.(bash|sh)"'
 
 # vim:ft=zsh
