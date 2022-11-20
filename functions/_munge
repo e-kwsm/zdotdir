@@ -1,0 +1,25 @@
+#compdef munge
+
+_arguments \
+  '(- *)'{-h,--help}'[Display this help]' \
+  '(- *)'{-L,--license}'[Display license information]' \
+  '(- *)'{-V,--version}'[Display version information]' \
+  '(-n --no-input)'{-n,--no-input}'[Discard all input for payload]' \
+  '(-s --string=)'{-s,--string=}'[Input payload from STRING]:STRING' \
+  '(-i --input=)'{-i,--input=}'[Input payload from FILE]:FILE:_files' \
+  '(-o --output=)'{-o,--output=}'[Output credential to FILE]:FILE:_files' \
+  '(-c --cipher=)'{-c,--cipher=}'[Specify cipher type]:STRING' \
+  '(- *)'{-C,--list-ciphers}'[Display a list of supported ciphers]' \
+  '(-m --mac=)'{-m,--mac=}'[Specify MAC type]:STRING' \
+  '(- *)'{-M,--list-macs}'[Display a list of supported MACs]' \
+  '(-z --zip=)'{-z,--zip=}'[Specify compression type]:STRING' \
+  '(- *)'{-Z,--list-zips}'[Display a list of supported compressions]' \
+  '(-u --restrict-uid=)'{-u,--restrict-uid=}'[Restrict credential decoding by UID]:UID' \
+  '(-U --uid=)'{-U,--uid=}'[Specify credential UID (requires root/CAP_SETUID)]:UID' \
+  '(-g --restrict-gid=)'{-g,--restrict-gid=}'[Restrict credential decoding by GID]:GID' \
+  '(-G --gid=)'{-G,--gid=}'[Specify credential GID (requires root/CAP_SETGID)]:GID' \
+  '(-t --ttl=)'{-t,--ttl=}'[Specify time-to-live (in seconds; 0=dfl -1=max)]:INTEGER' \
+  '(-S --socket=)'{-S,--socket=}'[Specify local domain socket for munged]:STRING' \
+  && :
+
+# vim:ft=zsh
