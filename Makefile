@@ -1,12 +1,14 @@
+DENO := $(shell which deno 2> /dev/null)
+
 .PHONY: all
 all: functions.zwc functions/_deno
 
 functions.zwc: $(shell git ls-files functions/)
 	zsh -c 'zcompile -U -M $@ $(sort $^)'
 
-functions/_deno:
-ifeq ($(shell type deno > /dev/null && echo FOUND),FOUND)
-	deno completions zsh > $@
+functions/_deno: $(DENO)
+ifneq ($(DENO),)
+	$< completions zsh > $@
 endif
 
 .PHONY: clean
