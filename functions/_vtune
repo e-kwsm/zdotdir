@@ -1,0 +1,85 @@
+#compdef vtune
+
+# main {{{1
+_vtune() {
+  typeset curcontext=$curcontext state lstate line
+
+  _arguments \
+    '*::vtune command:_vtune_command'
+#   -collect'[Choose an analysis type.]' \
+#   -collect-with'[Choose a collector.]' \
+#   -command'[Issue a command to a running collection.]' \
+#   -finalize'[Re-finalize the result.]' \
+#   -help'[Display help text.]' \
+#   -import'[Create a result directory by importing one or more legacy data files/directories.]' \
+#   -report'[Generate a report with the specified name.]' \
+#   '(- *)'-version'[Display product version.]' \
+}
+
+# _vtune-command {{{1
+(( $+functions[_vtune_command] )) || _vtune_command() {
+  typeset -a _vtune_cmds=(
+    '-collect:Choose an analysis type.'
+    '-collect-with:Choose a collector.'
+    '-command:Issue a command to a running collection.'
+    '-finalize:Re-finalize the result.'
+    '-help:Display help text.'
+    '-import:Create a result directory by importing one or more legacy data files/directories.'
+    '-report:Generate a report with the specified name.'
+    '-version:Display product version.'
+  )
+
+  if (( CURRENT == 1 )); then
+    _describe -t commands 'vtune command' _vtune_cmds
+  else
+    typeset curcontext="$curcontext" ret=1
+
+    cmd="${${_vtune_cmds[(r)$words[1]:*]%%:*}}"
+
+    if (( $#cmd )); then
+      curcontext="${curcontext%:*:*}:vtune-${cmd}:"
+
+      if [ $cmd = 'help' ]; then
+        _message 'no more arguments'
+      elif ! _call_function ret _vtune-$cmd; then
+	_default && ret=0
+      fi
+    else
+      _default && ret=0
+    fi
+    return ret
+  fi
+}
+
+
+# _vtune_collect {{{1
+(( $+functions[_vtune_collect] )) || _vtune_collect() {
+  _arguments \
+    performance-snapshot \
+    hotspots \
+    anomaly-detection \
+    memory-consumption \
+    uarch-exploration \
+    memory-access \
+    threading \
+    hpc-performance \
+    io \
+    gpu-offload \
+    gpu-hotspots \
+    fpga-interaction \
+    system-overview \
+    graphics-rendering \
+    platform-profiler \
+    tsx-exploration \
+    tsx-hotspots \
+    sgx-hotspots \
+
+}
+
+# _vtune_collect {{{1
+(( $+functions[_vtune_help] )) || _vtune_help() {
+# _arguments \
+
+}
+
+# vim:ft=zsh
