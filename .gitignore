@@ -1,3 +1,4 @@
 *.zwc
 /functions/_deno
+/functions/_meson
 /functions/_spack
