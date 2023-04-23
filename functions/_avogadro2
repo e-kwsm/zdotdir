@@ -1,6 +1,6 @@
 #compdef avogadro2 Avogadro2-x86_64.AppImage
 
 _arguments \
-  '*:files:_files -g "*.(cif|cjson|cml|com|fchk|gjf|gzmat|mol|sdf|xyz)"'
+  '*:files:_files -g "(CONTCAR|POSCAR|*.(cif|cjson|cml|com|fchk|gjf|gzmat|mol|sdf|vasp|xyz))"'
 
 # vim:ft=zsh
