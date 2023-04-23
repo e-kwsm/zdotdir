@@ -1,0 +1,18 @@
+#compdef python3-config python3.10-config
+
+_values \
+  'flags' \
+  '--prefix' \
+  '--exec-prefix' \
+  '--includes' \
+  '--libs' \
+  '--cflags' \
+  '--ldflags' \
+  '--extension-suffix' \
+  '--help' \
+  '--abiflags' \
+  '--configdir' \
+  '--embed' \
+  && :
+
+# vim:ft=zsh
