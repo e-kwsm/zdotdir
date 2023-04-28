@@ -1,0 +1,275 @@
+#compdef dftd4
+
+# 3.5.0
+
+typeset -a methods=(
+  'AM05'
+  'B-LYP'
+  'B-P'
+  'B-P86'
+  'B-PW'
+  'B1-LYP'
+  'B1-P'
+  'B1-PW'
+  'B1B95'
+  'B1LYP'
+  'B1P'
+  'B1P86'
+  'B1PW'
+  'B1PW91'
+  'B2-PLYP'
+  'B2GP-PLYP'
+  'B2GPPLYP'
+  'B2PLYP'
+  'B3-LYP'
+  'B3-P'
+  'B3-PW'
+  'B3LYP'
+  'B3P'
+  'B3P86'
+  'B3PW'
+  'B3PW91'
+  'B97'
+  'B97-1'
+  'B97-2'
+  'B97-3C'
+  'B973C'
+  'B97M'
+  'B98'
+  'BH-LYP'
+  'BHLYP'
+  'BLYP'
+  'BMK'
+  'BP'
+  'BP86'
+  'BPBE'
+  'BPW'
+  'BWB6K'
+  'CAM-B3LYP'
+  'DFTB\(3OB\)'
+  'DFTB\(MATSCI\)'
+  'DFTB\(MIO\)'
+  'DFTB\(OB2\)'
+  'DFTB\(PBC\)'
+  'DFTB3'
+  'DOD-BLYP'
+  'DOD-PBE'
+  'DOD-PBEB95'
+  'DOD-PBEP86'
+  'DOD-SVWN'
+  'DODBLYP'
+  'DODPBE'
+  'DODPBEB95'
+  'DODPBEP86'
+  'DODSVWN'
+  'DSD-BLYP'
+  'DSD-PBE'
+  'DSD-PBEB95'
+  'DSD-PBEP86'
+  'DSD-SVWN'
+  'DSDBLYP'
+  'DSDPBE'
+  'DSDPBEB95'
+  'DSDPBEP86'
+  'DSDSVWN'
+  'G-LYP'
+  'GLYP'
+  'HCTH120'
+  'HCTH407'
+  'HF'
+  'HF-3C'
+  'HF-3CV'
+  'HF3C'
+  'HF3CV'
+  'HISS'
+  'HSE03'
+  'HSE06'
+  'HSE12'
+  'HSE12S'
+  'HSESOL'
+  'LB94'
+  'LC-BLYP'
+  'LC-DFTB'
+  'LC-wHPBE'
+  'LC-wPBE'
+  'LCwHPBE'
+  'LCwPBE'
+  'LH07S-SVWN'
+  'LH07SSVWN'
+  'LH07T-SVWN'
+  'LH07TSVWN'
+  'LH12CT-SSIFPW92'
+  'LH12CT-SSIRPW92'
+  'LH12CTSSIFPW92'
+  'LH12CTSSIRPW92'
+  'LH14T-CALPBE'
+  'LH14TCALPBE'
+  'LH20T'
+  'M05'
+  'M05-2X'
+  'M052X'
+  'M06'
+  'M06-2X'
+  'M062X'
+  'M06L'
+  'M08-HX'
+  'M08HX'
+  'M11L'
+  'MN12L'
+  'MN12SX'
+  'MN15'
+  'MN15L'
+  'MPW-LYP'
+  'MPW-PW'
+  'MPW1-LYP'
+  'MPW1-PW'
+  'MPW1KCIS'
+  'MPW1LYP'
+  'MPW1PW'
+  'MPW1PW91'
+  'MPW2PLYP'
+  'MPWB1K'
+  'MPWKCIS1K'
+  'MPWLYP'
+  'MPWPW'
+  'MPWPW91'
+  'N12'
+  'N12SX'
+  'O-LYP'
+  'O3-LYP'
+  'O3LYP'
+  'OLYP'
+  'omegaB97'
+  'omegaB97M'
+  'omegaB97X'
+  'OPBE'
+  'OTPSS'
+  'PBE'
+  'PBE0'
+  'PBE0-2'
+  'PBE0-DH'
+  'PBE02'
+  'PBE0DH'
+  'PBE1KCIS'
+  'PBEH-3C'
+  'PBEH1PBE'
+  'PBEH3C'
+  'PBEHPBE'
+  'PBESOL'
+  'PBEXALPHA'
+  'PKZB'
+  'PTPSS'
+  'PW-P'
+  'PW1-PW'
+  'PW1PW'
+  'PW6B95'
+  'PW86PBE'
+  'PW91'
+  'PW91P86'
+  'PWGGA'
+  'PWP'
+  'PWP1'
+  'PWPB95'
+  'r2SCAN'
+  'r2SCAN0'
+  'r2SCAN50'
+  'r2SCANH'
+  'revDOD-PBEP86'
+  'revDODPBEP86'
+  'revDSD-BLYP'
+  'revDSD-PBE'
+  'revDSD-PBEP86'
+  'revDSD-PBEPBE'
+  'revDSDBLYP'
+  'revDSDPBE'
+  'revDSDPBEP86'
+  'revDSDPBEPBE'
+  'revPBE'
+  'revPBE0'
+  'revPBE0-DH'
+  'revPBE0DH'
+  'revPBE38'
+  'revSSB'
+  'revTPSS'
+  'revTPSS0'
+  'revTPSSH'
+  'RPBE'
+  'RPW86PBE'
+  'RSCAN'
+  'r²SCAN'
+  'r²SCAN0'
+  'r²SCAN50'
+  'r²SCANH'
+  'SCAN'
+  'SOGGA11X'
+  'SSB'
+  'tauHCTC'
+  'tauHCTHHYB'
+  'tHCTH'
+  'TPSS'
+  'TPSS0'
+  'TPSS1KCIS'
+  'TPSSh'
+  'wB97'
+  'wB97M'
+  'wB97X'
+  'X-LYP'
+  'X3-LYP'
+  'X3LYP'
+  'XLYP'
+  'ωB97'
+  'ωB97M'
+  'ωB97X'
+)
+
+_arguments \
+  '(-f --func)'{-f,--func}"[Use damping parameters for given functional]:method:_values method $methods" \
+  --property'[Show dispersion related atomic and system properties]' \
+  --pair-resolved'[Calculate pairwise representation of dispersion energy]' \
+  --noedisp'[Disable writing of dispersion energy to .EDISP file]' \
+  --json'[Dump results to JSON output (default: dftd4.json)]:file:_files -g "*.json"' \
+  '(-v --verbose)'{-v,--verbose}'[Show more, can be used multiple times]' \
+  '(-s --silent)'{-s,--silent}'[Show less, use twice to supress all output]' \
+  '(- *)'--version'[Print program version and exit]' \
+  '(- *)'--citation'[Print citation information and exit]' \
+  '(- *)'--license'[Print license header and exit]' \
+  '(- *)'{-h,--help}'[Show this help message]' \
+  '*:input:_files -g "(CONTCAR|POSCAR|*.(mol|sdf|vasp|xyz))"'
+
+: << EOF
+Usage: dftd4 [options] <input>
+
+Generally Applicable Atomic-Charge Dependent London Dispersion Correction.
+Takes an geometry input to calculate the D4 dispersion correction.
+Periodic calculations are performed automatically for periodic input formats.
+Reads .CHRG file (if present) from the same directory as the input.
+Specify the functional to select the correct parameters.
+
+  -c, --charge <real>   Set charge to molecule, overwrites .CHRG file
+  -i, --input <format>  Hint for the format of the input file
+  -f, --func <method>   Use damping parameters for given functional
+      --param <list>    Specify parameters for rational damping,
+                        expected order is s6, s8, a1, a2 (requires four arguments)
+      --mbdscale <s9>   Use scaled ATM three-body dispersion
+      --zeta <list>     Adjust charge scaling parameters, takes two reals
+                        expected order is ga, gc (default: 3.0, 2.0)
+      --wfactor <real>  Adjust weighting factor for interpolation
+                        (default: 6.0)
+  -g, --grad [file]     Evaluate molecular gradient and virial
+      --hessian         Evaluate molecular hessian
+                        write results to file (default: dftd4.txt),
+                        attempts to add to Turbomole gradient and gradlatt files
+      --property        Show dispersion related atomic and system properties
+      --pair-resolved   Calculate pairwise representation of dispersion energy
+      --noedisp         Disable writing of dispersion energy to .EDISP file
+      --json [file]     Dump results to JSON output (default: dftd4.json)
+  -v, --verbose         Show more, can be used multiple times
+  -s, --silent          Show less, use twice to supress all output
+      --version         Print program version and exit
+      --citation        Print citation information and exit
+      --license         Print license header and exit
+  -h, --help            Show this help message
+
+EOF
+
+# vim:ft=zsh
