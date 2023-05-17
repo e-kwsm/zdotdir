@@ -1,10 +1,29 @@
 #compdef shellcheck
 
+typeset -ar CODE=(SC{1000..1146} SC{2000..2336} SC{3000..3067})
+typeset -ar OPTIONALS=(
+  add-default-case
+  avoid-negated-conditions
+  avoid-nullary-conditions
+  check-extra-masked-returns
+  check-set-e-suppressed
+  check-unassigned-uppercase
+  deprecate-which
+  quote-safe-variables
+  require-double-brackets
+  require-variable-braces
+  useless-use-of-cat
+)
+
 typeset -ar args=(
   '(-a --check-sourced)'{-a,--check-sourced}'[Include warnings from sourced files]'
+  '(-i --include)'{-i,--include=}'[Consider only given types of warnings]:CODE:_values -s, CODE $CODE'
+  '(-e --exclude)'{-e,--exclude=}'[Exclude types of warnings]:CODE:_values -s, CODE $CODE'
   '(-f --format)'{-f,--format=}'[Output format]:FORMAT:(checkstyle diff gcc json json1 quiet tty)'
-  --list-optional'[List checks disabled by default]'
-  '(-s --shell)'{-s,--shell=}'[Specify dialect]:SHELLNAME:(sh bash dash ksh)'
+  '(- *)--list-optional[List checks disabled by default]'
+  --norc"[Don't look for .shellcheckrc files]"
+  '(-o --enable)'{-o,--enable=}'[List of optional checks to enable (or "all")]:checks:_values -s, checks all $OPTIONALS'
+  '(-s --shell)'{-s,--shell=}'[Specify dialect]:SHELLNAME:(sh bash dash ksh busybox)'
   '(- *)'{-V,--version}'[Print version information]'
   '(- *)--help[Show this usage summary and exit]'
   '*:files:_files -g "*.(bash|sh)"'
