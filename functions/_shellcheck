@@ -1,33 +1,60 @@
 #compdef shellcheck
 
-local -ar CODE=(SC{1000..1146} SC{2000..2336} SC{3000..3067})
-local -ar OPTIONALS=(
-  add-default-case
-  avoid-negated-conditions
-  avoid-nullary-conditions
-  check-extra-masked-returns
-  check-set-e-suppressed
-  check-unassigned-uppercase
-  deprecate-which
-  quote-safe-variables
-  require-double-brackets
-  require-variable-braces
-  useless-use-of-cat
-)
+# version: 0.11.0
 
-local -ar args=(
-  '(-a --check-sourced)'{-a,--check-sourced}'[Include warnings from sourced files]'
-  '(-i --include)'{-i,--include=}'[Consider only given types of warnings]:CODE:_values -s, CODE $CODE'
-  '(-e --exclude)'{-e,--exclude=}'[Exclude types of warnings]:CODE:_values -s, CODE $CODE'
-  '(-f --format)'{-f,--format=}'[Output format]:FORMAT:(checkstyle diff gcc json json1 quiet tty)'
-  '(- *)--list-optional[List checks disabled by default]'
-  --norc"[Don't look for .shellcheckrc files]"
-  '(-o --enable)'{-o,--enable=}'[List of optional checks to enable (or "all")]:checks:_values -s, checks all $OPTIONALS'
-  '(-s --shell)'{-s,--shell=}'[Specify dialect]:SHELLNAME:(sh bash dash ksh busybox)'
-  '(- *)'{-V,--version}'[Print version information]'
-  '(- *)--help[Show this usage summary and exit]'
-  '*:files:_files -g "*.(bash|sh)"'
-)
-_arguments "${(@)args}"
+_shellcheck() {
+  local -ar CODE=(SC{1000..1146} SC{2000..2336} SC{3000..3067})
+  local -ar OPTIONALS=(
+    add-default-case
+    avoid-negated-conditions
+    avoid-nullary-conditions
+    check-extra-masked-returns
+    check-set-e-suppressed
+    check-unassigned-uppercase
+    deprecate-which
+    quote-safe-variables
+    require-double-brackets
+    require-variable-braces
+    useless-use-of-cat
+  )
+
+  local -ar args=(
+    '(-a --check-sourced)'{-a,--check-sourced}'[Include warnings from sourced files]'
+    '(-i --include)'{-i,--include=}'[Consider only given types of warnings]:CODE:_values -s, CODE $CODE'
+    '(-e --exclude)'{-e,--exclude=}'[Exclude types of warnings]:CODE:_values -s, CODE $CODE'
+    '(-f --format)'{-f,--format=}'[Output format]:FORMAT:(checkstyle diff gcc json json1 quiet tty)'
+    '(- *)--list-optional[List checks disabled by default]'
+    "(--rcfile)--norc[Don't look for .shellcheckrc files]"
+    '(--norc)--rcfile=[Prefer the specified configuration file over searching for one]:RCFILE:_files'
+    '(-o --enable)'{-o,--enable=}'[List of optional checks to enable (or "all")]:checks:_values -s, checks all $OPTIONALS'
+    '(-s --shell)'{-s,--shell=}'[Specify dialect]:SHELLNAME:(sh bash dash ksh busybox)'
+    '(- *)'{-V,--version}'[Print version information]'
+    '(- *)--help[Show this usage summary and exit]'
+    '*:files:_files -g "*.(bash|sh)"'
+  )
+  _arguments "${(@)args}"
+}
+
+: << EOF
+Usage: shellcheck [OPTIONS...] FILES...
+  -a                  --check-sourced            Include warnings from sourced files
+  -C[WHEN]            --color[=WHEN]             Use color (auto, always, never)
+  -i CODE1,CODE2..    --include=CODE1,CODE2..    Consider only given types of warnings
+  -e CODE1,CODE2..    --exclude=CODE1,CODE2..    Exclude types of warnings
+                      --extended-analysis=bool   Perform dataflow analysis (default true)
+  -f FORMAT           --format=FORMAT            Output format (checkstyle, diff, gcc, json, json1, quiet, tty)
+                      --list-optional            List checks disabled by default
+                      --norc                     Don't look for .shellcheckrc files
+                      --rcfile=RCFILE            Prefer the specified configuration file over searching for one
+  -o check1,check2..  --enable=check1,check2..   List of optional checks to enable (or 'all')
+  -P SOURCEPATHS      --source-path=SOURCEPATHS  Specify path when looking for sourced files ("SCRIPTDIR" for script's dir)
+  -s SHELLNAME        --shell=SHELLNAME          Specify dialect (sh, bash, dash, ksh, busybox)
+  -S SEVERITY         --severity=SEVERITY        Minimum severity of errors to consider (error, warning, info, style)
+  -V                  --version                  Print version information
+  -W NUM              --wiki-link-count=NUM      The number of wiki links to show, when applicable
+  -x                  --external-sources         Allow 'source' outside of FILES
+                      --help                     Show this usage summary and exit
+
+EOF
 
 # vim:ft=zsh
