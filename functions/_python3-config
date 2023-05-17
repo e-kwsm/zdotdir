@@ -13,7 +13,6 @@ typeset -ar flags=(
   '--configdir'
   '--embed'
 )
-
 _values flags "${(@)flags}"
 
 # vim:ft=zsh
