@@ -222,19 +222,21 @@ typeset -a methods=(
   'ωB97X'
 )
 
-_arguments \
-  '(-f --func)'{-f,--func}"[Use damping parameters for given functional]:method:_values method $methods" \
-  --property'[Show dispersion related atomic and system properties]' \
-  --pair-resolved'[Calculate pairwise representation of dispersion energy]' \
-  --noedisp'[Disable writing of dispersion energy to .EDISP file]' \
-  --json'[Dump results to JSON output (default: dftd4.json)]:file:_files -g "*.json"' \
-  '(-v --verbose)'{-v,--verbose}'[Show more, can be used multiple times]' \
-  '(-s --silent)'{-s,--silent}'[Show less, use twice to supress all output]' \
-  '(- *)'--version'[Print program version and exit]' \
-  '(- *)'--citation'[Print citation information and exit]' \
-  '(- *)'--license'[Print license header and exit]' \
-  '(- *)'{-h,--help}'[Show this help message]' \
+typeset -a args=(
+  '(-f --func)'{-f,--func}'[Use damping parameters for given functional]:method:_values method $methods'
+  --property'[Show dispersion related atomic and system properties]'
+  --pair-resolved'[Calculate pairwise representation of dispersion energy]'
+  --noedisp'[Disable writing of dispersion energy to .EDISP file]'
+  --json'[Dump results to JSON output (default: dftd4.json)]:file:_files -g "*.json"'
+  '(-v --verbose)'{-v,--verbose}'[Show more, can be used multiple times]'
+  '(-s --silent)'{-s,--silent}'[Show less, use twice to supress all output]'
+  '(- *)'--version'[Print program version and exit]'
+  '(- *)'--citation'[Print citation information and exit]'
+  '(- *)'--license'[Print license header and exit]'
+  '(- *)'{-h,--help}'[Show this help message]'
   '*:input:_files -g "(CONTCAR|POSCAR|*.(mol|sdf|vasp|xyz))"'
+)
+_arguments "${(@)args}"
 
 : << EOF
 Usage: dftd4 [options] <input>
