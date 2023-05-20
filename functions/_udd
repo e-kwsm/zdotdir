@@ -1,5 +1,7 @@
 #compdef udd
 
+# 0.8.2
+
 typeset -a args=(
   '(- *)'{-h,--help}'[show this help text]'
   --dry-run'[test what dependencies can be updated]'
@@ -9,5 +11,21 @@ typeset -a args=(
   '*:file:_files -g "*.ts"'
 )
 _arguments "${(@)args}"
+
+: << EOF
+usage: udd [-h] [--dry-run] [--test TEST] file [file ...]
+
+udd: Update Deno Dependencies
+
+Positional arguments:
+  file      	files to update dependencies
+
+Optional arguments:
+ -h, --help 	show this help text
+ --dry-run  	test what dependencies can be updated
+ --test TEST	command to run after each dependency update e.g. "deno test"
+ --upgrade  	update udd to the latest version
+ --version  	print the version of udd
+EOF
 
 # vim:ft=zsh
