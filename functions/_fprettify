@@ -1,14 +1,16 @@
 #compdef fprettify
 
-_arguments \
-  '(- *)'{-h,--help}'[show this help message and exit]' \
-  '(-i --indent)'{-i,--indent}'[relative indentation width (default: 3)]:INDENT' \
-  --c-relations"[C-style relational operators ('<', '<=', ...)]" \
-  --strip-comments'[strip whitespaces before comments]' \
-  '(-d --diff -s --stdout)'{-d,--diff}'[Write file differences to stdout instead of formatting inplace]' \
-  '(-s --stdout -d --diff)'{-s,--stdout}'[Write to stdout instead of formatting inplace]' \
-  '(- *)'--version"[show program's version number and exit]" \
+typeset -a args=(
+  '(- *)'{-h,--help}'[show this help message and exit]'
+  '(-i --indent)'{-i,--indent}'[relative indentation width (default: 3)]:INDENT'
+  --c-relations"[C-style relational operators ('<', '<=', ...)]"
+  --strip-comments'[strip whitespaces before comments]'
+  '(-d --diff -s --stdout)'{-d,--diff}'[Write file differences to stdout instead of formatting inplace]'
+  '(-s --stdout -d --diff)'{-s,--stdout}'[Write to stdout instead of formatting inplace]'
+  '(- *)'--version"[show program's version number and exit]"
   '*:file:_files -g "*.[Ff](90|95|03)"'
+)
+_arguments "${(@)args}"
 
 : << EOF
 usage: fprettify [-h] [-c CONFIG_FILE] [-i INDENT]
