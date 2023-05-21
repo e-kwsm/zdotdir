@@ -32,21 +32,23 @@ _kpsewhich() {
     stack_size
   )
 
-  _arguments \
-    -all'[output all matches, one per line (no effect with pk/gf).]' \
-    -debug='[set debugging flags.]:NUM' \
-    '(-D -dpi)'{-D,-dpi}='[use a base resolution of NUM; default 600.]:NUM' \
-    -expand-braces='[output variable and brace expansion of STRING.]:STRING' \
-    -expand-path='[output complete path expansion of STRING.]:STRING' \
-    -expand-var='[output variable expansion of STRING.]:STRING' \
-    -format='[use file type NAME (list shown by -help-formats).]:NAME' \
-    '(- *)'-help'[display this message and exit.]' \
-    '(- *)'-help-formats'[display information about all supported file formats.]' \
-    -show-path='[output search path for file type TYPE]:TYPE' \
-    -var-brace-value="[output brace-expanded value of variable \$STRING.]:STRING:($variables)" \
-    -var-value="[output variable-expanded value of variable \$STRING.]:STRING:($variables)" \
-    '(- *)'-version'[display version information number and exit.]' \
+  typeset -a args=(
+    -all'[output all matches, one per line (no effect with pk/gf).]'
+    -debug='[set debugging flags.]:NUM'
+    '(-D -dpi)'{-D,-dpi}='[use a base resolution of NUM; default 600.]:NUM'
+    -expand-braces='[output variable and brace expansion of STRING.]:STRING'
+    -expand-path='[output complete path expansion of STRING.]:STRING'
+    -expand-var='[output variable expansion of STRING.]:STRING'
+    -format='[use file type NAME (list shown by -help-formats).]:NAME'
+    '(- *)'-help'[display this message and exit.]'
+    '(- *)'-help-formats'[display information about all supported file formats.]'
+    -show-path='[output search path for file type TYPE]:TYPE'
+    -var-brace-value="[output brace-expanded value of variable \$STRING.]:STRING:($variables)"
+    -var-value="[output variable-expanded value of variable \$STRING.]:STRING:($variables)"
+    '(- *)'-version'[display version information number and exit.]'
     '*:file:_files'
+  )
+  _arguments "${(@)args}"
 }
 
 # vim:ft=zsh
