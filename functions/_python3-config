@@ -1,18 +1,19 @@
 #compdef python3-config python3.8-config python3.9-config python3.10-config python3.11-config python3.12-config python3.13-config
 
-_values \
-  'flags' \
-  '--prefix' \
-  '--exec-prefix' \
-  '--includes' \
-  '--libs' \
-  '--cflags' \
-  '--ldflags' \
-  '--extension-suffix' \
-  '--help' \
-  '--abiflags' \
-  '--configdir' \
-  '--embed' \
-  && :
+typeset -a flags=(
+  '--prefix'
+  '--exec-prefix'
+  '--includes'
+  '--libs'
+  '--cflags'
+  '--ldflags'
+  '--extension-suffix'
+  '--help'
+  '--abiflags'
+  '--configdir'
+  '--embed'
+)
+
+_values 'flags' "${(@)flags}"
 
 # vim:ft=zsh
