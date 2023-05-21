@@ -1,8 +1,14 @@
 #compdef pdfcrop
 
+# pdfcrop 2023/04/15 v1.42
+
 typeset -a args=(
   '(- *)'--help'[print usage]'
   '(- *)'--version'[print version number]'
+  '(--xetex --luatex)'--pdftex'[use pdfTeX]'
+  '(--pdftex --luatex)'--xetex'[use XeTeX]'
+  '(--pdftex --xetex)'--luatex'[use LuaTeX]'
+  --margins'[add extra margins, unit is bp. If only one number is given, then it is used for all margins; in the case of two numbers, they are also used for right and bottom.]:<left> <top> <right> <bottom>'
   '1:input:_files -g "*.pdf"'
   '2:output:_files -g "*.pdf"'
 )
