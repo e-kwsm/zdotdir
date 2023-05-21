@@ -11,8 +11,10 @@ ifneq ($(DENO),)
 	$< completions zsh > $@
 endif
 
+.DELETE_ON_ERROR: functions/_meson
 functions/_meson:
-	wget -O $@ https://raw.githubusercontent.com/mesonbuild/meson/master/data/shell-completions/zsh/_meson
+	wget -O $@ https://raw.githubusercontent.com/mesonbuild/meson/1.1.0/data/shell-completions/zsh/_meson
+	echo 'e466ae7faa708dc71cfd996c8205c310c5a60ceac3d15c8fdb7e7e03 $@' | sha224sum --check -
 
 .PHONY: clean
 clean:
