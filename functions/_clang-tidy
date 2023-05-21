@@ -472,39 +472,41 @@ _clang-tidy() {
     zircon-temporary-objects
   )
 
-  _arguments \
-    '(- *)'{-h,--help}'[Display available options (--help-hidden for more)]' \
-    '(- *)'--help-hidden'[Display all available options]' \
-    '(- *)'--help-list'[Display list of available options (--help-list-hidden for more)]' \
-    '(- *)'--help-list-hidden'[Display list of all available options]' \
-    '(- *)'--print-all-options'[Print all option values after command line parsing]' \
-    '(- *)'--print-options'[Print non-default options after command line parsing]' \
-    '(- *)'--version'[Display the version of this program]' \
-    --allow-enabling-analyzer-alpha-checkers \
-    --checks="[Comma-separated list of globs with optional '-' prefix.]:string:_values -s, string $checks $(for c in $checks; do printf -- -$c\ ; done)" \
-    '(- --config-file)'--config='[Specifies a configuration in YAML/JSON format]:string' \
-    '(- --config)'--config-file='[Specify the path of .clang-tidy or custom config file]:string:_files' \
-    --dump-config'[Dumps configuration in the YAML format to stdout.]' \
-    --enable-check-profile'[Enable per-check timing profiles, and print a report to stderr.]' \
-    --explain-config'[For each enabled check explains, where it is enabled, i.e. in clang-tidy binary, command line or a specific configuration file.]' \
-    --export-fixes='[YAML file to store suggested fixes in]:filename:_files -g "*.yaml"' \
-    --extra-arg='[Additional argument to append to the compiler command line]:string' \
-    --extra-arg-before='[Additional argument to prepend to the compiler command line]:string' \
-    --fix'[Apply suggested fixes. Without -fix-errors clang-tidy will bail out if any compilation errors were found.]' \
-    --fix-errors'[Apply suggested fixes even if compilation errors were found.]' \
-    --fix-notes'[If a warning has no fix, but a single fix can be found through an associated diagnostic note, apply the fix]' \
-    --format-style='[Style for formatting code around applied fixes]:string:(none file llvm google webkit mozilla)' \
-    --header-filter='[Regular expression matching the names of the headers to output diagnostics from]:string' \
-    --line-filter='[List of files with line ranges to filter the warnings]:string' \
-    --list-checks'[List all enabled checks and exit.]' \
-    --load='[Load the specified plugin]:pluginfilename:_files' \
-    -p='[Build path]:string:_path_files -/' \
-    --quiet'[Run clang-tidy in quiet mode.]' \
-    --store-check-profile='[By default reports are printed in tabulated format to stderr. When this option is passed, these per-TU profiles are instead stored as JSON.]:prefix:_files -g "*.json"' \
-    --system-headers'[Display the errors from system headers]' \
-    --use-color'[Use colors in diagnostics]' \
-    --warnings-as-errors="[Upgrades warnings to errors.]:string:_values -s, string $checks" \
+  typeset -a args=(
+    '(- *)'{-h,--help}'[Display available options (--help-hidden for more)]'
+    '(- *)'--help-hidden'[Display all available options]'
+    '(- *)'--help-list'[Display list of available options (--help-list-hidden for more)]'
+    '(- *)'--help-list-hidden'[Display list of all available options]'
+    '(- *)'--print-all-options'[Print all option values after command line parsing]'
+    '(- *)'--print-options'[Print non-default options after command line parsing]'
+    '(- *)'--version'[Display the version of this program]'
+    --allow-enabling-analyzer-alpha-checkers
+    --checks="[Comma-separated list of globs with optional '-' prefix.]:string:_values -s, string $checks $(for c in $checks; do printf -- -$c\ ; done)"
+    '(- --config-file)'--config='[Specifies a configuration in YAML/JSON format]:string'
+    '(- --config)'--config-file='[Specify the path of .clang-tidy or custom config file]:string:_files'
+    --dump-config'[Dumps configuration in the YAML format to stdout.]'
+    --enable-check-profile'[Enable per-check timing profiles, and print a report to stderr.]'
+    --explain-config'[For each enabled check explains, where it is enabled, i.e. in clang-tidy binary, command line or a specific configuration file.]'
+    --export-fixes='[YAML file to store suggested fixes in]:filename:_files -g "*.yaml"'
+    --extra-arg='[Additional argument to append to the compiler command line]:string'
+    --extra-arg-before='[Additional argument to prepend to the compiler command line]:string'
+    --fix'[Apply suggested fixes. Without -fix-errors clang-tidy will bail out if any compilation errors were found.]'
+    --fix-errors'[Apply suggested fixes even if compilation errors were found.]'
+    --fix-notes'[If a warning has no fix, but a single fix can be found through an associated diagnostic note, apply the fix]'
+    --format-style='[Style for formatting code around applied fixes]:string:(none file llvm google webkit mozilla)'
+    --header-filter='[Regular expression matching the names of the headers to output diagnostics from]:string'
+    --line-filter='[List of files with line ranges to filter the warnings]:string'
+    --list-checks'[List all enabled checks and exit.]'
+    --load='[Load the specified plugin]:pluginfilename:_files'
+    -p='[Build path]:string:_path_files -/'
+    --quiet'[Run clang-tidy in quiet mode.]'
+    --store-check-profile='[By default reports are printed in tabulated format to stderr. When this option is passed, these per-TU profiles are instead stored as JSON.]:prefix:_files -g "*.json"'
+    --system-headers'[Display the errors from system headers]'
+    --use-color'[Use colors in diagnostics]'
+    --warnings-as-errors="[Upgrades warnings to errors.]:string:_values -s, string $checks"
     '*:file:_files -g "*.(cc|cpp|h|hpp)"'
+  )
+  _arguments "${(@)args}"
 }
 
 # vim:ft=zsh
