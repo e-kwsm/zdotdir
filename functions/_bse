@@ -4,7 +4,7 @@
 _bse() {
   typeset curcontext=$curcontext state lstate line
 
-  typeset -a basissets=(
+  typeset -ar basissets=(
     '3-21G'
     '6-31++G'
     '6-31++G\*'
@@ -179,7 +179,7 @@ _bse() {
     'Stuttgart\ RLC\ ECP'
   )
 
-  typeset -a elements=(
+  typeset -ar elements=(
     H                    He
     Li Be B  C  N  O  F  Ne
     Na Mg Al Si P  S  Cl Ar
@@ -187,7 +187,7 @@ _bse() {
                       I  Xe
   )
 
-  typeset -a families=(
+  typeset -ar families=(
     acvxz-j
     ahlrichs
     ahlrichs_dhf
@@ -247,7 +247,7 @@ _bse() {
     zorrilla
   )
 
-  typeset -a formats=(
+  typeset -ar formats=(
     bsedebug
     cp2k
     gamess_uk
@@ -263,13 +263,13 @@ _bse() {
     turbomole
   )
 
-  typeset -a reffmts=(
+  typeset -ar reffmts=(
     bib
     json
     txt
   )
 
-  typeset -a roles=(
+  typeset -ar roles=(
     orbital
     jfit
     jkfit
@@ -291,7 +291,7 @@ _bse() {
 
 # _bse-command {{{1
 (( $+functions[_bse_command] )) || _bse_command() {
-  typeset -a _bse_cmds=(
+  typeset -ar _bse_cmds=(
     'autoabs-basis:Form AutoABS auxiliary basis'
     'autoaux-basis:Form AutoAux auxiliary basis'
     'convert-basis:Convert basis set files from one format to another'
