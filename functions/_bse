@@ -281,12 +281,14 @@ _bse() {
     guess
   )
 
-  _arguments \
-    '(- *)'{-h,--help}'[show this help message and exit]' \
-    '(- *)'-V"[show program's version number and exit]" \
-    '(-d --data)'{-d,--data}'[Override which data directory to use]:PATH:_files -/' \
-    '(-o --output)'{-o,--output}'[Output to given file rather than stdout]:PATH:_files' \
+  typeset -a args=(
+    '(- *)'{-h,--help}'[show this help message and exit]'
+    '(- *)'-V"[show program's version number and exit]"
+    '(-d --data)'{-d,--data}'[Override which data directory to use]:PATH:_files -/'
+    '(-o --output)'{-o,--output}'[Output to given file rather than stdout]:PATH:_files'
     '*::bse command:_bse_command'
+  )
+  _arguments "${(@)args}"
 }
 
 # _bse-command {{{1
@@ -337,29 +339,31 @@ _bse() {
 }
 
 (( $+functions[_bse-get-basis] )) || _bse-get-basis() {  # {{{1
-  _arguments \
-    '(- *)'{-h,--help} \
-    --elements"[Which elements of the basis set to output. Default is all defined in the given basis]:ELEMENTS:_values -s, ELEMENTS $elements" \
-    --version'[Which version of the basis set to output. Default is the latest version]:VERSION' \
-    --noheader'[Do not output the header at the top]' \
-    --unc-gen'[Remove general contractions]' \
-    --unc-spdf'[Remove combined sp, spd, ... contractions]' \
-    --unc-seg'[Remove general contractions]' \
-    --opt-gen'[Optimize general contractions]' \
-    --make-gen'[Make the basis set as generally-contracted as possible]' \
-    --aug-steep'[Augment with n steep functions]:AUG_STEEP' \
-    --aug-diffuse'[Augment with n diffuse functions]:AUG_DIFFUSE' \
-    --get-aux'[Instead of the orbital basis, get an automatically formed auxiliary basis]:GET_AUX' \
-    "1:basis:_values basis $basissets" \
-    "2:fmt:_values fmt $formats" \
-    && return 0
+  typeset -a args=(
+    '(- *)'{-h,--help}
+    --elements"[Which elements of the basis set to output. Default is all defined in the given basis]:ELEMENTS:_values -s, ELEMENTS $elements"
+    --version'[Which version of the basis set to output. Default is the latest version]:VERSION'
+    --noheader'[Do not output the header at the top]'
+    --unc-gen'[Remove general contractions]'
+    --unc-spdf'[Remove combined sp, spd, ... contractions]'
+    --unc-seg'[Remove general contractions]'
+    --opt-gen'[Optimize general contractions]'
+    --make-gen'[Make the basis set as generally-contracted as possible]'
+    --aug-steep'[Augment with n steep functions]:AUG_STEEP'
+    --aug-diffuse'[Augment with n diffuse functions]:AUG_DIFFUSE'
+    --get-aux'[Instead of the orbital basis, get an automatically formed auxiliary basis]:GET_AUX'
+    "1:basis:_values basis $basissets"
+    "2:fmt:_values fmt $formats"
+  )
+  _arguments "${(@)args}"
 }
 
 (( $+functions[_bse-get-family] )) || _bse-get-family() {  # {{{1
-  _arguments \
-    '(- *)'{-h,--help} \
-    "1:basis:_values basis $basissets" \
-    && return 0
+  typeset -a args=(
+    '(- *)'{-h,--help}
+    "1:basis:_values basis $basissets"
+  )
+  _arguments "${(@)args}"
 }
 
 (( $+functions[_bse-get-family-notes] )) || _bse-get-family-notes() {  # {{{1
