@@ -4,27 +4,29 @@
 _pip() {
   typeset curcontext=$curcontext state lstate line
 
-  _arguments \
-    '(- *)'{-h,--help}'[Show help]' \
-    --isolated'[Run pip in an isolated mode, ignoring environment variables and user configuration.]' \
-    {-v,--verbose}'[Give more output. Option is additive, and can be used up to 3 times.]' \
-    '(- *)'{-V,--version}'[Show version and exit.]' \
-    {-q,--quiet}'[Give less output. (WARNING logging levels).]' \
-    -qq'[Give less output. (ERROR logging levels).]' \
-    -qqq'[Give less output. (CRITICAL logging levels).]' \
-    --log'[Path to a verbose appending log.]: :_files' \
-    --proxy'[Specify a proxy in the form \[user:passwd@\]proxy.server:port.]:proxy ' \
-    --retries'[Maximum number of retries each connection should attempt (default 5 times).]: ' \
-    --timeout'[Set the socket timeout (default 15 seconds).]:sec' \
-    --exists-action'[Default action when a path already exists]: :(s\:witch i\:gnore w\:ipe b\:ackup a\:bort)' \
-    --trusted-host'[Mark this host as trusted, even though it does not have valid or any HTTPS.]:hostname:' \
-    --cert'[Path to alternate CA bundle.]: :_files' \
-    --client-cert'[Path to SSL client certificate, a single file containing the private key and the certificate in PEM format.]: :_files' \
-    --cache-dir'[Store the cache data in <dir>.]:dir:_path_files -/' \
-    --no-cache-dir'[Disable the cache.]' \
-    --disable-pip-version-check"[Don't periodically check PyPI to determine whether a new version of pip is available for download. Implied with --no-index.]" \
-    --no-color'[Suppress colored output]' \
+  typeset -a args=(
+    '(- *)'{-h,--help}'[Show help]'
+    --isolated'[Run pip in an isolated mode, ignoring environment variables and user configuration.]'
+    {-v,--verbose}'[Give more output. Option is additive, and can be used up to 3 times.]'
+    '(- *)'{-V,--version}'[Show version and exit.]'
+    {-q,--quiet}'[Give less output. (WARNING logging levels).]'
+    -qq'[Give less output. (ERROR logging levels).]'
+    -qqq'[Give less output. (CRITICAL logging levels).]'
+    --log'[Path to a verbose appending log.]: :_files'
+    --proxy'[Specify a proxy in the form \[user:passwd@\]proxy.server:port.]:proxy '
+    --retries'[Maximum number of retries each connection should attempt (default 5 times).]: '
+    --timeout'[Set the socket timeout (default 15 seconds).]:sec'
+    --exists-action'[Default action when a path already exists]: :(s\:witch i\:gnore w\:ipe b\:ackup a\:bort)'
+    --trusted-host'[Mark this host as trusted, even though it does not have valid or any HTTPS.]:hostname:'
+    --cert'[Path to alternate CA bundle.]: :_files'
+    --client-cert'[Path to SSL client certificate, a single file containing the private key and the certificate in PEM format.]: :_files'
+    --cache-dir'[Store the cache data in <dir>.]:dir:_path_files -/'
+    --no-cache-dir'[Disable the cache.]'
+    --disable-pip-version-check"[Don't periodically check PyPI to determine whether a new version of pip is available for download. Implied with --no-index.]"
+    --no-color'[Suppress colored output]'
     '*::pip command:_pip_command'
+  )
+  _arguments "${(@)args}"
 }
 
 # _pip-command {{{1
