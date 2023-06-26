@@ -1,4 +1,5 @@
 *.zwc
 /functions/_deno
+/functions/_jupyter
 /functions/_meson
 /functions/_spack
