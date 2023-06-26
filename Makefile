@@ -1,7 +1,8 @@
 DENO := $(shell which deno 2> /dev/null)
+EXTERNAL := functions/_deno functions/_jupyter functions/_meson
 
 .PHONY: all
-all: functions.zwc functions/_deno functions/_jupyter functions/_meson
+all: functions.zwc $(EXTERNAL)
 
 functions.zwc: $(shell git ls-files functions/)
 	zsh -c 'zcompile -U -M $@ $(sort $^)'
@@ -23,4 +24,4 @@ functions/_meson:
 
 .PHONY: clean
 clean:
-	rm -f functions.zwc functions/_deno functions/_jupyter functions/_meson
+	rm -f functions.zwc $(EXTERNAL)
