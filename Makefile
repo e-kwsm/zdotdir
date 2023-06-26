@@ -1,7 +1,8 @@
 DENO := $(shell which deno 2> /dev/null)
+EXTERNAL := functions/_deno functions/_jupyter functions/_meson
 
 .PHONY: all
-all: functions.zwc functions/_deno functions/_meson
+all: functions.zwc $(EXTERNAL)
 
 functions.zwc: $(shell git ls-files functions/)
 	zsh -c 'zcompile -U -M $@ $(sort $^)'
@@ -11,6 +12,11 @@ ifneq ($(DENO),)
 	$< completions zsh > $@
 endif
 
+.DELETE_ON_ERROR: functions/_jupyter
+functions/_jupyter:
+	wget -O $@ https://raw.githubusercontent.com/jupyter/jupyter_core/v5.3.1/examples/completions-zsh
+	echo '5300e28506604c2f9f61980b9ee66a0312c0aa28c675f96810a6ce45 $@' | sha224sum --check -
+
 .DELETE_ON_ERROR: functions/_meson
 functions/_meson:
 	wget -O $@ https://raw.githubusercontent.com/mesonbuild/meson/1.1.0/data/shell-completions/zsh/_meson
@@ -18,4 +24,4 @@ functions/_meson:
 
 .PHONY: clean
 clean:
-	rm -f functions.zwc functions/_deno functions/_meson
+	rm -f functions.zwc $(EXTERNAL)
