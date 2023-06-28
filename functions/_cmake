@@ -1,35 +1,52 @@
 #compdef cmake
 
+# 3.26.4
+
+typeset -a GENERATORS=(
+  'Unix Makefiles'
+  'Ninja'
+  'Ninja Multi-Config'
+)
+
 typeset -a args=(
   -S'[Explicitly specify a source directory.]:path-to-source:_path_files -/'
   -B'[Explicitly specify a build directory.]:path-to-build:_path_files -/'
+  -C'[Pre-load a script to populate the cache.]:initial-cache:_path_files -/'
   '*'-D'[Create or update a cmake cache entry.]:var'
-  -G'[Specify a build system generator.]:generator-name:_values generator Unix\ Makefiles Ninja'
+  -U'[Remove matching entries from CMake cache.]:globbing_expr'
+  -G'[Specify a build system generator.]:generator-name:_values generator ${(@)GENERATORS}'
+  -T'[Specify toolset name if supported by generator.]:toolset-name'
   --toolchain'[Specify toolchain file]:CMAKE_TOOLCHAIN_FILE:_files -g "*.cmake"'
   --install-prefix'[Specify install directory]:CMAKE_INSTALL_PREFIX:_path_files -/'
-  -Wdev'[Enable developer warnings.]'
-  -Wno-dev'[Suppress developer warnings.]'
-  -Werror=dev'[Make developer warnings errors.]'
-  -Wno-error=dev'[Make developer warnings not errors.]'
-  -Wdeprecated'[Enable deprecation warnings.]'
-  -Wno-deprecated'[Suppress deprecation warnings.]'
-  -Werror=deprecated'[Make deprecated macro and function warnings errors.]'
-  -Wno-error=deprecated'[Make deprecated macro and function warnings not errors.]'
+  '(-Wno-dev)'-Wdev'[Enable developer warnings.]'
+  '(-Wdev)'-Wno-dev'[Suppress developer warnings.]'
+  '(-Wno-error=dev)'-Werror=dev'[Make developer warnings errors.]'
+  '(-Werror=dev)'-Wno-error=dev'[Make developer warnings not errors.]'
+  '(-Wno-deprecated)'-Wdeprecated'[Enable deprecation warnings.]'
+  '(-Wdeprecated)'-Wno-deprecated'[Suppress deprecation warnings.]'
+  '(-Wno-error=deprecated)'-Werror=deprecated'[Make deprecated macro and function warnings errors.]'
+  '(-Werror=deprecated)'-Wno-error=deprecated'[Make deprecated macro and function warnings not errors.]'
   --preset='[Specify a configure preset.]:preset:_files -g "*.json"'
   '(- *)'--list-presets'[List available presets.]'
   -E'[CMake command mode.]:command'
   '(-L -LA -LAH -LH)'{-L,-LA,-LAH,-LH}'[List non-advanced cached variables.]'
+  --fresh'[Configure a fresh build tree, removing any existing cache file.]'
   --build'[Build a CMake-generated project binary tree.]:dir:_path_files -/'
   --install'[Install a CMake-generated project binary]:dir:_path_files -/'
   -N'[View mode only.]'
   -P'[Process script mode.]:file:_files -g "*.cmake"'
   '(- *)'--system-information'[Dump information about this system.]'
+  --log-level='[Set the verbosity of messages from CMake files.]:LEVEL:(ERROR WARNING NOTICE STATUS VERBOSE DEBUG TRACE)'
   --debug-trycompile'[Do not delete the try_compile build tree. Only useful on one try_compile at a time.]'
   --debug-output'[Put cmake in a debug mode.]'
   --debug-find'[Put cmake find in a debug mode.]'
   --trace'[Put cmake in trace mode.]'
   --trace-expand'[Put cmake in trace mode with variable expansion.]'
-  '(- *)'{-h,--help}'[Print usage information and exit.]'
+  --warn-uninitialized'[Warn about uninitialized values.]'
+  --no-warn-unused-cli"[Don't warn about command line options.]"
+  --check-system-vars'[Find problems with variable usage in system files.]'
+  --compile-no-warning-as-error'[Ignore COMPILE_WARNING_AS_ERROR property and CMAKE_COMPILE_WARNING_AS_ERROR variable.]'
+  '(- *)'{-h,-H,--help}'[Print usage information and exit.]'
   '(- *)'--version'[Print version number and exit.]'
   '(- *)'--help-full'[Print all help manuals and exit.]'
   '(- *)'--help-manual'[Print one help manual and exit.]:man:_values man $(cmake --help-manual-list | sed -e s/"[^a-z-].*"//)'
@@ -49,8 +66,7 @@ typeset -a args=(
   '(- *)'--help-variable'[Print help for one variable and exit.]:var:_values mod $(cmake --help-variable-list)'
   '(- *)'--help-variable-list'[List variables with help available and exit.]'
   '(- *)'--help-variables'[Print cmake-variables manual and exit.]'
-  '1:dir:_path_files -/'
 )
-_arguments "${(@)args}"
+_arguments -S "${(@)args}"
 
 # vim:ft=zsh
