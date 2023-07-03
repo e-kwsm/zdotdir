@@ -1,5 +1,20 @@
 #compdef sbatch
 
+typeset -a MAIL_TYPES=(
+  NONE
+  BEGIN
+  END
+  FAIL
+  REQUEUE
+  ALL
+  STAGE_OUT
+  TIME_LIMIT
+  TIME_LIMIT_90
+  TIME_LIMIT_80
+  TIME_LIMIT_50
+  ARRAY_TASKS
+)
+
 typeset -a args=(
   '(-b --begin)'{-b,--begin=}'[Submit the batch script to the Slurm controller immediately, like normal, but tell the controller to defer the allocation of the job until the specified time.]:time'
   --comment='[An arbitrary comment enclosed in double quotes if using spaces or some special characters.]:string'
@@ -11,7 +26,7 @@ typeset -a args=(
   '(-H --hold)'{-H,--hold}'[Specify the job is to be submitted in a held state (priority of zero).]'
   '(- *)'{-h,--help}'[Display help information and exit.]'
   '(-J --job-name)'{-J,--job-name=}'[Specify a name for the job allocation.]:jobname'
-  --mail-type='[Notify user by email when certain event types occur.]:type:_values -s, type NONE BEGIN END FAIL REQUEUE ALL STAGE_OUT TIME_LIMIT TIME_LIMIT_90 TIME_LIMIT_80 TIME_LIMIT_50 ARRAY_TASKS'
+  --mail-type='[Notify user by email when certain event types occur.]:type:_values -s, type ${(@)MAIL_TYPES}'
   '(-N --nodes)'{-N,--nodes=}'[Request that a minimum of minnodes nodes be allocated to this job.]:minnodes[-maxnodes]'
   '(-o --output)'{-o,--output=}"[Instruct Slurm to connect the batch script's standard output directly to the file name specified in the *filename pattern*.]:filename pattern:_files"
   '(-p --partition)'{-p,--partition=}'[Request a specific partition for the resource allocation.]:partition_names'
