@@ -1,9 +1,11 @@
 #compdef qsub
 
-_arguments \
-  '(- *)'--help \
-  '(- *)'--version \
-  -h'[Specifies that a user hold be applied to the job at submission time]' \
+typeset -a args=(
+  '(- *)'--help
+  '(- *)'--version
+  -h'[Specifies that a user hold be applied to the job at submission time]'
   '*:script:_files -g "*.(bash|sh)"'
+)
+_arguments "${(@)args}"
 
 # vim:ft=zsh
