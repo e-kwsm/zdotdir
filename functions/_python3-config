@@ -14,6 +14,6 @@ typeset -a flags=(
   '--embed'
 )
 
-_values 'flags' "${(@)flags}"
+_values flags "${(@)flags}"
 
 # vim:ft=zsh
