@@ -1,4 +1,4 @@
-#compdef python3-config python3.10-config
+#compdef python3-config python3.10-config python3.11-config
 
 typeset -a flags=(
   '--prefix'
@@ -14,6 +14,6 @@ typeset -a flags=(
   '--embed'
 )
 
-_values 'flags' "${(@)flags}"
+_values flags "${(@)flags}"
 
 # vim:ft=zsh
