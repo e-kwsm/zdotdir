@@ -1,5 +1,14 @@
 #compdef srun
 
+typeset -a PROFILES=(
+  all
+  none
+  energy
+  task
+  filesystem
+  network
+)
+
 typeset -a args=(
   '(-b --begin)'{-b,--begin=}'[Defer initiation of this job until the specified time.]:time'
   --comment='[An arbitrary comment.]:string'
@@ -21,7 +30,7 @@ typeset -a args=(
   '(-o --output)'{-o,--output=}'[Specify the "filename pattern" for stdout redirection.]:file:_files'
   --open-mode='[Open the output and error files using append or truncate mode as specified.]:mode:(append truncate)'
   '(-p --partition)'{-p,--partition=}'[Request a specific partition for the resource allocation.]:partition_names'
-  --profile='[enables  detailed data collection by the acct_gather_profile plugin.]:option:_values -s, option all none energy task filesystem network'
+  --profile='[enables  detailed data collection by the acct_gather_profile plugin.]:option:_values -s, option ${(@)PROFILES}'
   --pty'[Execute task zero in pseudo terminal mode.]'
   '(-t --time)'{-t,--time=}'[Set a limit on the total run time of the job allocation.]:time'
   '(- *)'--usage'[Display brief help message and exit.]'
