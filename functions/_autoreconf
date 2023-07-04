@@ -1,0 +1,75 @@
+#compdef autoreconf
+
+# 2.71
+
+typeset -a args=(
+  '(- *)'{-h,--help}'[print this help, then exit]'
+  '(- *)'{-V,--version}'[print version number, then exit]'
+  {-v,--verbose}'[verbosely report processing]'
+  {-d,--debug}"[don't remove temporary files]"
+  {-f,--force}'[consider all generated and standard files obsolete]'
+  {-i,--install}'[copy missing standard auxiliary files]'
+  --no-recursive"[don't rebuild sub-packages]"
+  {-s,--symlink}'[with -i, install symbolic links instead of copies]'
+  {-m,--make}'[when applicable, re-run ./configure && make]'
+  '*:directory:_path_files -/'
+)
+_arguments "${(@)args}"
+
+: << EOF
+Usage: /usr/bin/autoreconf [OPTION]... [DIRECTORY]...
+
+Run 'autoconf' and, when needed, 'aclocal', 'autoheader', 'automake',
+'autopoint' (formerly 'gettextize'), 'libtoolize', 'intltoolize', and
+'gtkdocize' to regenerate the GNU Build System files in specified
+DIRECTORIES and their subdirectories (defaulting to '.').
+
+By default, it only remakes those files that are older than their
+sources.  If you install new versions of the GNU Build System,
+you can make 'autoreconf' remake all of the files by giving it the
+'--force' option.
+
+Operation modes:
+  -h, --help               print this help, then exit
+  -V, --version            print version number, then exit
+  -v, --verbose            verbosely report processing
+  -d, --debug              don't remove temporary files
+  -f, --force              consider all generated and standard files obsolete
+  -i, --install            copy missing standard auxiliary files
+      --no-recursive       don't rebuild sub-packages
+  -s, --symlink            with -i, install symbolic links instead of copies
+  -m, --make               when applicable, re-run ./configure && make
+  -W, --warnings=CATEGORY  report the warnings falling in CATEGORY [syntax]
+
+Warning categories include:
+  cross                  cross compilation issues
+  gnu                    GNU coding standards (default in gnu and gnits modes)
+  obsolete               obsolete features or constructions (default)
+  override               user redefinitions of Automake rules or variables
+  portability            portability issues (default in gnu and gnits modes)
+  portability-recursive  nested Make variables (default with -Wportability)
+  extra-portability      extra portability issues related to obscure tools
+  syntax                 dubious syntactic constructs (default)
+  unsupported            unsupported or incomplete features (default)
+  all                    all the warnings
+  no-CATEGORY            turn off warnings in CATEGORY
+  none                   turn off all the warnings
+  error                  treat warnings as errors
+
+The environment variable 'WARNINGS' is honored.  Some subtools might
+support other warning types, using 'all' is encouraged.
+
+Library directories:
+  -B, --prepend-include=DIR  prepend directory DIR to search path
+  -I, --include=DIR          append directory DIR to search path
+
+The environment variables AUTOCONF, ACLOCAL, AUTOHEADER, AUTOM4TE,
+AUTOMAKE, AUTOPOINT, GTKDOCIZE, INTLTOOLIZE, LIBTOOLIZE, M4, and MAKE
+are honored.
+
+Report bugs to <bug-autoconf@gnu.org>.
+GNU Autoconf home page: <https://www.gnu.org/software/autoconf/>.
+General help using GNU software: <https://www.gnu.org/gethelp/>.
+EOF
+
+# vim:ft=zsh
