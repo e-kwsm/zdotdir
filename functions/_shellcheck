@@ -2,8 +2,12 @@
 
 # version: 0.8.0
 
+typeset -a CODE=($(seq 1000 2236 | sed -e 's/^/SC/'))
+
 typeset -a args=(
   '(-a --check-sourced)'{-a,--check-sourced}'[Include warnings from sourced files]'
+  '(-i --include)'{-i,--include=}'[Consider only given types of warnings]:CODE:_values -s, CODE $CODE'
+  '(-e --exclude)'{-e,--exclude=}'[Exclude types of warnings]:CODE:_values -s, CODE $CODE'
   '(-f --format)'{-f,--format=}'[Output format]:FORMAT:(checkstyle diff gcc json json1 quiet tty)'
   '(- *)'--list-optional'[List checks disabled by default]'
   --norc"[Don't look for .shellcheckrc files]"
