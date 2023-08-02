@@ -48,6 +48,11 @@ ifneq ($(POETRY),)
 	$< completions zsh > $@
 endif
 
+functions/_pipx: $(REGISTER_PYTHON_ARGCOMPLETE)
+ifneq ($(REGISTER_PYTHON_ARGCOMPLETE),)
+	{ echo '#compdef pipx'; $< pipx; } > $@
+endif
+
 functions/_rye: $(RYE)
 ifneq ($(RYE),)
 	$< self completion -s zsh > $@
