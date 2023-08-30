@@ -1,5 +1,40 @@
 #compdef obabel
 
+typeset -a inputformats=(
+  can
+  cif
+  cml
+  fchk
+  gzmat
+  inchi
+  mol
+  mol2
+  mop
+  sdf
+  smi
+  vasp
+  xyz
+)
+typeset -a outputformats=(
+  ascii
+  can
+  cif
+  cjson
+  cml
+  gjf
+  gzmat
+  inchi
+  inchikey
+  mol
+  mol2
+  mop
+  sdf
+  smi
+  svg
+  vasp
+  xyz
+)
+
 typeset -a args=(
   --addtotitle'[Append text to the current molecule title]:title'
   --addformula'[Append the molecular formula after the current molecule title]'
@@ -13,10 +48,10 @@ typeset -a args=(
   --gen3D''
   -a+'[Read option]:read option'
   -x+'[Write option]:write option'
-  -i+'[Specifies input format]:format-ID:(can cif cml fchk gzmat inchi smi xyz)'
-  '1:infile:_files -g "*.(can|cif|cml|fchk|gzmat|inchi|mop|smi|xyz)"'
-  -o+'[Specifies output format]:format-ID:(ascii can cif cjson cml gjf gzmat inchi inchikey mop smi svg xyz)'
-  -O+'[oufile]:outfile:_files -g "*.(can|cif|cjson|cml|com|gjf|gzmat|inchi|mop|png|smi|svg|xyz)"'
+  -i+'[Specifies input format]:format-ID:_values format ${(@)inputformats}'
+  '1:infile:_files -g "*.(can|cif|cml|fchk|gzmat|inchi|smi|xyz)"'
+  -o+'[Specifies output format]:format-ID:_values format ${(@)outputformats}'
+  -O+'[oufile]:outfile:_files -g "*.(can|cif|cjson|cml|com|gjf|gzmat|inchi|png|smi|svg|xyz)"'
 )
 _arguments "${(@)args}"
 
