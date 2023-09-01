@@ -223,7 +223,9 @@ typeset -a methods=(
 )
 
 typeset -a args=(
+  '(-i --input)'{-i,--input}'[Hint for the format of the input file]:format'
   '(-f --func)'{-f,--func}'[Use damping parameters for given functional]:method:_values method $methods'
+  '(-g --grad)'{-g,--grad}'[Evaluate molecular gradient and virial]:file:_files'
   --property'[Show dispersion related atomic and system properties]'
   --pair-resolved'[Calculate pairwise representation of dispersion energy]'
   --noedisp'[Disable writing of dispersion energy to .EDISP file]'
