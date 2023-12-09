@@ -1,6 +1,6 @@
 #compdef yapf
 
-# yapf 0.32.0
+# yapf 0.40.2
 
 typeset -a args=(
   '(- *)'{-h,--help}'[show this help message and exit]'
@@ -17,7 +17,7 @@ _arguments "${(@)args}"
 
 : << EOF
 usage: yapf [-h] [-v] [-d | -i | -q] [-r | -l START-END] [-e PATTERN]
-            [--style STYLE] [--style-help] [--no-local-style] [-p] [-vv]
+            [--style STYLE] [--style-help] [--no-local-style] [-p] [-m] [-vv]
             [files ...]
 
 Formatter for Python code.
@@ -46,8 +46,8 @@ options:
   --style-help          show style settings and exit; this output can be saved
                         to .style.yapf to make your settings permanent
   --no-local-style      don't search for local style definition
-  -p, --parallel        run yapf in parallel when formatting multiple files.
-                        Requires concurrent.futures in Python 2.X
+  -p, --parallel        run YAPF in parallel when formatting multiple files.
+  -m, --print-modified  print out file names of modified files
   -vv, --verbose        print out file names while processing
 EOF
 
