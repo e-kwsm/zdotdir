@@ -4,13 +4,13 @@
 
 typeset -a args=(
   '(- *)'--cache'[If running as a PAR::Packer binary, show the cache location and exit.]'
-  '(--configfile -g)'{--configfile,-g}'[Use file as configuration file for "biber".]:file:_files -g "*"'
+  '(--configfile -g --noconf)'{--configfile,-g}'[Use file as configuration file for "biber".]:file:_files -g "*"'
   '(--debug -D)'{--debug,-D}'[Turn on debugging for "biber".]'
   '(- *)'{-h,--help}'[Show this help message.]'
   --input-directory'[.bcf and data files will be looked for first in the directory.]:directory:_path_files -/'
   '(--configfile -g)'--noconf"[Don't look for a configfile.]"
   --output-directory'[Output files (including log files) are output to directory instead of the current directory.]:directory:_path_files -/'
-  --output-format'[Biber output format.]:format:(dot bibtex biblatexml bbl bblxml)'
+  --output-format'[Biber output format.]:format:(dot bibtex biblatexml bbl bblxml bibjson)'
   '(--quiet -q)'{--quiet,-q}'[Log only errors.]'
   '(--trace -T)'{--trace,-T}'[Turn on tracing. Also turns on --debug|d and additionally provides a lot of low-level tracing information in the log.]'
   #--validate-config'[Schema validate the biber config file.]'
