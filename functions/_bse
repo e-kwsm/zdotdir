@@ -198,6 +198,7 @@ _bse() {
     aug_mcc
     binning
     blaudeau
+    cadpac
     ccj
     cologne
     crenb
@@ -229,6 +230,8 @@ _bse() {
     orp
     partridge
     paschoal
+    pec
+    pob
     pople
     pople_fit
     pople_mod
@@ -238,6 +241,7 @@ _bse() {
     sarc
     sauer_j
     sbkjc
+    sigmanz
     sto
     stuttgart
     truhlar
@@ -248,19 +252,35 @@ _bse() {
   )
 
   typeset -a formats=(
+    acesii
+    bdf
     bsedebug
+    cfour
     cp2k
+    crystal
+    dalton
+    demon2k
+    fhiaims
     gamess_uk
     gamess_us
     gaussian94
+    gaussian94lib
+    jaguar
     json
+    libmol
     molcas
+    molcas_library
     molpro
     nwchem
     orca
+    pqs
     psi4
     qchem
+    qcschema
+    ricdwrap
     turbomole
+    veloxchem
+    xtron
   )
 
   typeset -a reffmts=(
