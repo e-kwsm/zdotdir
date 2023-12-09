@@ -1,6 +1,6 @@
 #compdef sphinx-build
 
-# sphinx-build 7.0.0
+# sphinx-build 7.2.6
 
 typeset -a builders=(
   html
