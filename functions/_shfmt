@@ -1,6 +1,6 @@
 #compdef shfmt
 
-# v3.6.0
+# v3.7.0
 
 typeset -a args=(
   '(- *)'--version'[show version and exit]'
