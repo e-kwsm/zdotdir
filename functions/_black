@@ -1,6 +1,6 @@
 #compdef black
 
-# black, 23.3.0
+# black, 23.11.0
 
 typeset -a specs=(
   '(-l --line-length)'{-l,--line-length}'[How many characters per line to allow.]:INTEGER:_values INTEGER 79 88'
@@ -25,7 +25,7 @@ _arguments "${(@)specs}"
 
 return
 
-: << EOF
+: << 'EOF'
 Usage: black [OPTIONS] SRC ...
 
   The uncompromising code formatter.
@@ -34,7 +34,7 @@ Options:
   -c, --code TEXT                 Format the code passed in as a string.
   -l, --line-length INTEGER       How many characters per line to allow.
                                   [default: 88]
-  -t, --target-version [py33|py34|py35|py36|py37|py38|py39|py310|py311]
+  -t, --target-version [py33|py34|py35|py36|py37|py38|py39|py310|py311|py312]
                                   Python versions that should be supported by
                                   Black's output. By default, Black will try
                                   to infer this from the project metadata in
@@ -69,6 +69,14 @@ Options:
                                   was an internal error.
   --diff                          Don't write the files back, just output a
                                   diff for each file on stdout.
+  --line-ranges START-END         When specified, _Black_ will try its best to
+                                  only format these lines. This option can be
+                                  specified multiple times, and a union of the
+                                  lines will be formatted. Each range must be
+                                  specified as two integers connected by a
+                                  `-`: `<START>-<END>`. The `<START>` and
+                                  `<END>` integer indices are 1-based and
+                                  inclusive on both ends.
   --color / --no-color            Show colored diff. Only applies when
                                   `--diff` is given.
   --fast / --safe                 If --fast given, skip temporary sanity
@@ -93,9 +101,10 @@ Options:
                                   directories on all platforms (Windows, too).
                                   Exclusions are calculated first, inclusions
                                   later. [default: /(\.direnv|\.eggs|\.git|\.h
-                                  g|\.mypy_cache|\.nox|\.tox|\.venv|venv|\.svn
-                                  |\.ipynb_checkpoints|_build|buck-
-                                  out|build|dist|__pypackages__)/]
+                                  g|\.ipynb_checkpoints|\.mypy_cache|\.nox|\.p
+                                  ytest_cache|\.ruff_cache|\.tox|\.svn|\.venv|
+                                  \.vscode|__pypackages__|_build|buck-
+                                  out|build|dist|venv)/]
   --extend-exclude TEXT           Like --exclude, but adds additional files
                                   and directories on top of the excluded ones.
                                   (Useful if you simply want to add to the
@@ -108,8 +117,9 @@ Options:
                                   stdin. Useful to make sure Black will
                                   respect --force-exclude option on some
                                   editors that rely on using stdin.
-  -W, --workers INTEGER RANGE     Number of parallel workers [default: number
-                                  of CPUs in the system]  [x>=1]
+  -W, --workers INTEGER RANGE     Number of parallel workers [default:
+                                  BLACK_NUM_WORKERS environment variable or
+                                  number of CPUs in the system]  [x>=1]
   -q, --quiet                     Don't emit non-error messages to stderr.
                                   Errors are still emitted; silence those with
                                   2>/dev/null.
