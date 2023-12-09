@@ -1,6 +1,6 @@
 #compdef shellcheck
 
-# version: 0.8.0
+# version: 0.9.0
 
 typeset -a CODE=($(seq 1000 2236 | sed -e 's/^/SC/'))
 
@@ -37,6 +37,7 @@ Usage: shellcheck [OPTIONS...] FILES...
   -W NUM              --wiki-link-count=NUM      The number of wiki links to show, when applicable
   -x                  --external-sources         Allow 'source' outside of FILES
                       --help                     Show this usage summary and exit
+
 EOF
 
 # vim:ft=zsh
