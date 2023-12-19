@@ -1,6 +1,8 @@
 *.zwc
+/functions/_conda
 /functions/_deno
 /functions/_jupyter
 /functions/_meson
 /functions/_pipx
+/functions/_poetry
 /functions/_spack
