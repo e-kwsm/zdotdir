@@ -38,7 +38,7 @@ functions/_meson:
 
 functions/_pipx: $(REGISTER_PYTHON_ARGCOMPLETE)
 ifneq ($(REGISTER_PYTHON_ARGCOMPLETE),)
-	{ printf '%s\n' '#compdef pipx' 'autoload bashcompinit' 'bashcompinit'; $< pipx; } > $@
+	{ printf '%s\n' '#compdef $(patsubst _%,%,$(@F))' 'autoload bashcompinit' 'bashcompinit'; $< $(patsubst _%,%,$(@F)); } > $@
 endif
 
 functions/_poetry: $(POETRY)
