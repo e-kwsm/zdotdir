@@ -28,13 +28,13 @@ functions/_conda:
 
 .DELETE_ON_ERROR: functions/_jupyter
 functions/_jupyter:
-	wget -O $@ https://raw.githubusercontent.com/jupyter/jupyter_core/v5.3.1/examples/completions-zsh
+	wget -O $@ https://raw.githubusercontent.com/jupyter/jupyter_core/v5.5.1/examples/completions-zsh
 	echo '5300e28506604c2f9f61980b9ee66a0312c0aa28c675f96810a6ce45 $@' | sha224sum --check -
 
 .DELETE_ON_ERROR: functions/_meson
 functions/_meson:
-	wget -O $@ https://raw.githubusercontent.com/mesonbuild/meson/1.1.0/data/shell-completions/zsh/_meson
-	echo 'e466ae7faa708dc71cfd996c8205c310c5a60ceac3d15c8fdb7e7e03 $@' | sha224sum --check -
+	wget -O $@ https://raw.githubusercontent.com/mesonbuild/meson/1.3.0/data/shell-completions/zsh/_meson
+	echo '35b4a698e7088fe05d6691d544185ce6364149fe9326726c712b08e7 $@' | sha224sum --check -
 
 functions/_pipx: $(REGISTER_PYTHON_ARGCOMPLETE)
 ifneq ($(REGISTER_PYTHON_ARGCOMPLETE),)
