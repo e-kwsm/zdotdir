@@ -1,6 +1,7 @@
 DENO := $(shell which deno 2> /dev/null)
 POETRY := $(shell which poetry 2> /dev/null)
 REGISTER_PYTHON_ARGCOMPLETE := $(shell which register-python-argcomplete 2> /dev/null)
+RYE := $(shell which rye 2> /dev/null)
 
 EXTERNAL := \
 	functions/_conda \
@@ -9,6 +10,7 @@ EXTERNAL := \
 	functions/_meson \
 	functions/_pipx \
 	functions/_poetry \
+	functions/_rye \
 
 .PHONY: all
 all: functions.zwc $(EXTERNAL)
@@ -44,6 +46,11 @@ endif
 functions/_poetry: $(POETRY)
 ifneq ($(POETRY),)
 	$< completions zsh > $@
+endif
+
+functions/_rye: $(RYE)
+ifneq ($(RYE),)
+	$< self completion -s zsh > $@
 endif
 
 .PHONY: clean
