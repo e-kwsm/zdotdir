@@ -3,6 +3,17 @@
 # version: 0.9.0
 
 typeset -a CODE=($(seq 1000 2236 | sed -e 's/^/SC/'))
+typeset -a OPTIONALS=(
+  add-default-case
+  avoid-nullary-conditions
+  check-extra-masked-returns
+  check-set-e-suppressed
+  check-unassigned-uppercase
+  deprecate-which
+  quote-safe-variables
+  require-double-brackets
+  require-variable-braces
+)
 
 typeset -a args=(
   '(-a --check-sourced)'{-a,--check-sourced}'[Include warnings from sourced files]'
@@ -11,6 +22,7 @@ typeset -a args=(
   '(-f --format)'{-f,--format=}'[Output format]:FORMAT:(checkstyle diff gcc json json1 quiet tty)'
   '(- *)'--list-optional'[List checks disabled by default]'
   --norc"[Don't look for .shellcheckrc files]"
+  '(-o --enable)'{-o,--enable=}'[List of optional checks to enable (or "all")]:checks:_values -s, checks all $OPTIONALS'
   '(-s --shell)'{-s,--shell=}'[Specify dialect]:SHELLNAME:(sh bash dash ksh)'
   '(- *)'{-V,--version}'[Print version information]'
   '(- *)'--help'[Show this usage summary and exit]'
