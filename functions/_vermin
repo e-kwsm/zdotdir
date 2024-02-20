@@ -1,0 +1,263 @@
+#compdef vermin
+
+typeset -a args=(
+'(--dump -d --no-dump)'{--dump,-d}'[Dump AST node visits.]'
+'(--dump -d --no-dump)'--no-dump"[Don't dump AST node visits.]"
+'(- *)'{--help,-h}'[Shows this information and exits.]'
+'(- *)'{--version,-V}'[Shows version number and exits.]'
+--versions'[In the end, print all unique versions required by the analysed code.]'
+'*:files:_files -g "*.py"'
+)
+_arguments "${(@)args}"
+
+: << 'EOF'
+Vermin 1.6.0
+Usage: vermin [options] <python source files and folders..>
+
+Concurrently detect the minimum Python versions needed to run code.
+
+Heuristics are employed to determine which files to analyze:
+  - 'py', 'py3', 'pyw', 'pyj', 'pyi' are always scanned (unless otherwise excluded)
+  - 'pyc', 'pyd', 'pxd', 'pyx', 'pyo' are ignored (including various other files)
+  - Magic lines with 'python' are accepted, like: #!/usr/bin/env python
+  - Files that cannot be opened for reading as text devices are ignored
+
+However, Vermin will always attempt to parse any file paths directly specified on
+the command line, even without accepted extensions or heuristics, unless otherwise
+excluded.
+
+Results interpretation:
+  ~2       No known reason it won't work with py2.
+  !2       It is known that it won't work with py2.
+  2.5, !3  Works with 2.5+ but it is known it won't work with py3.
+  ~2, 3.4  No known reason it won't work with py2, works with 3.4+
+
+Incompatible versions notices mean that several files were detected incompatible
+with py2 and py3 simultaneously. In such cases the results might be inconclusive.
+
+A config file is automatically tried detected from the current working directory
+where Vermin is run, following parent folders until either the root or project
+boundary files/folders are reached. However, if --config-file is specified, no config
+is auto-detected and loaded.
+
+Config file names being looked for: 'vermin.ini', 'vermin.conf', '.vermin', 'setup.cfg'
+Project boundary files/folders: '.bzr', '.fslckout', '.git', '.hg', '.p4root', '.pijul', '.svn', '_darcs'
+
+Options:
+  --quiet | -q
+        Quiet mode. If used together with --violations, quiet mode is preserved
+        while showing only violations: no descriptive text, tips, or verdicts.
+
+  --no-quiet (default)
+        Disable quiet mode.
+
+  -v..  Verbosity level 1 to 4. -v, -vv, -vvv, and -vvvv shows increasingly more
+        information.
+        -v     will show the individual versions required per file.
+        -vv    will also show which modules, functions etc. that constitutes
+               the requirements.
+        -vvv   will also show line/col numbers.
+        -vvvv  will also show user-defined symbols being ignored.
+
+  --target=V | -t=V
+        Target version that files must abide by. Can be specified once or twice.
+        A '-' can be appended to match target version or smaller, like '-t=3.5-'.
+        If not met Vermin will exit with code 1. Vermin will only compare target
+        versions with the same major version, so if you do not care about Python
+        2, you can just specify one target for Python 3. However, if used in
+        conjunction with --violations, and no rules are triggered, it will exit
+        with code 0.
+
+  --no-target (default)
+        Don't expect certain target version(s).
+
+  --processes=N | -p=N
+        Use N concurrent processes to detect and analyze files. Defaults to all
+        cores (8).
+
+  --ignore | -i
+        Ignore incompatible versions and warnings. However, if no compatible
+        versions are found then incompatible versions will be shown in the end to
+        not have an absence of results.
+
+  --no-ignore (default)
+        Don't ignore incompatible versions and warnings.
+
+  --dump | -d
+        Dump AST node visits.
+
+  --no-dump (default)
+        Don't dump AST node visits.
+
+  --help | -h
+        Shows this information and exits.
+
+  --version | -V
+        Shows version number and exits.
+
+  --config-file <path> | -c <path>
+        Loads config file unless --no-config-file is specified. Any additional
+        arguments supplied are applied on top of that config. See configuration
+        section above for more information.
+
+  --no-config-file
+        No automatic config file detection and --config-file argument is disallowed.
+
+  --hidden
+        Analyze 'hidden' files and folders starting with '.'.
+
+  --no-hidden (default)
+        Don't analyze hidden files and folders unless specified directly.
+
+  --versions
+        In the end, print all unique versions required by the analysed code.
+
+  --show-tips (default)
+        Show helpful tips at the end, like those relating to backports or usage of
+        unevaluated generic/literal annotations.
+
+  --no-tips
+        Don't show tips.
+
+  --violations | --lint
+        Show only results that violate versions described by --target arguments,
+        which are required to be specified. Verbosity mode is automatically set to
+        at least 2 in order to show violations in output text, but can be increased
+        if necessary.
+
+        If no rules are triggered while used in conjunction with --target, an exit
+        code 0 will still be yielded due to inconclusivity.
+
+        Can be used together with --quiet such that only the violations are shown:
+        no descriptive text, tips, or verdicts.
+
+  --no-violations | --no-lint (default)
+        Show regular results.
+
+  --pessimistic
+        Pessimistic mode: syntax errors are interpreted as the major Python version
+        in use being incompatible.
+
+  --no-pessimistic (default)
+        Disable pessimistic mode.
+
+  --eval-annotations
+        Instructs parser that annotations will be manually evaluated in code, which
+        changes minimum versions in certain cases. Otherwise, function and variable
+        annotations are not evaluated at definition time. Apply this argument if
+        code uses `typing.get_type_hints` or `eval(obj.__annotations__)` or
+        otherwise forces evaluation of annotations.
+
+  --no-eval-annotations (default)
+        Disable annotations evaluation.
+
+  --parse-comments (default)
+        Parse for comments to influence exclusion of code for analysis via
+        "# novm" and "# novermin".
+
+  --no-parse-comments
+        Don't parse for comments. Not parsing comments can sometimes yield a speedup
+        of 30-40%+.
+
+  --scan-symlink-folders
+        Scan symlinks to folders to include in analysis.
+
+  --no-symlink-folders (default)
+        Don't scan symlinks to folders to include in analysis. Symlinks
+        to non-folders or top-level folders will always be scanned.
+
+  --format <name> | -f <name>
+        Format to show results and output in.
+        Supported formats:
+          default  - Default formatting.
+          parsable - Each result is on form 'file:line:column:py2:py3:feature'. The
+                     last line has no path or line/column numbers and contains the
+                     minimum py2 and py3 versions. Minimum verbosity level is set to
+                     3 but can be increased. Tips, hints, incompatible versions, and
+                     `--versions` are disabled. File paths containing ':' are ignored.
+
+  [--exclude <name>] ...
+        Exclude full names, like 'email.parser.FeedParser', from analysis. Useful to
+        ignore conditional logic that can trigger incompatible results.
+
+        Examples:
+          Exclude 'foo.bar.baz' module/member: --exclude 'foo.bar.baz'
+          Exclude 'foo' kwarg:                 --exclude 'somemodule.func(foo)'
+          Exclude 'bar' codecs error handler:  --exclude 'ceh=bar'
+          Exclude 'baz' codecs encoding:       --exclude 'ce=baz'
+
+  [--exclude-file <file name>] ...
+        Exclude full names like --exclude but from a specified file instead. Each
+        line constitutes an exclusion with the same format as with --exclude.
+
+  --no-exclude (default)
+        Use no excludes. Clears any excludes specified before this.
+
+  [--exclude-regex <regex pattern>] ...
+        Exclude files from analysis by matching a regex pattern against their
+        entire path as expanded from the Vermin command line. Patterns are matched
+        using re.search(), so '^' or '$' anchors should be applied as needed.
+
+        Examples:
+          Exclude any '.pyi' file:                --exclude-regex '\.pyi$'
+
+          (Note: the below examples require --no-make-paths-absolute, or prefixing
+          the patterns with the regex-escaped path to the current directory.)
+
+          Exclude the directory 'a/b/':           --exclude-regex '^a/b$'
+            (This will also exclude any files under 'a/b'.)
+
+          Exclude '.pyi' files under 'a/b/':      --exclude-regex '^a/b/.+\.pyi$'
+          Exclude '.pyi' files in exactly 'a/b/': --exclude-regex '^a/b/[^/]+\.pyi$'
+
+  --no-exclude-regex (default)
+        Use no exclude patterns. Clears any exclude patterns specified before this.
+
+  --make-paths-absolute (default)
+        Convert any relative paths from the command line into absolute paths.
+        This affects the path printed to the terminal if a file fails a check,
+        and requires --exclude-regex patterns to match absolute paths.
+
+  --no-make-paths-absolute
+        Do not convert relative paths from the command line into absolute paths.
+
+  [--backport <name>] ...
+        Some features are sometimes backported into packages, in repositories such
+        as PyPi, that are widely used but aren't in the standard language. If such a
+        backport is specified as being used, the results will reflect that instead.
+        Versioned backports are only used when minimum versions change. Unversioned
+        backports must be the newest among versioned and unversioned.
+
+        Supported backports:
+          argparse               - https://pypi.org/project/argparse/ (2.3, 3.1)
+          asyncio                - https://pypi.org/project/asyncio/ (!2, 3.3)
+          configparser           - https://pypi.org/project/configparser/ (2.6, 3.0)
+          contextvars            - https://pypi.org/project/contextvars/ (!2, 3.5)
+          dataclasses            - https://pypi.org/project/dataclasses/ (!2, 3.6)
+          enum                   - https://pypi.org/project/enum34/ (2.4, 3.3)
+          faulthandler           - https://pypi.org/project/faulthandler/ (2.6, 3.0)
+          importlib              - https://pypi.org/project/importlib/ (2.3, 3.0)
+          ipaddress              - https://pypi.org/project/ipaddress/ (2.6, 3.2)
+          mock                   - https://pypi.org/project/mock/ (!2, 3.6)
+          statistics             - https://pypi.org/project/statistics/ (2.6, 3.4)
+          typing                 - https://pypi.org/project/typing/ (2.7, 3.2)
+          typing_extensions==4.0 - https://pypi.org/project/typing-extensions/4.0.0/ (!2, 3.6)
+          typing_extensions==4.3 - https://pypi.org/project/typing-extensions/4.3.0/ (!2, 3.7)
+          typing_extensions      - https://pypi.org/project/typing-extensions/4.3.0/ (!2, 3.7)
+          zoneinfo               - https://pypi.org/project/backports.zoneinfo/ (!2, 3.6)
+
+  --no-backport (default)
+        Use no backports. Clears any backports specified before this.
+
+  [--feature <name>] ...
+        Some features are disabled by default due to being unstable:
+          fstring-self-doc - [Unstable] Detect self-documenting fstrings. Can in
+                             some cases wrongly report fstrings as self-documenting.
+          union-types      - [Unstable] Detect union types `X | Y`. Can in some cases
+                             wrongly report union types due to having to employ heuristics.
+
+  --no-feature (default)
+        Use no features. Clears any features specified before this.
+EOF
+
+# vim:ft=zsh
