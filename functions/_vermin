@@ -6,7 +6,7 @@ local -a args=(
   '(- *)'{--help,-h}'[Shows this information and exits.]'
   '(- *)'{--version,-V}'[Shows version number and exits.]'
   --versions'[In the end, print all unique versions required by the analysed code.]'
-  '*:files:_files -g "*.(py|pyi)"'
+  '*:files:_files -g "*.py"'
 )
 _arguments "${(@)args}"
 
