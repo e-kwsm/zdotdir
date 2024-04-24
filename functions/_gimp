@@ -1,0 +1,10 @@
+#compdef gimp
+
+typeset -a args=(
+  '(- *)--help'
+  '(- *)--version'
+  '*:file:_files -g "*.(bmp|eps|gif|jpg|jpeg|png|svg|tif|tiff)"'
+)
+_arguments "${(@)args}"
+
+# vim:ft=zsh
