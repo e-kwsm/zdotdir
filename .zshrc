@@ -2,7 +2,7 @@
 
 autoload -Uz promptinit
 promptinit
-prompt clint
+prompt elite2
 
 unsetopt beep
 
@@ -66,13 +66,13 @@ preexec_functions+=(mypreexec)
 
 autoload -Uz vcs_info
 setopt prompt_subst
-#zstyle ':vcs_info:*' check-for-changes true
-#zstyle ':vcs_info:*' stagedstr "%F{yellow}!"
-#zstyle ':vcs_info:*' unstagedstr "%F{red}+"
-##zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-#zstyle ':vcs_info:*' actionformats '[%b|%a]'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
 precmd_functions+=(vcs_info)
-#RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 if [ -r ~/.ssh/config ]; then
   _cache_hosts=($(sed -n -e '/^\s*Host\s/ { s///; /\*/d; p }' ~/.ssh/config))
