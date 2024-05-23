@@ -4,7 +4,8 @@ typeset -a args=(
   '(- *)'--help
   '(- *)'--version
   -h'[Specifies that a user hold be applied to the job at submission time]'
-  '*:script:_files -g "*.(bash|sh)"'
+  '(:)'-I'[Interactive]'
+  '1:script:_files -g "*.(bash|sh)"'
 )
 _arguments "${(@)args}"
 
