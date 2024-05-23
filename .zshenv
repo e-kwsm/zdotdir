@@ -13,6 +13,10 @@ if ! type module > /dev/null 2>&1; then
   fi
 fi
 
+if ! declare -f __vte_osc7 > /dev/null && [ -r /etc/profile.d/vte.sh ]; then
+  . /etc/profile.d/vte.sh
+fi
+
 if [ -r ~/.zshenv_local ]; then
   . ~/.zshenv_local
 fi
