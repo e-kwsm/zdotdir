@@ -82,3 +82,4 @@ Global options:
 
 For help with a specific command, see: `ruff help <command>`.
 EOF
+# vi:fdm=marker ft=zsh
