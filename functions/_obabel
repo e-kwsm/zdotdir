@@ -13,10 +13,10 @@ _arguments -s -S \
   --gen3D'' \
   -a+'[Read option]:read option' \
   -x+'[Write option]:write option' \
-  -i+'[Specifies input format]:format-ID:(can cif cml fchk gzmat inchi mol mol2 mop sdf smi vasp xyz)' \
-  '1:infile:_files -g "*.(can|cif|cml|fchk|gzmat|inchi|mol|mol2|mop|sdf|smi|vasp|xyz)"' \
-  -o+'[Specifies output format]:format-ID:(ascii can cif cjson cml gjf gzmat inchi inchikey mol mol2 mop sdf smi svg vasp xyz)' \
-  -O+'[oufile]:outfile:_files -g "*.(can|cif|cjson|cml|com|gjf|gzmat|inchi|mol|mol2|mop|png|sdf|smi|svg|vasp|xyz)"' \
+  -i+'[Specifies input format]:format-ID:(can cif cml fchk gzmat inchi smi xyz)' \
+  '1:infile:_files -g "*.(can|cif|cml|fchk|gzmat|inchi|mop|smi|xyz)"' \
+  -o+'[Specifies output format]:format-ID:(ascii can cif cjson cml gjf gzmat inchi inchikey mop smi svg xyz)' \
+  -O+'[oufile]:outfile:_files -g "*.(can|cif|cjson|cml|com|gjf|gzmat|inchi|mop|png|smi|svg|xyz)"' \
   && :
 
 # vim:ft=zsh
