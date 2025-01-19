@@ -1,6 +1,6 @@
 #compdef yapf
 
-# yapf 0.40.2
+# yapf 0.43.0
 
 typeset -a args=(
   '(- *)'{-h,--help}'[show this help message and exit]'
@@ -32,9 +32,9 @@ options:
   -i, --in-place        make changes to files in place
   -q, --quiet           output nothing and set return value
   -r, --recursive       run recursively over directories
-  -l START-END, --lines START-END
+  -l, --lines START-END
                         range of lines to reformat, one-based
-  -e PATTERN, --exclude PATTERN
+  -e, --exclude PATTERN
                         patterns for files to exclude from formatting
   --style STYLE         specify formatting style: either a style name (for
                         example "pep8" or "google"), or the name of a file
