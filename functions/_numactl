@@ -42,3 +42,5 @@ use --balancing | -b to enable Linux kernel NUMA balancing
 for the process if it is supported by kernel
 <length> can have g (GB), m (MB) or k (KB) suffixes
 EOF
+
+# vim:ft=zsh
