@@ -34,7 +34,7 @@ typeset -a variables=(
 typeset -a args=(
   -all'[output all matches, one per line (no effect with pk/gf).]'
   -debug='[set debugging flags.]:NUM'
-  '(-D -dpi)'{-D,-dpi}='[use a base resolution of NUM; default 600.]:NUM'
+  '(-D -dpi)'{-D,-dpi=}'[use a base resolution of NUM; default 600.]:NUM'
   -expand-braces='[output variable and brace expansion of STRING.]:STRING'
   -expand-path='[output complete path expansion of STRING.]:STRING'
   -expand-var='[output variable expansion of STRING.]:STRING'
