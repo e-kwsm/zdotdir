@@ -1,6 +1,6 @@
 #compdef biber
 
-# biber version: 2.19
+# biber version: 2.20
 
 typeset -a args=(
   '(- *)'--cache'[If running as a PAR::Packer binary, show the cache location and exit.]'
@@ -460,9 +460,9 @@ OPTIONS
         "CROSSREF"s are in another file that you are not including in the
         tool mode run.
 
-    --trace|T
-        Turn on tracing. Also turns on --debug|d and additionally provides a
-        lot of low-level tracing information in the log.
+    --trace|-T
+        Turn on tracing. Also turns on --debug|-D and additionally provides
+        a lot of low-level tracing information in the log.
 
     -u  Alias for --input-encoding=UTF-8
 
@@ -509,8 +509,9 @@ OPTIONS
         turn off biber's UTF-16 filename support on Windows. This will
         result in much improved handling of Unicode filenames.
 
-    --wraplines|-w
-        Wrap lines in the .bbl file.
+    --wraplines|-w=[column]
+        Wrap lines in the .bbl file (or output .bib file in tool mode) at
+        column column (default 80).
 
     --xdatamarker=[marker]
         Use marker as the string before "--xdatasep" which introduces an
@@ -545,7 +546,7 @@ BUGS & DOCUMENTATION
 
 COPYRIGHT & LICENSE
     Copyright 2009-2012 François Charette and Philip Kime, all rights
-    reserved. Copyright 2012-2023 Philip Kime, all rights reserved.
+    reserved. Copyright 2012-2024 Philip Kime, all rights reserved.
 
     This module is free software. You can redistribute it and/or modify it
     under the terms of the Artistic License 2.0.
