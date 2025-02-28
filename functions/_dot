@@ -1,0 +1,179 @@
+#compdef dot
+
+# dot - graphviz version 12.2.1 (0)
+
+typeset -a formats=(
+  canon
+  cmap
+  cmapx
+  cmapx_np
+  dot
+  dot_json
+  eps
+  fig
+  gd
+  gd2
+  gif
+  gv
+  imap
+  imap_np
+  ismap
+  jpe
+  jpeg
+  jpg
+  json
+  json0
+  kitty
+  kittyz
+  pdf
+  pic
+  plain
+  plain-ext
+  png
+  pov
+  ps
+  ps2
+  svg
+  svg_inline
+  svgz
+  tk
+  vrml
+  vt
+  vt-24bit
+  vt-4up
+  vt-6up
+  vt-8up
+  wbmp
+  webp
+  x11
+  xdot
+  xdot1.2
+  xdot1.4
+  xdot_json
+  xlib
+
+# canon:dot:core
+# cmap:map:core
+# cmapx:map:core
+# cmapx_np:map:core
+# dot:dot:core
+# dot_json:json:core
+# eps:ps:core
+# eps:cairo:cairo
+# fig:fig:core
+# gd:cairo:gd
+# gd:gd:gd
+# gd2:cairo:gd
+# gd2:gd:gd
+# gif:cairo:gd
+# gif:gd:gd
+# gv:dot:core
+# imap:map:core
+# imap_np:map:core
+# ismap:map:core
+# jpe:cairo:gd
+# jpe:gd:gd
+# jpeg:cairo:gd
+# jpeg:gd:gd
+# jpg:cairo:gd
+# jpg:gd:gd
+# json:json:core
+# json0:json:core
+# kitty:cairo:kitty
+# kittyz:cairo:kitty
+# pdf:cairo:cairo
+# pic:pic:core
+# plain:dot:core
+# plain-ext:dot:core
+# png:cairo:cairo
+# png:cairo:gd
+# png:gd:gd
+# pov:pov:core
+# ps:ps:core
+# ps:cairo:cairo
+# ps2:ps:core
+# svg:svg:core
+# svg:cairo:cairo
+# svg_inline:svg:core
+# svgz:svg:core
+# tk:tk:core
+# vrml:vrml:gd
+# vt:cairo:vt
+# vt-24bit:cairo:vt
+# vt-4up:cairo:vt
+# vt-6up:cairo:vt
+# vt-8up:cairo:vt
+# wbmp:cairo:gd
+# wbmp:gd:gd
+# webp:cairo:webp
+# x11:cairo:xlib
+# xdot:xdot:core
+# xdot1.2:xdot:core
+# xdot1.4:xdot:core
+# xdot_json:json:core
+# xlib:cairo:xlib
+)
+
+typeset -a engines=(
+  circo
+  dot
+  fdp
+  neato
+  nop
+  nop1
+  nop2
+  osage
+  patchwork
+  sfdp
+  twopi
+)
+
+typeset -a args=(
+  '(- *)-V[Print version and exit]'
+  '-v[Enable verbose mode]'
+  '-T-[Set output format]:format:(${(@)formats})'
+  '-K-[Set layout engine]:engine:(${(@)engines})'
+  '(-O)-o-[Write output]:file:_files'
+  "(-o)-O[Automatically generate an output filename based on the input filename with a .'format' appended.]"
+  '-x[Reduce graph]'
+  '(- *)-?[Print usage and exit]'
+)
+_arguments "${(@)args}"
+
+: << 'EOF'
+Usage: dot [-Vv?] [-(GNE)name=val] [-(KTlso)<val>] <dot files>
+(additional options for neato)    [-x] [-n<v>]
+(additional options for fdp)      [-L(gO)] [-L(nUCT)<val>]
+(additional options for config)  [-cv]
+
+ -V          - Print version and exit
+ -v          - Enable verbose mode 
+ -Gname=val  - Set graph attribute 'name' to 'val'
+ -Nname=val  - Set node attribute 'name' to 'val'
+ -Ename=val  - Set edge attribute 'name' to 'val'
+ -Tv         - Set output format to 'v'
+ -Kv         - Set layout engine to 'v' (overrides default based on command name)
+ -lv         - Use external library 'v'
+ -ofile      - Write output to 'file'
+ -O          - Automatically generate an output filename based on the input filename with a .'format' appended. (Causes all -ofile options to be ignored.) 
+ -P          - Internally generate a graph of the current plugins. 
+ -q[l]       - Set level of message suppression (=1)
+ -s[v]       - Scale input by 'v' (=72)
+ -y          - Invert y coordinate in output
+
+ -n[v]       - No layout mode 'v' (=1)
+ -x          - Reduce graph
+
+ -Lg         - Don't use grid
+ -LO         - Use old attractive force
+ -Ln<i>      - Set number of iterations to i
+ -LU<i>      - Set unscaled factor to i
+ -LC<v>      - Set overlap expansion factor to v
+ -LT[*]<v>   - Set temperature (temperature factor) to v
+
+ -c          - Configure plugins (Writes $prefix/lib/graphviz/config 
+               with available plugin information.  Needs write privilege.)
+ -?          - Print usage and exit
+EOF
+
+# vim:ft=zsh
