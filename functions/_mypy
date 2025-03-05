@@ -5,6 +5,15 @@ typeset -a args=(
   '(- :)'{-h,--help}'[Show this help message and exit]'
   '(- :)'{-v,--verbose}'[More verbose messages]'
   '(- :)'{-V,--version}"[Show program's version number and exit]"
+
+  --no-site-packages'[Do not search for installed PEP 561 compliant packages]'
+  --no-silence-site-packages'[Do not silence errors in PEP 561 compliant installed packages]'
+
+  --python-version'[Type check code assuming it will be running on Python x.y]:version'
+
+  '(--no-check-untyped-defs)'--check-untyped-defs'[Type check the interior of functions without type annotations]'
+  '(--check-untyped-defs)'--no-check-untyped-defs'[NO Type check the interior of functions without type annotations]'
+
   '*:file:_files -g "*.py"'
 )
 _arguments "${(@)args}"
