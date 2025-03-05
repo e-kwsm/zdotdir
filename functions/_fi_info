@@ -1,0 +1,43 @@
+#compdef fi_info
+
+args=(
+  '(- *)'{-h,--help}'[display this help and exit]'
+# -s, --src_addr=ADDR		source name or address
+# -n, --node=NAME		dest node name or address
+# -P, --port=PNUM		port number
+# -c, --caps=CAP1|CAP2..	one or more capabilities: FI_MSG|FI_RMA...
+# -m, --mode=MOD1|MOD2..	one or more modes, default all modes
+# -t, --ep_type=EPTYPE		specify single endpoint type: FI_EP_MSG, FI_EP_DGRAM...
+# -d, --domain=DOMAIN		specify the domain name
+# -f, --fabric=FABRIC		specify the fabric name
+# -a, --addr_format=FMT		specify accepted address format: FI_FORMAT_UNSPEC, FI_SOCKADDR...
+# -p, --provider=PROV		specify provider explicitly
+  '(-e --env)'{-e,--env}'[print libfabric environment variables]'
+# -g, --getenv=SUBSTR		print libfabric environment variables with substr
+# -i, --info=		print fi_info structures containing substr
+  '(-l --list)'{-l,--list}'[list available libfabric providers]'
+  '(-v --verbose)'{-v,--verbose}'[verbose output]'
+  '(- *)'--version'[print version info and exit]'
+)
+_arguments "${(@)args}"
+
+: << EOF
+Usage: fi_info
+  -h, --help			display this help and exit
+  -s, --src_addr=ADDR		source name or address
+  -n, --node=NAME		dest node name or address
+  -P, --port=PNUM		port number
+  -c, --caps=CAP1|CAP2..	one or more capabilities: FI_MSG|FI_RMA...
+  -m, --mode=MOD1|MOD2..	one or more modes, default all modes
+  -t, --ep_type=EPTYPE		specify single endpoint type: FI_EP_MSG, FI_EP_DGRAM...
+  -d, --domain=DOMAIN		specify the domain name
+  -f, --fabric=FABRIC		specify the fabric name
+  -a, --addr_format=FMT		specify accepted address format: FI_FORMAT_UNSPEC, FI_SOCKADDR...
+  -p, --provider=PROV		specify provider explicitly
+  -e, --env			print libfabric environment variables
+  -g, --getenv=SUBSTR		print libfabric environment variables with substr
+  -i, --info=		print fi_info structures containing substr
+  -l, --list			list available libfabric providers
+  -v, --verbose			verbose output
+  --version			print version info and exit
+EOF
