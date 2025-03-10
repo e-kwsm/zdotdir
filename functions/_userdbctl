@@ -1,0 +1,110 @@
+#compdef userdbctl
+
+# main {{{1
+_userdbctl() {
+  typeset -a args=(
+    '(- *)'{-h,--help}'[Show help]'
+    '(- *)'--version'[Show package version]'
+    '*::userdbctl command:_userdbctl_command'
+  )
+  _arguments "${(@)args}"
+}
+
+# _userdbctl-command {{{1
+(( $+functions[_userdbctl_command] )) || _userdbctl_command() {
+  typeset -a _userdbctl_cmds=(
+    'user:Inspect user'
+    'group:Inspect group'
+    'users-in-group:Show users that are members of specified groups'
+    'groups-of-user:Show groups the specified users are members of'
+    'services:Show enabled database services'
+    'ssh-authorized-keys:Show SSH authorized keys for user'
+  )
+
+  if (( CURRENT == 1 )); then
+    _describe -t commands 'userdbctl command' _userdbctl_cmds
+  else
+    typeset curcontext="$curcontext" ret=1
+
+    cmd="${${_userdbctl_cmds[(r)$words[1]:*]%%:*}}"
+
+    if (( $#cmd )); then
+      curcontext="${curcontext%:*:*}:userdbctl-${cmd}:"
+
+      if [ $cmd = 'help' ]; then
+        _message 'no more arguments'
+      elif ! _call_function ret _userdbctl-$cmd; then
+	_default && ret=0
+      fi
+    else
+      _default && ret=0
+    fi
+    return ret
+  fi
+}
+
+(( $+functions[_userdbctl-user] )) || _userdbctl-user() {  # {{{1
+}
+
+(( $+functions[_userdbctl-group] )) || _userdbctl-group() {  # {{{1
+}
+
+(( $+functions[_userdbctl-users-in-group] )) || _userdbctl-users-in-group() {  # {{{1
+}
+
+(( $+functions[_userdbctl-groups-of-user] )) || _userdbctl-groups-of-user() {  # {{{1
+}
+
+(( $+functions[_userdbctl-services] )) || _userdbctl-services() {  # {{{1
+}
+
+(( $+functions[_userdbctl-ssh-authorized-keys] )) || _userdbctl-ssh-authorized-keys() {  # {{{1
+}
+
+return
+
+: << 'EOF'
+userdbctl [OPTIONS...] COMMAND ...
+
+Show user and group information.
+
+Commands:
+  user [USER…]               Inspect user
+  group [GROUP…]             Inspect group
+  users-in-group [GROUP…]    Show users that are members of specified groups
+  groups-of-user [USER…]     Show groups the specified users are members of
+  services                   Show enabled database services
+  ssh-authorized-keys USER   Show SSH authorized keys for user
+
+Options:
+  -h --help                  Show this help
+     --version               Show package version
+     --no-pager              Do not pipe output into a pager
+     --no-legend             Do not show the headers and footers
+     --output=MODE           Select output mode (classic, friendly, table, json)
+  -j                         Equivalent to --output=json
+  -s --service=SERVICE[:SERVICE…]
+                             Query the specified service
+     --with-nss=BOOL         Control whether to include glibc NSS data
+  -N                         Do not synthesize or include glibc NSS data
+                             (Same as --synthesize=no --with-nss=no)
+     --synthesize=BOOL       Synthesize root/nobody user
+     --with-dropin=BOOL      Control whether to include drop-in records
+     --with-varlink=BOOL     Control whether to talk to services at all
+     --multiplexer=BOOL      Control whether to use the multiplexer
+     --json=pretty|short     JSON output mode
+     --chain                 Chain another command
+     --uid-min=ID            Filter by minimum UID/GID (default 0)
+     --uid-max=ID            Filter by maximum UID/GID (default 4294967294)
+  -z --fuzzy                 Do a fuzzy name search
+     --disposition=VALUE     Filter by disposition
+  -I                         Equivalent to --disposition=intrinsic
+  -S                         Equivalent to --disposition=system
+  -R                         Equivalent to --disposition=regular
+     --boundaries=BOOL       Show/hide UID/GID range boundaries in output
+  -B                         Equivalent to --boundaries=no
+
+See the userdbctl(1) man page for details.
+EOF
+
+# vim:ft=zsh
