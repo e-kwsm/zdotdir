@@ -61,6 +61,7 @@ _userdbctl() {
 (( $+functions[_userdbctl-ssh-authorized-keys] )) || _userdbctl-ssh-authorized-keys() {  # {{{1
 }
 
+# }}}1
 return
 
 : << 'EOF'
@@ -107,4 +108,4 @@ Options:
 See the userdbctl(1) man page for details.
 EOF
 
-# vim:ft=zsh
+# vim:fdm=marker ft=zsh
