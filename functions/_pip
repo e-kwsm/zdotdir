@@ -36,14 +36,18 @@ _pip() {
     'download:Download packages.'
     'uninstall:Uninstall packages.'
     'freeze:Output installed packages in requirements format.'
+    'inspect:Inspect the python environment.'
     'list:List installed packages.'
     'show:Show information about installed packages.'
     'check:Verify installed packages have compatible dependencies.'
     'config:Manage local and global configuration.'
     'search:Search PyPI for packages.'
+    "cache:Inspect and manage pip's wheel cache."
+    'index:Inspect information available from package indexes.'
     'wheel:Build wheels from your requirements.'
     'hash:Compute hashes of package archives.'
     'completion:A helper command used for command completion.'
+    'debug:Show information useful for debugging.'
     'help:Show help for commands.'
   )
 
@@ -116,6 +120,12 @@ _pip() {
     '(- *)'--help'[Show help.]' \
     && return 0
 }
+
+# inspect {{{1
+(( $+functions[_pip-inspect] )) || _pip-inspect() {
+  : && return 0
+}
+
 # }}}1
 # list {{{1
 (( $+functions[_pip-list] )) || _pip-list() {
