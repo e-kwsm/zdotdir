@@ -1,7 +1,7 @@
 #compdef mypy
 
 # mypy 1.14.0
-typeset -a args=(
+typeset -ar args=(
   '(- :)'{-h,--help}'[Show this help message and exit]'
   '(- :)'{-v,--verbose}'[More verbose messages]'
   '(- :)'{-V,--version}"[Show program's version number and exit]"

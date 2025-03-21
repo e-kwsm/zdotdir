@@ -301,7 +301,7 @@ _bse() {
     guess
   )
 
-  typeset -a args=(
+  typeset -ar args=(
     '(- *)'{-h,--help}'[show this help message and exit]'
     '(- *)'-V"[show program's version number and exit]"
     '(-d --data)'{-d,--data}'[Override which data directory to use]:PATH:_files -/'
@@ -314,21 +314,8 @@ _bse() {
 # _bse-command {{{1
 (( $+functions[_bse_command] )) || _bse_command() {
   typeset -ar _bse_cmds=(
-    'autoabs-basis:Form AutoABS auxiliary basis'
-    'autoaux-basis:Form AutoAux auxiliary basis'
-    'convert-basis:Convert basis set files from one format to another'
-    'create-bundle:Create a bundle of basis sets'
-    'get-basis:Output a formatted basis set'
-    'get-data-dir:Output the default data directory of this package'
-    'get-family-notes:Get the notes of a family of basis sets'
-    'get-family:Output the family of a basis set'
-    'get-info:Output general info and metadata for a basis set'
-    'get-notes:Output the notes for a basis set'
-    'get-refs:Output references for a basis set'
-    'get-versions:Output a list all available versions of a basis set'
-    'list-basis-sets:Output a list all available basis sets and descriptions'
-    'list-families:Output a list all available basis set families'
-    'list-formats:Output a list all available basis set formats and descriptions'
+    'list-formats:Output a list of basis set formats that can be used with obtaining a basis set'
+    'list-writer-formats:Output a list available basis set formats that can be written'
     'list-reader-formats:Output a list of basis set formats that can be read'
     'list-ref-formats:Output a list all available reference formats and descriptions'
     'list-roles:Output a list all available roles and descriptions'
@@ -404,7 +391,7 @@ _bse() {
 }
 
 (( $+functions[_bse-get-basis] )) || _bse-get-basis() {  # {{{1
-  typeset -a args=(
+  typeset -ar args=(
     '(- *)'{-h,--help}
     --elements"[Which elements of the basis set to output. Default is all defined in the given basis]:ELEMENTS:_values -s, ELEMENTS $elements"
     --version'[Which version of the basis set to output. Default is the latest version]:VERSION'
@@ -449,7 +436,7 @@ _bse() {
 }
 
 (( $+functions[_bse-get-family] )) || _bse-get-family() {  # {{{1
-  typeset -a args=(
+  typeset -ar args=(
     '(- *)'{-h,--help}
     "1:basis:_values basis $basissets"
   )

@@ -18,7 +18,7 @@ _vtune() {
 
 # _vtune-command {{{1
 (( $+functions[_vtune_command] )) || _vtune_command() {
-  typeset -a _vtune_cmds=(
+  typeset -ar _vtune_cmds=(
     '-collect:Choose an analysis type.'
     '-collect-with:Choose a collector.'
     '-command:Issue a command to a running collection.'

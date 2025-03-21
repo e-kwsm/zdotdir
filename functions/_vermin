@@ -1,6 +1,6 @@
 #compdef vermin
 
-typeset -a args=(
+typeset -ar args=(
 '(--dump -d --no-dump)'{--dump,-d}'[Dump AST node visits.]'
 '(--dump -d --no-dump)'--no-dump"[Don't dump AST node visits.]"
 '(- *)'{--help,-h}'[Shows this information and exits.]'

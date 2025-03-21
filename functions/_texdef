@@ -1,11 +1,11 @@
 #compdef texdef latexdef
 
-typeset -a engines=(
+typeset -ar engines=(
   {,lua,pdf,xe}{,la}tex{,-dev}
   context
 )
 
-typeset -a args=(
+typeset -ar args=(
   '(--tex -t)'{--tex=,-t}'[Use given format of TeX]:format:($engines)'
   --texoptions'[Call (La)TeX with the given options.]:options'
   '(--source -s)'{--source=,-s}'[Try to show the original source code of the command definition.]'
