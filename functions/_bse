@@ -4,7 +4,7 @@
 _bse() {
   typeset curcontext=$curcontext state lstate line
 
-  typeset -a basissets=(
+  typeset -ar basissets=(
     '3-21G'
     '6-31++G'
     '6-31++G\*'
