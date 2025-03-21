@@ -2,7 +2,7 @@
 
 # black, 25.1.0
 
-typeset -a specs=(
+typeset -ar specs=(
   '(-l --line-length)'{-l,--line-length}'[How many characters per line to allow.]:INTEGER:_values INTEGER 79 88'
   '(--ipynb)'--pyi'[Format all input files like typing stubs regardless of file extension (useful when piping source on standard input).]'
   '(--pyi)'--ipynb'[Format all input files like Jupyter Notebooks regardless of file extension (useful when piping source on standard input).]'
