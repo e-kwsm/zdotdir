@@ -2,7 +2,7 @@
 
 # biber version: 2.20
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'--cache'[If running as a PAR::Packer binary, show the cache location and exit.]'
   '(--configfile -g --noconf)'{--configfile,-g}'[Use file as configuration file for "biber".]:file:_files -g "*"'
   '(--debug -D)'{--debug,-D}'[Turn on debugging for "biber".]'
