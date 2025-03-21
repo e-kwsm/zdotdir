@@ -1,6 +1,6 @@
 #compdef squeue
 
-typeset -a args=(
+typeset -ar args=(
   '(-A --account)'{-A,--account=}'[Specify the accounts of the jobs to view.]:account_list'
   '(-a --all)'{-a,--all}'[Display information about jobs and job steps in all partitions.]'
   '(-h --noheader)'{-h,--noheader}'[Do not print a header on the output.]'

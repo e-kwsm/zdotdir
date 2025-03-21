@@ -2,8 +2,8 @@
 
 # version: 0.10.0
 
-typeset -a CODE=(SC{1000..2330})
-typeset -a OPTIONALS=(
+typeset -ar CODE=(SC{1000..2330})
+typeset -ar OPTIONALS=(
   add-default-case
   avoid-nullary-conditions
   check-extra-masked-returns
@@ -15,7 +15,7 @@ typeset -a OPTIONALS=(
   require-variable-braces
 )
 
-typeset -a args=(
+typeset -ar args=(
   '(-a --check-sourced)'{-a,--check-sourced}'[Include warnings from sourced files]'
   '(-i --include)'{-i,--include=}'[Consider only given types of warnings]:CODE:_values -s, CODE $CODE'
   '(-e --exclude)'{-e,--exclude=}'[Exclude types of warnings]:CODE:_values -s, CODE $CODE'

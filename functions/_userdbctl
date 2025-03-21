@@ -2,7 +2,7 @@
 
 # main {{{1
 _userdbctl() {
-  typeset -a args=(
+  typeset -ar args=(
     '(- *)'{-h,--help}'[Show help]'
     '(- *)'--version'[Show package version]'
     '*::userdbctl command:_userdbctl_command'
@@ -12,7 +12,7 @@ _userdbctl() {
 
 # _userdbctl-command {{{1
 (( $+functions[_userdbctl_command] )) || _userdbctl_command() {
-  typeset -a _userdbctl_cmds=(
+  typeset -ar _userdbctl_cmds=(
     'user:Inspect user'
     'group:Inspect group'
     'users-in-group:Show users that are members of specified groups'

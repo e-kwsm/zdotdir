@@ -2,8 +2,7 @@
 
 # 3.5.0
 
-typeset -a methods=(
-
+typeset -ar methods=(
   'AM05'
   'B-LYP' 'BLYP'
   'B-P' 'BP86' 'BP' 'B-P86'
@@ -341,7 +340,7 @@ typeset -a methods=(
   'ωB97X'
 )
 
-typeset -a args=(
+typeset -ar args=(
   '(-f --func)'{-f,--func}'[Use damping parameters for given functional]:method:_values method $methods'
   --property'[Show dispersion related atomic and system properties]'
   --pair-resolved'[Calculate pairwise representation of dispersion energy]'

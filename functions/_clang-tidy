@@ -2,7 +2,7 @@
 
 # LLVM version 19.1.7
 
-typeset -a checks=(
+typeset -ar checks=(
   abseil-cleanup-ctad
   abseil-duration-addition
   abseil-duration-comparison
@@ -566,8 +566,9 @@ for c in $checks; do
   negchecks=($negchecks "-$c")
 done
 unset c
+typeset -r negchecks
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'{-h,--help}'[Display available options (--help-hidden for more)]'
   '(- *)'--help-hidden'[Display all available options]'
   '(- *)'--help-list'[Display list of available options (--help-list-hidden for more)]'
