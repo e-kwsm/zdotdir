@@ -1,6 +1,6 @@
 #compdef python3-config python3.8-config python3.9-config python3.10-config python3.11-config python3.12-config python3.13-config
 
-typeset -a flags=(
+typeset -ar flags=(
   '--prefix'
   '--exec-prefix'
   '--includes'

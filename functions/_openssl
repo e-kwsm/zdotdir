@@ -2,7 +2,7 @@
 
 _openssl() {
   typeset curcontext=$curcontext state lstate line
-  typeset -a args=(
+  typeset -ar args=(
     '(- *)'-help'[Provides a terse summary of all options]'
     '(- *)'-version'[Provides a terse summary of the openssl program version]'
     '*::openssl command:_openssl_command'
@@ -11,7 +11,7 @@ _openssl() {
 }
 
 (( $+functions[_openssl_command] )) || _openssl_command() {
-  typeset -a _openssl_cmds=(
+  typeset -ar _openssl_cmds=(
 asn1parse:
 ca:
 ciphers:

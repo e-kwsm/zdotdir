@@ -1,6 +1,6 @@
 #compdef fprettify
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'{-h,--help}'[show this help message and exit]'
   '(-i --indent)'{-i,--indent}'[relative indentation width (default: 3)]:INDENT'
   --c-relations"[C-style relational operators ('<', '<=', ...)]"

@@ -2,7 +2,7 @@
 
 # yapf 0.43.0
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'{-h,--help}'[show this help message and exit]'
   '(- *)'{-v,--version}"[show program's version number and exit]"
   '(-d --diff -i --in-place)'{-d,--diff}'[print the diff for the fixed source]'

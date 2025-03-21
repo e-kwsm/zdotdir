@@ -2,7 +2,7 @@
 
 # typos-cli 1.17.1
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'{-h,--help}'[Print help]'
   '(- *)'{-V,--version}'[Print version]'
 

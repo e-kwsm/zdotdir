@@ -1,6 +1,6 @@
 #compdef qsub
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'--help
   '(- *)'--version
   -h'[Specifies that a user hold be applied to the job at submission time]'

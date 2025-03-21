@@ -2,7 +2,7 @@
 
 # 2.3.0
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)--help[this message]'
   '(- *)--about[print pkgconf version and license to stdout]'
   '(- *)--version[print supported pkg-config version to stdout]'

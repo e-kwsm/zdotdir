@@ -4,7 +4,7 @@
 _pip() {
   typeset curcontext=$curcontext state lstate line
 
-  typeset -a args=(
+  typeset -ar args=(
     '(- *)'{-h,--help}'[Show help]'
     --isolated'[Run pip in an isolated mode, ignoring environment variables and user configuration.]'
     {-v,--verbose}'[Give more output. Option is additive, and can be used up to 3 times.]'
@@ -31,7 +31,7 @@ _pip() {
 
 # _pip-command {{{1
 (( $+functions[_pip_command] )) || _pip_command() {
-  typeset -a _pip_cmds=(
+  typeset -ar _pip_cmds=(
     'install:Install packages.'
     'download:Download packages.'
     'uninstall:Uninstall packages.'

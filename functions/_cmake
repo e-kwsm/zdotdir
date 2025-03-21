@@ -2,13 +2,13 @@
 
 # 3.26.4
 
-typeset -a GENERATORS=(
+typeset -ar GENERATORS=(
   'Unix Makefiles'
   'Ninja'
   'Ninja Multi-Config'
 )
 
-typeset -a args=(
+typeset -ar args=(
   -S'[Explicitly specify a source directory.]:path-to-source:_path_files -/'
   -B'[Explicitly specify a build directory.]:path-to-build:_path_files -/'
   -C'[Pre-load a script to populate the cache.]:initial-cache:_path_files -/'

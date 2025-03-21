@@ -2,7 +2,7 @@
 
 # 7.0.0
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'{-h,--help}'[show this help message and exit]'
 # -v, --verbose         Print more information about what is happening in
 #                       flake8. This option is repeatable and will increase

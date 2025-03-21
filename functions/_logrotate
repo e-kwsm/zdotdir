@@ -1,6 +1,6 @@
 #compdef logrotate
 
-typeset -a args=(
+typeset -ar args=(
   '(-d --debug)'{-d,--debug}"[Don't do anything, just test and print debug messages]"
   '(-f --force)'{-f,--force}'[Force file rotation]'
   '(-v --verbose)'{-v,--verbose}'[Display messages during rotation]'

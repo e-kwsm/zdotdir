@@ -2,7 +2,7 @@
 
 # keychain 2.8.5
 
-typeset -a args=(
+typeset -ar args=(
   --clear"[Delete all of ssh-agent's keys.]"
   --query'[Keychain will print lines in KEY=value format representing the values which are set by the agents.]'
   --eval'[Keychain will print lines to be evaluated in the shell on stdout.]'
