@@ -2,7 +2,7 @@
 
 # version: 0.10.0
 
-typeset -a CODE=($(seq 1000 2236 | sed -e 's/^/SC/'))
+typeset -a CODE=(SC{1000..2330})
 typeset -a OPTIONALS=(
   add-default-case
   avoid-nullary-conditions
