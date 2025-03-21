@@ -2,7 +2,7 @@
 
 # 2.71
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'{-h,--help}'[print this help, then exit]'
   '(- *)'{-V,--version}'[print version number, then exit]'
   {-v,--verbose}'[verbosely report processing]'
