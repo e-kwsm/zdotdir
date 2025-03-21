@@ -1,6 +1,6 @@
 #compdef pbsnodes
 
-typeset -a args=(
+typeset -ar args=(
   -a'[All attributes of a node or all nodes are listed.]:node'
   -x'[Same as -a, but the output has an XML-like format.]:node'
   -c'[Clear OFFLINE from listed nodes.]:node'

@@ -1,6 +1,6 @@
 #compdef ctest
 
-typeset -a args=(
+typeset -ar args=(
   --preset='[Read arguments from a test preset.]:preset:_files'
   '(- *)'--list-presets'[List available test presets.]'
   '(-C --build-config)'{-C,--build-config}'[Choose configuration to test.]:cfg:_files'

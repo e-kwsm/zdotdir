@@ -1,6 +1,6 @@
 #compdef numactl
 
-typeset -a args=(
+typeset -ar args=(
   {--all,-a}'[Unset default cpuset awareness, so user can use all possible CPUs/nodes for following policy settings.]'
   '(- *)'{--show,-s}'[Show NUMA policy settings of the current process.]'
   '(- *)'{--hardware,-H}'[Show inventory of available nodes on the system.]'

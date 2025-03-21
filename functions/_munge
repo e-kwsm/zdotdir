@@ -1,6 +1,6 @@
 #compdef munge
 
-typeset -a ciphers=(
+typeset -ar ciphers=(
   none
   default
   blowfish
@@ -9,7 +9,7 @@ typeset -a ciphers=(
   aes256
 )
 
-typeset -a macs=(
+typeset -ar macs=(
   default
   md5
   sha1
@@ -18,14 +18,14 @@ typeset -a macs=(
   sha512
 )
 
-typeset -a zips=(
+typeset -ar zips=(
   none
   default
   bzlib
   zlib
 )
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'{-h,--help}'[Display this help]'
   '(- *)'{-L,--license}'[Display license information]'
   '(- *)'{-V,--version}'[Display version information]'

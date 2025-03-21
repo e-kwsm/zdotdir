@@ -2,7 +2,7 @@
 
 # pdfcrop 2023/04/15 v1.42
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'--help'[print usage]'
   '(- *)'--version'[print version number]'
   '(--xetex --luatex)'--pdftex'[use pdfTeX]'

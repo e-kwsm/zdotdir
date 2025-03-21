@@ -2,7 +2,7 @@
 
 # stylua 0.14.2
 
-typeset -a args=(
+typeset -ar args=(
   '(-c --check)'{-c,--check}"[Runs in 'check' mode]"
   '(-f --config-path)'{-f,--config-path}'[Specify path to stylua.toml configuration file]:CONFIG_PATH:_files -g "*.toml"'
   '(-g --glob)'{-g,--glob}'[Glob patterns to test against which files to check.]:GLOB'

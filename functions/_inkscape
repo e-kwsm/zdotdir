@@ -1,6 +1,6 @@
 #compdef inkscape
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'--help'[Show this help message]'
   '(- *)'{-V,--version}'[Print the Inkscape version number]'
   '(- *)'--system-data-directory'[Prints the system data directory where data files that ship with Inkscape are stored.]'

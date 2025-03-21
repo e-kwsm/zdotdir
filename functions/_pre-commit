@@ -4,7 +4,7 @@
 _pre-commit() {
   typeset curcontext=$curcontext state lstate line
 
-  typeset -a args=(
+  typeset -ar args=(
     '(- *)'{-h,--help}'[show this help message and exit]'
     '(- *)'{-V,--version}"[show program's version number and exit]"
     '*::pre-commit command:_pre-commit_command'
@@ -14,7 +14,7 @@ _pre-commit() {
 
 # _pre-commit-command {{{1
 (( $+functions[_pre-commit_command] )) || _pre-commit_command() {
-  typeset -a _pre_commit_cmds=(
+  typeset -ar _pre_commit_cmds=(
     "autoupdate:Auto-update pre-commit config to the latest repos' versions."
     'clean:Clean out pre-commit files.'
     'gc:Clean unused cached repos.'
@@ -53,7 +53,7 @@ _pre-commit() {
 
 # install {{{1
 (( $+functions[_pre-commit-install] )) || _pre-commit-install() {
-  typeset -a args=(
+  typeset -ar args=(
     '(- *)'{-h,--help}'[show this help message and exit]'
     --color'[Whether to use color in output. Defaults to `auto`.]: :(auto always never)'
     '(-c --config)'{-c,--config}'[Path to alternate config file]:CONFIG:_files'
@@ -67,7 +67,7 @@ _pre-commit() {
 
 # run {{{1
 (( $+functions[_pre-commit-run] )) || _pre-commit-run() {
-  typeset -a args=(
+  typeset -ar args=(
     '(- *)'{-h,--help}'[show this help message and exit]'
     --color'[Whether to use color in output. Defaults to `auto`.]: :(auto always never)'
     '(-c --config)'{-c,--config}'[Path to alternate config file]:CONFIG:_files'

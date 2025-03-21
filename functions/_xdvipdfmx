@@ -1,6 +1,6 @@
 #compdef xdvipdfmx
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'{--help,-h}'[Show this help message and exit]'
   -o'[PDF output file name]:PDF:_files -g "*.pdf"'
   '(- *)'--version'[Output version information and exit]'

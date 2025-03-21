@@ -1,7 +1,7 @@
 #compdef reflector
 
 _reflector() {
-  typeset -a args=(
+  typeset -ar args=(
     '(- *)'{-h,--help}'[show this help message and exit]'
     '(- *)'--list-countries'[Display a table of the distribution of servers by country.]'
     --sort'[Sort the mirrorlist. "age": last server synchronization; "rate": download rate; "country": country name, either alphabetically or in the order given by the --country option; "score": MirrorStatus score; "delay": MirrorStatus delay.]:sorter:(age rate country score delay)'

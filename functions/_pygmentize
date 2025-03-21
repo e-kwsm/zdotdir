@@ -2,7 +2,7 @@
 
 # Pygments version 2.15.1
 
-typeset -a args=(
+typeset -ar args=(
   '(-g)'-l'[lexer]:LEXER'
   '(-l)'-g'[Guess the lexer from the file contents, or pass through as plain text if nothing can be guessed.]'
   -f'[Specify the formatter to use. (Query names with -L.) If not given, the formatter is guessed from the output filename, and defaults to the terminal formatter if the output is to the terminal or an unknown file extension.]:FORMATTER'

@@ -1,6 +1,6 @@
 #compdef sinfo
 
-typeset -a states=(
+typeset -ar states=(
   ALLOC
   ALLOCATED
   COMP
@@ -28,7 +28,7 @@ typeset -a states=(
   UNKNOWN
 )
 
-typeset -a args=(
+typeset -ar args=(
   '(-a --all)'{-a,--all}'[Display information about all partitions.]'
   '(-d --dead)'{-d,--dead}'[If set only report state information for non-responding (dead) nodes.]'
   '(-e --exact)'{-e,--exact}'[If set, do not group node information on multiple nodes unless their configurations to be reported are identical.]'

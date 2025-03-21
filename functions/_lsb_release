@@ -1,6 +1,6 @@
 #compdef lsb_release
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'{-v,--version}'[Show the version of the LSB against which your current installation is compliant.]'
   '(- *)'{-i,--id}"[Display the distributor's ID.]"
   '(- *)'{-d,--description}'[Display a description of the currently installed distribution.]'

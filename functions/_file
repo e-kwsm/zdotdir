@@ -1,7 +1,7 @@
 #compdef file
 
 # file-5.46
-typeset -a args=(
+typeset -ar args=(
   '(- :)'--help'[display this help and exit]'
   '(- :)'{-v,--version}'[output version information and exit]'
   '(-b --brief)'{-b,--brief}'[do not prepend filenames to output lines]'
