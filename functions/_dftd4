@@ -3,7 +3,7 @@
 # 3.5.0
 
 _dftd4() {
-typeset -a methods=(
+local -ar methods=(
 
   'AM05'
   'B-LYP' 'BLYP'
@@ -342,7 +342,7 @@ typeset -a methods=(
   'ωB97X'
 )
 
-typeset -a args=(
+typeset -ar args=(
   '(-f --func)'{-f,--func}'[Use damping parameters for given functional]:method:_values method $methods'
   --property'[Show dispersion related atomic and system properties]'
   --pair-resolved'[Calculate pairwise representation of dispersion energy]'

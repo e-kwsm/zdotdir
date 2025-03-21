@@ -2,7 +2,7 @@
 
 # dot - graphviz version 12.2.1 (0)
 
-typeset -a formats=(
+typeset -ar formats=(
   canon
   cmap
   cmapx
@@ -114,7 +114,7 @@ typeset -a formats=(
 # xlib:cairo:xlib
 )
 
-typeset -a engines=(
+typeset -ar engines=(
   circo
   dot
   fdp
@@ -128,7 +128,7 @@ typeset -a engines=(
   twopi
 )
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)-V[Print version and exit]'
   '-v[Enable verbose mode]'
   '-T-[Set output format]:format:(${(@)formats})'

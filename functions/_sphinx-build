@@ -2,7 +2,7 @@
 
 # sphinx-build 7.2.6
 
-typeset -a builders=(
+typeset -ar builders=(
   html
   dirhtml
   singlehtml
@@ -29,7 +29,7 @@ typeset -a builders=(
   clean
 )
 
-typeset -a args=(
+typeset -ar args=(
   '(- *)'{-h,--help}'[show this help message and exit]'
   '(- *)'--version"[show program's version number and exit]"
   -b'[builder to use]:BUILDER:_values BUILDER $builders'
