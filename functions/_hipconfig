@@ -1,0 +1,37 @@
+#compdef hipconfig
+
+# file-5.46
+typeset -ar args=(
+	{--path,-p}'[print HIP_PATH (use env var if set, else determine from hipconfig path)]'
+  	{--rocmpath,-R}'[print ROCM_PATH (use env var if set, else determine from hip path or /opt/rocm)]'
+  	{--cpp_config,-C}'[print C++ compiler options]'
+  	{--compiler,-c}'[print compiler (clang or nvcc)]'
+  	{--platform,-P}'[print platform (amd or nvidia)]'
+  	{--runtime,-r}'[print runtime (rocclr or cuda)]'
+  	{--hipclangpath,-l}'[print HIP_CLANG_PATH]'
+  	{--full,-f}'[print full config]'
+  	{--version,-v}'[print hip version]'
+  	--check'[check configuration]'
+  	{--newline,-n}'[print newline]'
+  	{--help,-h}'[print help message]'
+)
+_arguments "${(@)args}"
+
+return
+: << 'EOF'
+usage: hipconfig [OPTIONS]
+  --path,  -p        : print HIP_PATH (use env var if set, else determine from hipconfig path)
+  --rocmpath,  -R    : print ROCM_PATH (use env var if set, else determine from hip path or /opt/rocm)
+  --cpp_config, -C   : print C++ compiler options
+  --compiler, -c     : print compiler (clang or nvcc)
+  --platform, -P     : print platform (amd or nvidia)
+  --runtime, -r      : print runtime (rocclr or cuda)
+  --hipclangpath, -l : print HIP_CLANG_PATH
+  --full, -f         : print full config
+  --version, -v      : print hip version
+  --check            : check configuration
+  --newline, -n      : print newline
+  --help, -h         : print help message
+EOF
+
+# vim:ft=zsh
