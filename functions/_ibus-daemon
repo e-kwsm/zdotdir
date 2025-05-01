@@ -1,0 +1,42 @@
+#compdef ibus-daemon
+
+# ibus-daemon - Version 1.5.32
+
+typeset -ar args=(
+  '(- *)'{-h,--help}'[Show help options]'
+  '(- *)'{-V,--version}"[Show the application's version.]"
+  '(-d --daemonize)'{-d,--daemonize}'[run ibus as background process.]'
+  '(-x --xim)'{-x,--xim}'[execute ibus XIM server.]'
+  '(-r --replace)'{-r,--replace}'[if there is an old ibus-daemon is running, it will be replaced.]'
+  '(-R --restart)'{-R,--restart}'[restart panel and config processes when they die.]'
+  '(-v --verbose)'{-v,--verbose}'[verbose.]'
+)
+_arguments -s : "${(@)args}"
+
+: << EOF
+Usage:
+  ibus-daemon [OPTION?] - ibus daemon
+
+Help Options:
+  -h, --help                                   Show help options
+
+Application Options:
+  -V, --version                                Show the application's version.
+  -d, --daemonize                              run ibus as background process.
+  -s, --single                                 do not execute panel and config module.
+  -x, --xim                                    execute ibus XIM server.
+  -n, --desktop=name                           specify the name of desktop session. [default=gnome]
+  -p, --panel=cmdline                          specify the cmdline of panel program. pass 'disable' not to start a panel program.
+  -E, --emoji-extension=cmdline                specify the cmdline of emoji extension program. pass 'disable' not to start an extension program.
+  -c, --config=cmdline                         specify the cmdline of config program. pass 'disable' not to start a config program.
+  -a, --address=address                        specify the address of ibus daemon.
+  -r, --replace                                if there is an old ibus-daemon is running, it will be replaced.
+  -t, --cache                                  specify the cache mode. [auto/refresh/none]
+  -o, --timeout=timeout [default is 15000]     gdbus reply timeout in milliseconds. pass -1 to use the default timeout of gdbus.
+  -m, --mem-profile                            enable memory profile, send SIGUSR2 to print out the memory profile.
+  -R, --restart                                restart panel and config processes when they die.
+  -v, --verbose                                verbose.
+
+EOF
+
+# vim:ft=zsh
