@@ -3,6 +3,7 @@
 typeset -ar args=(
   '(-d --debug)'{-d,--debug}"[Don't do anything, just test and print debug messages]"
   '(-f --force)'{-f,--force}'[Force file rotation]'
+  '(-s --state)'{-s,--state=}'[Path of state file]:statefile:_files'
   '(-v --verbose)'{-v,--verbose}'[Display messages during rotation]'
   '(: -)'--version'[Display version information]'
   '(-l --log)'{-l,--log=}"[Log file or 'syslog' to log to syslog]:logfile:_files"
