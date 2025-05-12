@@ -1,72 +1,70 @@
 #compdef keychain
 
-# keychain 2.8.5
+# keychain 2.9.2
 
 typeset -ar args=(
-  --clear"[Delete all of ssh-agent's keys.]"
-  --query'[Keychain will print lines in KEY=value format representing the values which are set by the agents.]'
-  --eval'[Keychain will print lines to be evaluated in the shell on stdout.]'
-  '(- *)'{-h,--help}'[Show help that looks remarkably like this man-page.]'
-  '(- *)'{-l,--list}'[List signatures of all active SSH keys, and exit, similar to "ssh-add -l".]'
-  '(- *)'{-L,--list-fp}'[List fingerprints of all active SSH keys, and exit, similar to "ssh-add -L".]'
-  '(-Q --quick)'{-Q,--quick}'[If an ssh-agent process is running then use it.]'
-  '(-q --quiet)'{-q,--quiet}'[Only print messages in case of warning, error or required interactivity.]'
-  '(- *)'{-V,--version}'[Show version information.]'
+  --clear"[Delete all of ssh-agent's keys]"
+  --eval'[Keychain will print lines to be evaluated in the shell on stdout]'
+  '(- *)'{-h,--help}'[Show help]'
+  '(- *)'{-l,--list}'[List signatures of all active SSH keys, and exit, similar to "ssh-add -l"]'
+  '(- *)'{-L,--list-fp}'[List fingerprints of all active SSH keys, and exit, similar to "ssh-add -L"]'
+  --query'[Keychain will print lines in KEY=value format representing the values which are set by the agents]'
+  '(-Q --quick)'{-Q,--quick}'[If an ssh-agent process is running then use it]'
+  '(-q --quiet)'{-q,--quiet}'[Only print messages in case of warning, error or required interactivity]'
+  --systemd'[Inject environment variables into the systemd --user session]'
+  '(- *)'{-V,--version}'[Show version information]'
   '*:keys:_files -g "id_*"'
 )
 _arguments "${(@)args}"
 
-: << EOF
+: << 'EOF'
 SYNOPSIS
-    keychain [ -hklQqV ] [ --clear --confhost --gpg2 --help --ignore-missing
-     --list --noask --nocolor --nogui --nolock --quick --quiet --version ]
-    [ --agents list ] [ --attempts num ] [ --dir dirname ]
-    [ --host name ] [ --lockwait seconds ]
-    [ --stop which ] [ --timeout minutes ] [ keys... ]
+    keychain [ -hklQqV ] [ --clear --confhost --confallhosts --debug
+    --extended --gpg2 --help --ignore-missing --list --noask --nocolor --nog
+    ui --noinherit --nolock --quick --quiet --ssh-allow-forwarded --ssh-rm
+    --ssh-spawn-gpg --systemd --version ] [ --ssh-agent-socket path ]
+    [ --dir dirname ] [ --host name ] [ --lockwait seconds ]
+    [ --stop which ] [ --timeout minutes ] [ --wipe which ] [ keys... 
+    ]
 
 OPTIONS
-    --agents list
-        Start the agents listed. By default keychain will start ssh-agent if
-        it is found in your path. The list should be comma-separated, for
-        example "gpg,ssh"
-
-    --attempts num
-        Try num times to add keys before giving up. The default is 1.
+    --absolute
+        Any arguments to "--dir" are interpreted to be absolute. The default
+        behavior is to append "/.keychain" to the argument for backwards
+        compatibility.
 
     --clear
-        Delete all of ssh-agent's keys. Typically this is used in
-        .bash_profile. The theory behind this is that keychain should assume
-        that you are an intruder until proven otherwise. However, while this
-        option increases security, it still allows your cron jobs to use
-        your ssh keys when you're logged out.
+        When specified, this option adds an initial step prior to adding any
+        keys to the agents of wiping all existing cached keys/passphrases.
+        This is intended to be used alongside keychain --eval to ensure that
+        only the specified keys are loaded, and that keychain should assume
+        that you are an intruder until proven otherwise and force all
+        interactive logins to specify valid passphrases. This option
+        increases security and still allows your cron jobs to use your ssh
+        keys when you're logged out.
 
-    --confhost
-        By default, keychain will look for key pairs in the ~/.ssh/
-        directory. The --confhost option will inform keychain to look in
-        ~/.ssh/config for IdentityFile settings defined for particular
-        hosts, and use these paths to locate keys.
+    --confallhosts
+        In addition to any keys specified on the command-line, this option
+        will tell keychain to scour "~/.ssh/config" for all private keys
+        referenced in all "IdentityFile" lines, and load all keys for all
+        hosts.
 
     --confirm
         Keys are subject to interactive confirmation by the SSH_ASKPASS
         program before being used for authentication. See the -c option for
         ssh-add(1).
 
-    --absolute
-        Any arguments to "--dir" are interpreted to be absolute. The default
-        behavior is to append "/.keychain" to the argument for backwards
-        compatibility.
+    --debug
+        Keychain 2.9.0 introduces the --debug option, which will output
+        additional information related to how Keychain makes its
+        agent-selection process. Specifically, it will output when an
+        SSH_AUTH_SOCK is rejected because it is being supplied by gpg-agent
+        -- and this is not allowed due to no --ssh-allow-gpg option, or when
+        it is rejected because it appears to be from a forwarded SSH
+        connection, and --ssh-allow-forwarded was not supplied.
 
     --dir dirname
         Keychain will use dirname rather than $HOME/.keychain
-
-    --query
-        Keychain will print lines in KEY=value format representing the
-        values which are set by the agents.
-
-    --eval
-        Keychain will print lines to be evaluated in the shell on stdout. It
-        respects the SHELL environment variable to determine if Bourne shell
-        or C shell output is expected.
 
     --env filename
         After parsing options, keychain will load additional environment
@@ -76,11 +74,32 @@ OPTIONS
         override settings such as PATH, in case ssh is stored in a
         non-standard place.
 
+    --eval
+        Keychain will print lines to be evaluated in the shell on stdout. It
+        respects the SHELL environment variable to determine if Bourne shell
+        or C shell output is expected.
+
+    --extended
+        This enables extended command-line key processing with more
+        features, and is a replacement for the old "--confhost" option. When
+        specified, each key specified on the command-line must have a prefix
+        to explictly. categorize it. SSH keys must have a prefix of "sshk:"
+        immediately followed by the path or key name (the part after the
+        "sshk:" is processed just like a SSH key is without the "--extended"
+        option). GPG keys must be in the format "gpgk:" immediately followed
+        by the 8 or 16-character fingerprint. If "host:<hostname>" is
+        specified, then Keychain will extract the SSH configuration for the
+        specified hostname, grab all identityfile options (private keys)
+        specified, and these keys will be included in the set of keys to be
+        loaded by keychain. This allows multiple keys of multiple types,
+        including SSH-keys-by-host, to be specified together, which wasn't
+        possible with "--confhost".
+
     --gpg2
         This option changes the default gpg calls to use gpg2 instead to
         support distributions such as Ubuntu which has both gpg and gpg2
 
-    -h --help
+    --help -h
         Show help that looks remarkably like this man-page. As of 2.6.10,
         help is sent to stdout so it can be easily piped to a pager.
 
@@ -92,28 +111,6 @@ OPTIONS
         useful for situations where you have a shared .bash_profile, but
         your keys might not be available on every machine where keychain is
         run.
-
-    --inherit which
-        Attempt to inherit agent variables from the environment. This can be
-        useful in a variety of circumstances, for example when ssh-agent is
-        started by gdm. The following values are valid for "which":
-
-        local       Inherit when a pid (e.g. SSH_AGENT_PID) is set in the
-                    environment. This disallows inheriting a forwarded
-                    agent.
-
-        any         Inherit when a sock (e.g. SSH_AUTH_SOCK) is set in the
-                    environment. This allows inheriting a forwarded agent.
-
-        local-once  Same as "local", but only inherit if keychain isn't
-                    already providing an agent.
-
-        any-once    Same as "any", but only inherit if keychain isn't
-                    already providing an agent.
-
-        By default, keychain-2.5.0 and later will behave as if "--inherit
-        local-once" is specified. You should specify "--noinherit" if you
-        want the older behavior.
 
     -l --list
         List signatures of all active SSH keys, and exit, similar to
@@ -143,22 +140,51 @@ OPTIONS
         prompt on the terminal instead of using a graphical program.
 
     --noinherit
-        Don't inherit any agent processes, overriding the default "--inherit
-        local-once"
+        Don't inherit any agent processes, overriding the default behavior
+        of inheriting all non-forwarded ssh-agent and any existing gpg-agent
+        processes. Also see "AGENT DETECTION AND STARTUP ALGORITHM".
 
     --nolock
         Don't attempt to use a lockfile while manipulating files, pids and
         keys.
 
-    -k --stop which
-        Kill currently running agent processes. The following values are
-        valid for "which":
+    --query
+        Keychain will print lines in KEY=value format representing the
+        values which are set by the agents.
 
-        all      Kill all agent processes and quit keychain immediately.
+    --quick -Q
+        If an ssh-agent process is running then use it. Don't verify the
+        list of keys, other than making sure it's non-empty. This option
+        avoids locking when possible so that multiple terminals can be
+        opened simultaneously without waiting on each other. See the "THE
+        QUICK SHORT-CIRCUIT" section for more information regarding how this
+        fits into the overall startup algorithm.
+
+    --quiet -q
+        Only print messages in case of warning, error or required
+        interactivity. As of version 2.6.10, this also suppresses
+        "Identities added" messages for ssh-agent.
+
+    --stop -k which
+        Kill currently running ssh-agent processes and exit.
+
+        Note that previous versions of keychain (2.8.5 and earlier) allowed
+        killing of gpg-agent as well. This functionality was removed as
+        ssh-agent and gpg-agent have a bit different design philosophies and
+        you almost always only have at most one gpg-agent running at a time.
+        Use "killall gpg-agent" if you really want to kill gpg-agent.
+        However, since this option also removes pidfiles, it will remove any
+        gpg-agent processes adopted by keychain that were being used to
+        store ssh keys.
+
+        The following values are valid for "which" which controls which
+        ssh-agents to target:
+
+        all      Kill all ssh-agent processes and quit keychain immediately.
                  Prior to keychain-2.5.0, this was the behavior of the bare
                  "--stop" option.
 
-        others   Kill agent processes other than the one keychain is
+        others   Kill agent processes other than the ones keychain is
                  providing. Prior to keychain-2.5.0, keychain would do this
                  automatically. The new behavior requires that you specify
                  it explicitly if you want it.
@@ -166,19 +192,55 @@ OPTIONS
         mine     Kill keychain's agent processes, leaving other agents
                  alone.
 
+    --ssh-agent-socket path
+        Use this option to specify the path to the socket file that you
+        would like ssh-agent to create and use as its official socket. By
+        default, ssh-agent will create its own socket file, typically in
+        /tmp.
+
+    --ssh-allow-forwarded
+        By default, keychain will not use a forwarded ssh-agent connection,
+        which is a ssh-agent socket created by SSH that has no associated
+        local process. To permit keychain to use a forwarded ssh-agent
+        connection, specify this option. If a SSH-forwarded socket is used,
+        it will not be persisted in the pidfiles, as it is not likely to be
+        available outside of the currently-active SSH session.
+
+    --ssh-allow-gpg
+        Would you like to have keychain use an already-running gpg-agent to
+        store your SSH keys, rather than spawning a new ssh-agent? This
+        option does just that. When this option is specified, keychain will
+        accept an SSH_AUTH_SOCK environment variable in its environment,
+        even if it was created by gpg-agent. Modern versions of gpg-agent
+        are also able to store SSH keys. By default, keychain has a special
+        check to avoid using a gpg-agent that has set the SSH_AUTH_SOCK
+        environment variable, and will instead spawn its own ssh-agent. With
+        this option enabled, this restriction is turned off. Please note
+        that this option does not actually instruct keychain to spawn a
+        gpg-agent for storing SSH keys if no agent is available -- if you
+        want that, see the --ssh-spawn-gpg option, below.
+
+        ALSO NOTE: When a gpg-agent is adopted for ssh-agent duties in this
+        way, the "~/.keychain/${HOSTNAME}-sh" pidfile will be updated to
+        reference the gpg-agent socket, so it will be seamlessly used by
+        future cron jobs needing an ssh-agent, as well as by future
+        invocations of keychain, as long as the --ssh-allow-gpg or
+        --ssh-spawn-gpg (which implies --ssh-allow-gpg) are specified.
+
+    --ssh-spawn-gpg
+        This is the option to use if you're really on-board with using
+        gpg-agent as a replacement for ssh-agent. Not only will keychain use
+        a running gpg-agent if found as per the --ssh-allow-gpg, but if it
+        needs to spawn a new ssh-agent, it will go ahead and spawn a
+        gpg-agent in its place, and use it instead. Also see notes for the
+        --ssh-allow-gpg option, as this option also implies --ssh-allow-gpg.
+
+    --ssh-rm -r keys
+        Only perform the single action of removing the specified cached keys
+        from the running ssh-agent, and then exit.
+
     --systemd
         Inject environment variables into the systemd --user session.
-
-    -Q --quick
-        If an ssh-agent process is running then use it. Don't verify the
-        list of keys, other than making sure it's non-empty. This option
-        avoids locking when possible so that multiple terminals can be
-        opened simultaneously without waiting on each other.
-
-    -q --quiet
-        Only print messages in case of warning, error or required
-        interactivity. As of version 2.6.10, this also suppresses
-        "Identities added" messages for ssh-agent.
 
     --timeout minutes
         Allows a timeout to be set for identities added to ssh-agent. When
@@ -196,8 +258,14 @@ OPTIONS
         optionally set different timeouts for keys added by using a
         subsequent invocation of keychain.
 
-    -V --version
+    --version -V
         Show version information.
+
+    --wipe which
+        Only perform the single action of wiping all agent's cached keys.
+        Specify 'ssh', 'gpg' or 'all' for SSH keys, GPG keys and all agents
+        respectively. Also see the "--ssh-rm" action and the "--clear"
+        option.
 
 EOF
 
