@@ -1,0 +1,74 @@
+#compdef monkeytype
+
+# main {{{1
+_monkeytype() {
+  typeset -ar args=(
+    '*::monkeytype command:_monkeytype_command'
+  )
+  _arguments "${(@)args}"
+}
+
+# _monkeytype-command {{{1
+(( $+functions[_monkeytype_command] )) || _monkeytype_command() {
+  typeset -ar _monkeytype_cmds=(
+    'run:Run a Python script under MonkeyType tracing'
+    'apply:Generate and apply a stub'
+    'stub:Generate a stub'
+    'list-modules:Listing of the unique set of module traces'
+  )
+  if (( CURRENT == 1 )); then
+    _describe -t commands 'monkeytype command' _monkeytype_cmds
+  else
+    typeset curcontext="$curcontext" ret=1
+
+    cmd="${${_monkeytype_cmds[(r)$words[1]:*]%%:*}}"
+
+    if (( $#cmd )); then
+      curcontext="${curcontext%:*:*}:monkeytype-${cmd}:"
+
+      if [ $cmd = 'help' ]; then
+        _message 'no more arguments'
+      elif ! _call_function ret _monkeytype-$cmd; then
+	_default && ret=0
+      fi
+    else
+      _default && ret=0
+    fi
+    return ret
+  fi
+}
+
+# apply {{{1
+(( $+functions[_monkeytype-apply] )) || _monkeytype-apply() {
+  typeset -ar args=(
+    '(- *)'{-h,--help}'[show help]'
+    '--sample-count[Print to stderr the numbers of traces stubs are based on]'
+    '--ignore-existing-annotations[Ignore existing annotations when applying stubs from traces.]'
+    '*:module_path'
+  )
+  _arguments "${(@)args}"
+}
+
+# run {{{1
+(( $+functions[_monkeytype-run] )) || _monkeytype-run() {
+  typeset -ar args=(
+    '(- *)'{-h,--help}'[show help]'
+    '*:script_path:_file'
+  )
+  _arguments "${(@)args}"
+}
+
+# stub {{{1
+(( $+functions[_monkeytype-stub] )) || _monkeytype-stub() {
+  typeset -ar args=(
+    '(- *)'{-h,--help}'[show help]'
+    '--sample-count[Print to stderr the numbers of traces stubs are based on]'
+    '--ignore-existing-annotations[Ignore existing annotations and generate stubs only from traces.]'
+    '--omit-existing-annotations[Omit from stub any existing annotations in source. Implied by --apply.]'
+    '--diff[Compare stubs generated with and without considering existing annotations.]'
+    '*:module_path'
+  )
+  _arguments "${(@)args}"
+}
+
+# vim:ft=zsh
