@@ -35,8 +35,8 @@ functions/_jupyter:
 
 .DELETE_ON_ERROR: functions/_meson
 functions/_meson:
-	wget -O $@ https://raw.githubusercontent.com/mesonbuild/meson/1.6.1/data/shell-completions/zsh/_meson
-	echo '734c6627ef7a9196ed543455232d230e28d2c1edba21ae8bd27041af $@' | sha224sum --check -
+	wget -O $@ https://raw.githubusercontent.com/mesonbuild/meson/1.8.2/data/shell-completions/zsh/_meson
+	echo 'd878fa7c6635ea93d821770d6b6ba09a162181cb28a357d11affce3f $@' | sha224sum --check -
 
 functions/_pipx: $(REGISTER_PYTHON_ARGCOMPLETE)
 ifneq ($(REGISTER_PYTHON_ARGCOMPLETE),)
