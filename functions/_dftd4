@@ -381,7 +381,10 @@ _dftd4() {
   )
 
   typeset -ar args=(
+    '(-c --charge)'{-c,--charge}'[Set charge to molecule, overwrites .CHRG file]:charge'
     '(-f --func)'{-f,--func}'[Use damping parameters for given functional]:method:_values method $methods'
+    {-g,--grad}'[Evaluate molecular gradient and virial, write results to file (default: dftd4.txt)]:file:_files'
+    --hessian'[Evaluate molecular hessian]'
     --property'[Show dispersion related atomic and system properties]'
     --pair-resolved'[Calculate pairwise representation of dispersion energy]'
     --noedisp'[Disable writing of dispersion energy to .EDISP file]'
@@ -402,7 +405,7 @@ _dftd4() {
   _arguments "${(@)args}"
 }
 
-# return
+return
 
 : << EOF
 Usage: dftd4 [run|param] [options] ...
