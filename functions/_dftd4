@@ -1,6 +1,6 @@
 #compdef dftd4
 
-# 3.5.0
+# 3.7.0
 
 typeset -ar methods=(
   'AM05'
@@ -399,5 +399,7 @@ Options
    --citation            Print citation information and exit
    --license             Print license header and exit
 -h,--help                Show this help message
+
+EOF
 
 # vim:ft=zsh
