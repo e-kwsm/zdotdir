@@ -5,5 +5,6 @@
 /functions/_meson
 /functions/_pipx
 /functions/_poetry
+/functions/_ruff
 /functions/_rye
 /functions/_spack

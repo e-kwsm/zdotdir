@@ -1,6 +1,7 @@
 DENO != command -v deno
 POETRY != command -v poetry
 REGISTER_PYTHON_ARGCOMPLETE != command -v register-python-argcomplete
+RUFF != command -v ruff
 RYE != command -v rye
 
 EXTERNAL := \
@@ -10,6 +11,7 @@ EXTERNAL := \
 	functions/_meson \
 	functions/_pipx \
 	functions/_poetry \
+	functions/_ruff \
 	functions/_rye \
 
 .PHONY: all
@@ -46,6 +48,11 @@ endif
 functions/_poetry: $(POETRY)
 ifneq ($(POETRY),)
 	$< completions zsh > $@
+endif
+
+functions/_ruff: $(RUFF)
+ifneq ($(RUFF),)
+	$< generate-shell-completion zsh > $@
 endif
 
 functions/_rye: $(RYE)
