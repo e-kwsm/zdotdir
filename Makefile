@@ -1,7 +1,7 @@
-DENO := $(shell which deno 2> /dev/null)
-POETRY := $(shell which poetry 2> /dev/null)
-REGISTER_PYTHON_ARGCOMPLETE := $(shell which register-python-argcomplete 2> /dev/null)
-RYE := $(shell which rye 2> /dev/null)
+DENO != command -v deno
+POETRY != command -v poetry
+REGISTER_PYTHON_ARGCOMPLETE != command -v register-python-argcomplete
+RYE != command -v rye
 
 EXTERNAL := \
 	functions/_conda \
