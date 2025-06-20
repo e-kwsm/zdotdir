@@ -1,0 +1,115 @@
+#compdef appstreamcli
+
+# main {{{1
+_appstreamcli() {
+  typeset curcontext=$curcontext state lstate line
+
+  typeset -ar args=(
+    '(- *)'{-h,--help}'[Show help options]'
+    '(- *)'--version'[Display the version number of appstreamcli]'
+    '*::appstreamcli command:_appstreamcli_command'
+  )
+  _arguments "${(@)args}"
+}
+
+# _appstreamcli-command {{{1
+(( $+functions[_appstreamcli_command] )) || _appstreamcli_command() {
+  typeset -ar _appstreamcli_cmds=(
+    'validate:Validate AppStream XML files for issues.'
+    'status:Display status information about available AppStream metadata.'
+    'sysinfo:Show information about the current device and used operating system.'
+  )
+
+  if (( CURRENT == 1 )); then
+    _describe -t commands 'appstreamcli command' _appstreamcli_cmds
+  else
+    typeset curcontext="$curcontext" ret=1
+
+    cmd="${${_appstreamcli_cmds[(r)$words[1]:*]%%:*}}"
+
+    if (( $#cmd )); then
+      curcontext="${curcontext%:*:*}:appstreamcli-${cmd}:"
+
+      if [ $cmd = 'help' ]; then
+        _message 'no more arguments'
+      elif ! _call_function ret _appstreamcli-$cmd; then
+	_default && ret=0
+      fi
+    else
+      _default && ret=0
+    fi
+    return ret
+  fi
+}
+
+(( $+functions[_appstreamcli-validate] )) || _appstreamcli-validate() {  # {{{1
+  local args=(
+    '--pedantic[Also show pedantic hints.]'
+    '--explain[Print detailed explanation for found issues.]'
+    '--no-net[Do not use network access.]'
+    '--strict[Fail validation if any issue is emitted that is not of pedantic severity.]'
+    '--format[Format of the generated report.]:format:(text yaml)'
+    '--override[Override the severities of selected issue tags.]'
+    '*:file:_files -g "*.xml"'
+  )
+  _arguments "${args[@]}" && return
+}
+
+# }}}1
+
+return
+
+: << EOF
+Usage:
+  appstreamcli [OPTION?] - AppStream CLI.
+
+AppStream command-line interface
+
+Subcommands:
+  search TERM                 - Search the component database. (Alias: 's')
+  get COMPONENT-ID            - Get information about a component by its ID.
+  what-provides TYPE VALUE    - Get components which provide the given item. Needs an item type (e.g.
+                                lib, bin, python3, ?) and item value as parameter.
+  list-categories NAMES       - List components that are part of the specified categories.
+
+  dump COMPONENT-ID           - Dump raw XML metadata for a component matching the ID.
+  refresh-cache               - Rebuild the component metadata cache. (Alias: 'refresh')
+
+  validate FILE                     - Validate AppStream XML files for issues.
+  validate-tree DIRECTORY           - Validate an installed file-tree of an application for valid metadata.
+  check-license LICENSE             - Check license string for validity and print details about it.
+  is-satisfied FILE|COMPONENT-ID    - Check if requirements of a component (via its ID or MetaInfo file)
+                                      are satisfied on this system.
+  check-syscompat FILE|COMPONENT-ID - Check compatibility of a component (via its ID or MetaInfo file) with
+                                      common system and chassis types.
+
+  install COMPONENT-ID        - Install software matching the component-ID.
+  remove COMPONENT-ID         - Remove software matching the component-ID.
+
+  status                      - Display status information about available AppStream metadata.
+  sysinfo                     - Show information about the current device and used operating system.
+  put FILE                    - Install a metadata file into the right location.
+  convert FILE FILE           - Convert metadata catalog XML to YAML or vice versa.
+  vercmp VER1 [COMP] VER2     - Compare two version numbers. (Alias: 'compare-versions')
+
+  new-template TYPE FILE                        - Create a template for a metainfo file (to be filled out by the
+                                                  upstream project).
+  make-desktop-file MI_FILE DESKTOP_FILE        - Create a desktop-entry file from a metainfo file.
+  news-to-metainfo NEWS_FILE MI_FILE [OUT_FILE] - Convert a YAML or text NEWS file into metainfo releases.
+  metainfo-to-news MI_FILE NEWS_FILE            - Write NEWS text or YAML file with information from a metainfo file.
+  compose                                       - Compose AppStream metadata catalog from directory trees.
+
+You can find information about subcommand-specific options by passing "--help" to the subcommand.
+
+Help Options:
+  -h, --help       Show help options
+
+Application Options:
+  --version        Show the program version.
+  --verbose        Show extra debugging information.
+  --no-color       Don't show colored output.
+  --profile        Enable profiling
+
+EOF
+
+# vi:fdm=marker ft=zsh
