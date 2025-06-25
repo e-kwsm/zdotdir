@@ -1,6 +1,6 @@
 #compdef clang-tidy
 
-# LLVM version 19.1.7
+# LLVM version 20.1.6
 
 typeset -ar checks=(
   abseil-cleanup-ctad
@@ -48,6 +48,7 @@ typeset -ar checks=(
   bugprone-assert-side-effect
   bugprone-assignment-in-if-condition
   bugprone-bad-signal-to-kill-thread
+  bugprone-bitwise-pointer-cast
   bugprone-bool-pointer-implicit-conversion
   bugprone-branch-clone
   bugprone-casting-through-void
@@ -67,6 +68,7 @@ typeset -ar checks=(
   bugprone-inaccurate-erase
   bugprone-inc-dec-in-conditions
   bugprone-incorrect-enable-if
+  bugprone-incorrect-enable-shared-from-this
   bugprone-incorrect-roundings
   bugprone-infinite-loop
   bugprone-integer-division
@@ -83,6 +85,7 @@ typeset -ar checks=(
   bugprone-narrowing-conversions
   bugprone-no-escape
   bugprone-non-zero-enum-to-bool-conversion
+  bugprone-nondeterministic-pointer-iteration-order
   bugprone-not-null-terminated-result
   bugprone-optional-value-conversion
   bugprone-parent-virtual-call
@@ -113,6 +116,7 @@ typeset -ar checks=(
   bugprone-suspicious-stringview-data-usage
   bugprone-swapped-arguments
   bugprone-switch-missing-default-case
+  bugprone-tagged-union-member-count
   bugprone-terminating-continue
   bugprone-throw-keyword-missing
   bugprone-too-small-loop-variable
@@ -128,6 +132,7 @@ typeset -ar checks=(
   bugprone-unused-return-value
   bugprone-use-after-move
   bugprone-virtual-near-miss
+  cert-arr39-c
   cert-con36-c
   cert-con54-cpp
   cert-ctr56-cpp
@@ -177,6 +182,7 @@ typeset -ar checks=(
   clang-analyzer-core.BitwiseShift
   clang-analyzer-core.CallAndMessage
   clang-analyzer-core.CallAndMessageModeling
+  clang-analyzer-core.DereferenceModeling
   clang-analyzer-core.DivideZero
   clang-analyzer-core.DynamicTypePropagation
   clang-analyzer-core.NonNullParamChecker
@@ -223,7 +229,10 @@ typeset -ar checks=(
   clang-analyzer-optin.performance.GCDAntipattern
   clang-analyzer-optin.performance.Padding
   clang-analyzer-optin.portability.UnixAPI
+  clang-analyzer-optin.taint.GenericTaint
+  clang-analyzer-optin.taint.TaintPropagation
   clang-analyzer-optin.taint.TaintedAlloc
+  clang-analyzer-optin.taint.TaintedDiv
   clang-analyzer-osx.API
   clang-analyzer-osx.MIG
   clang-analyzer-osx.NSOrCFErrorDerefChecker
@@ -256,6 +265,8 @@ typeset -ar checks=(
   clang-analyzer-osx.coreFoundation.containers.OutOfBounds
   clang-analyzer-osx.coreFoundation.containers.PointerSizedValues
   clang-analyzer-security.FloatLoopCounter
+  clang-analyzer-security.MmapWriteExec
+  clang-analyzer-security.PointerSub
   clang-analyzer-security.PutenvStackArray
   clang-analyzer-security.SetgidSetuidOrder
   clang-analyzer-security.cert.env.InvalidPtr
@@ -275,6 +286,7 @@ typeset -ar checks=(
   clang-analyzer-security.insecureAPI.vfork
   clang-analyzer-unix.API
   clang-analyzer-unix.BlockInCriticalSection
+  clang-analyzer-unix.Chroot
   clang-analyzer-unix.DynamicMemoryModeling
   clang-analyzer-unix.Errno
   clang-analyzer-unix.Malloc
@@ -285,6 +297,7 @@ typeset -ar checks=(
   clang-analyzer-unix.Vfork
   clang-analyzer-unix.cstring.BadSizeArg
   clang-analyzer-unix.cstring.CStringModeling
+  clang-analyzer-unix.cstring.NotNullTerminated
   clang-analyzer-unix.cstring.NullArg
   clang-analyzer-valist.CopyToSelf
   clang-analyzer-valist.Uninitialized
@@ -459,6 +472,7 @@ typeset -ar checks=(
   modernize-use-emplace
   modernize-use-equals-default
   modernize-use-equals-delete
+  modernize-use-integer-sign-comparison
   modernize-use-nodiscard
   modernize-use-noexcept
   modernize-use-nullptr
@@ -507,6 +521,7 @@ typeset -ar checks=(
   portability-restrict-system-includes
   portability-simd-intrinsics
   portability-std-allocator-const
+  portability-template-virtual-member-function
   readability-avoid-const-params-in-decls
   readability-avoid-nested-conditional-operator
   readability-avoid-return-with-void-value
@@ -603,6 +618,7 @@ typeset -ar args=(
   '*:file:_files -g "*.(cc|cpp|h|hpp)"'
 )
 _arguments "${(@)args}"
+return
 
 : << 'EOF'
 USAGE: clang-tidy [options] <source0> [... <sourceN>]
@@ -759,6 +775,10 @@ clang-tidy options:
 	suffix of a path in the compile command database.
 
 
+Parameters files:
+  A large number of options or source files can be passed as parameter files
+  by use '@parameter-file' in the command line.
+
 Configuration files:
   clang-tidy attempts to read configuration for each source file from a
   .clang-tidy file located in the closest parent directory of the source
@@ -776,12 +796,12 @@ Configuration files:
                                  globs can be specified as a list instead of a
                                  string.
   ExcludeHeaderFilterRegex     - Same as '--exclude-header-filter'.
-  ExtraArgs                    - Same as '--extra-args'.
-  ExtraArgsBefore              - Same as '--extra-args-before'.
+  ExtraArgs                    - Same as '--extra-arg'.
+  ExtraArgsBefore              - Same as '--extra-arg-before'.
   FormatStyle                  - Same as '--format-style'.
   HeaderFileExtensions         - File extensions to consider to determine if a
                                  given diagnostic is located in a header file.
-  HeaderFilterRegex            - Same as '--header-filter-regex'.
+  HeaderFilterRegex            - Same as '--header-filter'.
   ImplementationFileExtensions - File extensions to consider to determine if a
                                  given diagnostic is located in an
                                  implementation file.
