@@ -1,6 +1,6 @@
 #compdef clang-format
 
-# clang-format version 19.1.7
+# clang-format version 20.1.6
 
 typeset -ar styles=(
   LLVM
@@ -32,6 +32,8 @@ typeset -ar args=(
 )
 _arguments "${(@)args}"
 
+return
+
 : << EOF
 OVERVIEW: A tool to format C/C++/Java/JavaScript/JSON/Objective-C/Protobuf/C# code.
 
@@ -48,7 +50,7 @@ OPTIONS:
 Clang-format options:
 
   --Werror                       - If set, changes formatting warnings to errors
-  --Wno-error=<value>            - If set don't error out on the specified warning type.
+  --Wno-error=<value>            - If set, don't error out on the specified warning type.
     =unknown                     -   If set, unknown format options are only warned about.
                                      This can be used to enable formatting, even if the
                                      configuration contains unknown (newer) options.
@@ -64,7 +66,7 @@ Clang-format options:
                                    supported:
                                      CSharp: .cs
                                      Java: .java
-                                     JavaScript: .mjs .js .ts
+                                     JavaScript: .js .mjs .cjs .ts
                                      Json: .json
                                      Objective-C: .m .mm
                                      Proto: .proto .protodevel
