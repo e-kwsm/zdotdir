@@ -1,0 +1,13 @@
+#compdef dircolors
+
+typeset -ar args=(
+  '(-b --sh --bourne-shell -p --print-database --print-ls-colors)'{-b,--sh,--bourne-shell}'[output Bourne shell code to set LS_COLORS]'
+  '(- *)'{-p,--print-database}'[output defaults]'
+  '(-b --sh --bourne-shell -p --print-database)'--print-ls-colors'[output fully escaped colors for display]'
+  '(- *)'--help'[display help and exit]'
+  '(- *)'--version'[output version information and exit]'
+  1:FILE:_files
+)
+_arguments "${(@)args}"
+
+# vim:ft=zsh
