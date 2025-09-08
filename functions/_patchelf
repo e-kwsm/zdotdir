@@ -3,49 +3,23 @@
 typeset -ar args=(
   --print-interpreter'[Prints the ELF interpreter of the executable.]'
   --print-os-abi'[Prints the OS ABI of the executable (EI_OSABI field of an ELF file).]'
-  --print-soname"[Prints DT_SONAME entry of .dynamic section.  Raises an error if DT_SONAME doesn't exist.]"
-  --set-rpath'[Change the DT_RUNPATH of the executable or library to RUNPATH.]:RPATH'
-  --add-rpath'[Add RUNPATH to the existing DT_RUNPATH of the executable or library.]:RPATH'
+  --print-soname'[Prints DT_SONAME entry of .dynamic section.]'
+  --set-rpath'[Change the DT_RUNPATH of the executable or library to RUNPATH.]:RUNPATH'
+  --add-rpath'[Add RUNPATH to the existing DT_RUNPATH of the executable or library.]:RUNPATH'
   --remove-rpath'[Removes the DT_RPATH or DT_RUNPATH entry of the executable or library.]'
-  --shrink-rpath'[Remove  from  the  DT_RUNPATH or DT_RPATH all directories that do not contain a library referenced by DT_NEEDED fields of the executable or library.]'
+  --shrink-rpath'[Remove from the DT_RUNPATH or DT_RPATH all directories that do not contain a library referenced by DT_NEEDED fields of the executable or library.]'
   --print-rpath'[Prints the DT_RUNPATH or DT_RPATH for an executable or library.]'
+  --print-needed'[Prints all DT_NEEDED entries of the executable.]'
+  --no-sort'[Do not sort program headers or section headers.]'
+  --print-execstack'[Prints the state of the executable flag of the GNU_STACK program header, if present.]'
+  --clear-execstack'[Clears the executable flag of the GNU_STACK program header, or adds a new header.]'
+  --set-execstack'[Sets the executable flag of the GNU_STACK program header, or adds a new header.]'
+  --debug'[Prints details of the changes made to the input file.]'
+  '(- *)'--version'[Shows the version of patchelf.]'
+  '(- *)'{-h,--help}'[Shows help]'
   '*: :_files'
 )
 _arguments "${(@)args}"
 return
-
-: << 'EOF'
-syntax: patchelf
-  [--set-interpreter FILENAME]
-  [--page-size SIZE]
-  [--print-interpreter]
-  [--print-os-abi]		Prints 'EI_OSABI' field of ELF header
-  [--set-os-abi ABI]		Sets 'EI_OSABI' field of ELF header to ABI.
-  [--print-soname]		Prints 'DT_SONAME' entry of .dynamic section. Raises an error if DT_SONAME doesn't exist
-  [--set-soname SONAME]		Sets 'DT_SONAME' entry to SONAME.
-  [--set-rpath RPATH]
-  [--add-rpath RPATH]
-  [--remove-rpath]
-  [--shrink-rpath]
-  [--allowed-rpath-prefixes PREFIXES]		With '--shrink-rpath', reject rpath entries not starting with the allowed prefix
-  [--print-rpath]
-  [--force-rpath]
-  [--add-needed LIBRARY]
-  [--remove-needed LIBRARY]
-  [--replace-needed LIBRARY NEW_LIBRARY]
-  [--print-needed]
-  [--no-default-lib]
-  [--no-sort]		Do not sort program+section headers; useful for debugging patchelf.
-  [--clear-symbol-version SYMBOL]
-  [--add-debug-tag]
-  [--print-execstack]		Prints whether the object requests an executable stack
-  [--clear-execstack]
-  [--set-execstack]
-  [--rename-dynamic-symbols NAME_MAP_FILE]	Renames dynamic symbols. The map file should contain two symbols (old_name new_name) per line
-  [--output FILE]
-  [--debug]
-  [--version]
-  FILENAME...
-EOF
 
 # vim:ft=zsh
