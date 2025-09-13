@@ -1,6 +1,6 @@
 #compdef clang-tidy
 
-# LLVM version 20.1.6
+# LLVM version 20.1.8
 
 typeset -ar checks=(
   abseil-cleanup-ctad
