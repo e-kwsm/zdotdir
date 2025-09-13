@@ -1,5 +1,7 @@
 #compdef clang-tidy
 
+# LLVM version 20.1.8
+
 _clang-tidy() {
   local -ar checks=(
     abseil-cleanup-ctad
