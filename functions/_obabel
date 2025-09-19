@@ -49,7 +49,7 @@ typeset -ar args=(
   -a+'[Read option]:read option'
   -x+'[Write option]:write option'
   -i+'[Specifies input format]:format-ID:_values format ${(@)inputformats}'
-  '1:infile:_files -g "*.(can|cif|cml|fchk|gzmat|inchi|smi|xyz)"'
+  '1:infile:_files -g "*.(can|cif|cml|fchk|gzmat|inchi|mol|sdf|smi|vasp|xyz)"'
   -o+'[Specifies output format]:format-ID:_values format ${(@)outputformats}'
   -O+'[oufile]:outfile:_files -g "*.(can|cif|cjson|cml|com|gjf|gzmat|inchi|png|smi|svg|xyz)"'
 )
