@@ -1,13 +1,20 @@
 #compdef typos
 
-# typos-cli 1.17.1
+# typos-cli 1.40.0
 
 typeset -ar args=(
   '(- *)'{-h,--help}'[Print help]'
   '(- *)'{-V,--version}'[Print version]'
 
+  '(-c --config)'{-c,--config}'[Custom config file]:CUSTOM_CONFIG:_files'
+  --isolated'[Ignore implicit configuration files]'
+  --hidden'[Search hidden files and directories]'
+  --no-check-filenames'[Skip verifying spelling in file names]'
+
   '(-w --write-changes)'--diff'[Print a diff of what would change]'
   '(--diff -w --write-changes)'{-w,--write-changes}'[Write fixes out]'
+  --dump-config'[Write the current configuration to file with `-` for stdout]:DUMP_CONFIG:_files'
+  '(- *)'--type-list'[Show all supported file types]'
 
   '*:file:_files'
 )
@@ -19,11 +26,12 @@ Source Code Spelling Correction
 Usage: typos [OPTIONS] [PATH]...
 
 Arguments:
-  [PATH]...  Paths to check with `-` for stdin [default: .]
+  [PATH]...  Paths to check (`-` to check stdin) [default: .]
 
 Options:
       --file-list <FILE_LIST>  Read the list of newline separated paths from file or stdin (if `-`)
   -j, --threads <THREADS>      The approximate number of threads to use [default: 0]
+      --sort                   Sort results
       --force-exclude          Respect excluded files even for paths passed explicitly
   -h, --help                   Print help
   -V, --version                Print version
@@ -49,16 +57,18 @@ Mode:
   -w, --write-changes              Write fixes out
       --files                      Debug: Print each file that would be spellchecked
       --file-types                 Debug: Print each file's type
+      --highlight-identifiers      Debug: Print back out files, stylizing identifiers that would be spellchecked
       --identifiers                Debug: Print each identifier that would be spellchecked
+      --highlight-words            Debug: Print back out files, stylizing words that would be spellchecked
       --words                      Debug: Print each word that would be spellchecked
       --dump-config <DUMP_CONFIG>  Write the current configuration to file with `-` for stdout
       --type-list                  Show all supported file types
 
 Output:
-      --format <FORMAT>  Render style for messages [default: long] [possible values: silent, brief, long, json]
+      --format <FORMAT>  Render style for messages [default: long] [possible values: silent, brief, long, json, sarif]
       --color <WHEN>     Controls when to use color [default: auto] [possible values: auto, always, never]
-  -v, --verbose...       More output per occurrence
-  -q, --quiet...         Less output per occurrence
+  -v, --verbose...       Increase logging verbosity
+  -q, --quiet...         Decrease logging verbosity
 EOF
 
 # vim:ft=zsh
