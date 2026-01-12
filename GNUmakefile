@@ -35,14 +35,14 @@ endif
 .DELETE_ON_ERROR: functions/_jupyter
 functions/_jupyter:
 ifeq ($(wildcard /usr/share/zsh/site-functions/_jupyter),)
-	wget -O $@ https://raw.githubusercontent.com/jupyter/jupyter_core/v5.7.2/examples/completions-zsh
+	wget -O $@ https://raw.githubusercontent.com/jupyter/jupyter_core/v5.9.1/examples/completions-zsh
 	echo '5300e28506604c2f9f61980b9ee66a0312c0aa28c675f96810a6ce45 $@' | sha224sum --check -
 endif
 
 .DELETE_ON_ERROR: functions/_meson
 functions/_meson:
 ifeq ($(wildcard /usr/share/zsh/site-functions/_meson),)
-	wget -O $@ https://raw.githubusercontent.com/mesonbuild/meson/1.8.2/data/shell-completions/zsh/_meson
+	wget -O $@ https://raw.githubusercontent.com/mesonbuild/meson/1.10.0/data/shell-completions/zsh/_meson
 	echo 'd878fa7c6635ea93d821770d6b6ba09a162181cb28a357d11affce3f $@' | sha224sum --check -
 endif
 
