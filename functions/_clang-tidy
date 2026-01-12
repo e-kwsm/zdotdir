@@ -1,6 +1,6 @@
 #compdef clang-tidy
 
-# LLVM version 20.1.8
+# LLVM version 21.1.6
 
 typeset -ar checks=(
   abseil-cleanup-ctad
@@ -51,6 +51,7 @@ typeset -ar checks=(
   bugprone-bitwise-pointer-cast
   bugprone-bool-pointer-implicit-conversion
   bugprone-branch-clone
+  bugprone-capturing-this-in-member-variable
   bugprone-casting-through-void
   bugprone-chained-comparison
   bugprone-compare-pointer-to-member-virtual-function
@@ -75,6 +76,7 @@ typeset -ar checks=(
   bugprone-lambda-function-name
   bugprone-macro-parentheses
   bugprone-macro-repeated-side-effects
+  bugprone-misleading-setter-of-reference
   bugprone-misplaced-operator-in-strlen-in-alloc
   bugprone-misplaced-pointer-arithmetic-in-alloc
   bugprone-misplaced-widening-cast
@@ -125,6 +127,7 @@ typeset -ar checks=(
   bugprone-undelegated-constructor
   bugprone-unhandled-exception-at-new
   bugprone-unhandled-self-assignment
+  bugprone-unintended-char-ostream-output
   bugprone-unique-ptr-array-mismatch
   bugprone-unsafe-functions
   bugprone-unused-local-non-trivial-variable
@@ -185,6 +188,7 @@ typeset -ar checks=(
   clang-analyzer-core.DereferenceModeling
   clang-analyzer-core.DivideZero
   clang-analyzer-core.DynamicTypePropagation
+  clang-analyzer-core.FixedAddressDereference
   clang-analyzer-core.NonNullParamChecker
   clang-analyzer-core.NonnilStringConstants
   clang-analyzer-core.NullDereference
@@ -192,6 +196,7 @@ typeset -ar checks=(
   clang-analyzer-core.StackAddressEscape
   clang-analyzer-core.UndefinedBinaryOperatorResult
   clang-analyzer-core.VLASize
+  clang-analyzer-core.builtin.AssumeModeling
   clang-analyzer-core.builtin.BuiltinFunctions
   clang-analyzer-core.builtin.NoReturnFunctions
   clang-analyzer-core.uninitialized.ArraySubscript
@@ -210,12 +215,10 @@ typeset -ar checks=(
   clang-analyzer-cplusplus.SelfAssignment
   clang-analyzer-cplusplus.SmartPtrModeling
   clang-analyzer-cplusplus.StringChecker
-  clang-analyzer-cplusplus.VirtualCallModeling
   clang-analyzer-deadcode.DeadStores
   clang-analyzer-fuchsia.HandleChecker
   clang-analyzer-nullability.NullPassedToNonnull
   clang-analyzer-nullability.NullReturnedFromNonnull
-  clang-analyzer-nullability.NullabilityBase
   clang-analyzer-nullability.NullableDereferenced
   clang-analyzer-nullability.NullablePassedToNonnull
   clang-analyzer-nullability.NullableReturnedFromNonnull
@@ -264,6 +267,7 @@ typeset -ar checks=(
   clang-analyzer-osx.coreFoundation.CFRetainRelease
   clang-analyzer-osx.coreFoundation.containers.OutOfBounds
   clang-analyzer-osx.coreFoundation.containers.PointerSizedValues
+  clang-analyzer-security.ArrayBound
   clang-analyzer-security.FloatLoopCounter
   clang-analyzer-security.MmapWriteExec
   clang-analyzer-security.PointerSub
@@ -347,6 +351,7 @@ typeset -ar checks=(
   cppcoreguidelines-slicing
   cppcoreguidelines-special-member-functions
   cppcoreguidelines-use-default-member-init
+  cppcoreguidelines-use-enum-class
   cppcoreguidelines-virtual-class-destructor
   darwin-avoid-spinlock
   darwin-dispatch-once-nonstatic
@@ -415,6 +420,7 @@ typeset -ar checks=(
   llvm-namespace-comment
   llvm-prefer-isa-or-dyn-cast-in-conditionals
   llvm-prefer-register-over-unsigned
+  llvm-prefer-static-over-anonymous-namespace
   llvm-qualified-auto
   llvm-twine-local
   llvmlibc-callee-namespace
@@ -478,6 +484,7 @@ typeset -ar checks=(
   modernize-use-nullptr
   modernize-use-override
   modernize-use-ranges
+  modernize-use-scoped-lock
   modernize-use-starts-ends-with
   modernize-use-std-format
   modernize-use-std-numbers
@@ -518,10 +525,12 @@ typeset -ar checks=(
   performance-type-promotion-in-math-fn
   performance-unnecessary-copy-initialization
   performance-unnecessary-value-param
+  portability-avoid-pragma-once
   portability-restrict-system-includes
   portability-simd-intrinsics
   portability-std-allocator-const
   portability-template-virtual-member-function
+  readability-ambiguous-smartptr-reset-call
   readability-avoid-const-params-in-decls
   readability-avoid-nested-conditional-operator
   readability-avoid-return-with-void-value
@@ -573,6 +582,7 @@ typeset -ar checks=(
   readability-uniqueptr-delete-release
   readability-uppercase-literal-suffix
   readability-use-anyofallof
+  readability-use-concise-preprocessor-directives
   readability-use-std-min-max
   zircon-temporary-objects
 )
@@ -614,6 +624,7 @@ typeset -ar args=(
   --store-check-profile='[By default reports are printed in tabulated format to stderr. When this option is passed, these per-TU profiles are instead stored as JSON.]:prefix:_files -g "*.json"'
   --system-headers'[Display the errors from system headers]'
   --use-color'[Use colors in diagnostics]'
+  --verify-config'[Check the config files to ensure each check and option is recognized without running any checks.]'
   --warnings-as-errors='[Upgrades warnings to errors.]:string:_values -s, string $checks'
   '*:file:_files -g "*.(cc|cpp|h|hpp)"'
 )
@@ -746,7 +757,7 @@ clang-tidy options:
                                      This option overrides the 'UseColor' option in
                                      .clang-tidy file, if any.
   --verify-config                  - Check the config files to ensure each check and
-                                     option is recognized.
+                                     option is recognized without running any checks.
   --vfsoverlay=<filename>          - Overlay the virtual filesystem described by file
                                      over the real file system.
   --warnings-as-errors=<string>    - Upgrades warnings to errors. Same format as
