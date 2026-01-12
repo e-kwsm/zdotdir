@@ -1,6 +1,6 @@
 #compdef clang-tidy
 
-# LLVM version 20.1.8
+# LLVM version 21.1.6
 
 _clang-tidy() {
   local -ar checks=(
@@ -773,7 +773,7 @@ clang-tidy options:
                                      This option overrides the 'UseColor' option in
                                      .clang-tidy file, if any.
   --verify-config                  - Check the config files to ensure each check and
-                                     option is recognized.
+                                     option is recognized without running any checks.
   --vfsoverlay=<filename>          - Overlay the virtual filesystem described by file
                                      over the real file system.
   --warnings-as-errors=<string>    - Upgrades warnings to errors. Same format as
