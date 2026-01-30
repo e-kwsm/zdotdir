@@ -1,0 +1,13 @@
+#compdef doxygen
+
+typeset -ar args=(
+  -s'[Ommit comments]'
+  '(-u)'-g'[Generate a template configuration file]'
+  '(-g)'-u'[Update an existing configuration file]'
+  '(- *)'-v'[print version string]'
+  '(- *)'-V'[print extended version information]'
+  '(- *)'{-h,--help}'[prints usage help information]'
+)
+_arguments "${(@)args}"
+
+# vim:ft=zsh
