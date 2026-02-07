@@ -1,0 +1,98 @@
+#compdef hlint
+
+typeset -ar args=(
+  {-g,--git}'[Run on files tracked by git]'
+  {-s,--show}'[Show all ignored ideas]'
+  --ignore-suggestions'[Ignore suggestions, only show warnings and errors]'
+  {-d,--default}'[Print a default file to stdout]'
+  --json'[Display hint data as JSON]'
+  --refactor'[Automatically invoke `refactor` to apply hints]'
+  --refactor-options='[Options to pass to the `refactor` executable]:OPTIONS:(--inplace --step)'
+  --generate-config='[Generate a .hlint.yaml config file with all hints set to the specified severity level ]:LEVEL:(ignore suggest warn error)'
+  --test'[Run the test suite]'
+  '(- :)'{'-?',--help}'[Display help message]'
+  '(- :)'{-V,--version}'[Print version information]'
+  '(-v --verbose -q --quiet)'{-v,--verbose}'[Loud verbosity]'
+  '(-v --verbose -q --quiet)'{-q,--quiet}'[Quiet verbosity]'
+  # '(- :)'{-h,--help}'[Show this help message and exit]'
+  '*:file:_files -g "*.hs" "*.lhs"'
+)
+_arguments "${(@)args}"
+
+return
+: << 'EOF'
+HLint v3.6.1, (C) Neil Mitchell 2006-2023
+
+hlint [OPTIONS] [FILE/DIR]
+
+Common flags:
+  -r --report[=FILE]                       Generate a report in HTML
+  -h --hint=FILE                           Hint/ignore file to use
+     --with-group=GROUP                    Extra hint groups to use
+  -g --git                                 Run on files tracked by git
+  -c --color[=always/never/auto] --colour  Color output (requires an ANSI
+                                           terminal; 'auto' means on if the
+                                           standard output channel can support
+                                           ANSI; by itself, selects 'always')
+  -j --threads[=INT] --cmdthreads          Number of threads to use (-j for
+                                           all)
+  -i --ignore=HINT                         Ignore a particular hint
+  -s --show                                Show all ignored ideas
+     --ignore-suggestions                  Ignore suggestions, only show
+                                           warnings and errors
+  -e --extension=EXT                       File extensions to search (default
+                                           hs/lhs)
+  -X --language=EXTENSION                  Language extensions (Arrows,
+                                           NoCPP)
+     --cross                               Work between modules
+  -f --find=FILE                           Find hints in a Haskell file
+     --datadir=DIR                         Override the data directory
+  -d --default                             Print a default file to stdout
+  -p --path=ITEM                           Directory in which to search for
+                                           files
+     --cpp-define=NAME[=VALUE]             CPP #define
+     --cpp-include=DIR                     CPP include path
+     --cpp-file=FILE                       CPP pre-include file
+     --cpp-simple                          Use a simple CPP (strip # lines)
+     --cpp-ansi                            Use CPP in ANSI compatibility mode
+     --json                                Display hint data as JSON
+     --cc                                  Display hint data as Code Climate
+                                           Issues
+     --sarif                               Display hint data as SARIF
+     --no-summary                          Do not show summary information
+  -o --only=HINT                           Specify which hints explicitly
+     --no-exit-code                        Do not give a negative exit if
+                                           hints
+     --timing                              Display timing information
+     --serialise                           Serialise hint data for
+                                           consumption by apply-refact
+     --refactor                            Automatically invoke `refactor` to
+                                           apply hints
+     --refactor-options=OPTIONS            Options to pass to the `refactor`
+                                           executable
+     --with-refactor=ITEM                  Give the path to refactor
+     --ignore-glob=ITEM                    Ignore paths matching glob pattern
+                                           (e.g. foo/bar/*.hs)
+     --generate-summary[=ITEM]             Generate a summary of available
+                                           hints, in Markdown format
+     --generate-summary-json[=ITEM]        Generate a summary of available
+                                           hints, in JSON format
+     --generate-config[=LEVEL]             Generate a .hlint.yaml config file
+                                           with all hints set to the specified
+                                           severity level (default level: warn,
+                                           alternatives: ignore, suggest,
+                                           error)
+     --test                                Run the test suite
+  -? --help                                Display help message
+  -V --version                             Print version information
+     --numeric-version                     Print just the version number
+  -v --verbose                             Loud verbosity
+  -q --quiet                               Quiet verbosity
+
+HLint gives hints on how to improve Haskell code.
+
+To check all Haskell files in 'src' and generate a report type:
+  hlint src --report
+EOF
+
+# vim:ft=zsh
