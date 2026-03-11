@@ -1,0 +1,27 @@
+#compdef cvtsudoers
+
+typeset -ar args=(
+  {-b,--base=}'[The base DN (distinguished name) that will be used when performing LDAP queries]:dn'
+  {-c,--config=}'[Specify the path to the configuration file]:file:_files'
+  {-d,--defaults=}'[Only convert Defaults entries of the specified types]:deftypes:_values -s , deftype all global user runas host command'
+  {-e,--expand-aliases}'[Expand aliases in input_file]'
+  {-f,--output-format=}'[Specify the output format]:output_format:((csv json ldif sudoers))'
+  --group-file='[]:file:_files'
+  '(- *)'{-h,--help}'[Display a short help message to the standard output and exit]'
+  {-i,--input-format=}'[Specify the input format]:input_format'
+  {-I,--increment=}'[]:increment'
+  {-l,--logfile=}'[Log conversion warnings to log_file instead of to the standard error]:log_file:_files'
+  {-m,--match=}'[Only output rules that match the specified filter]:filter:_values -s , filter cmnd= host= group= user='
+  {-M,--match-local}'[When the -m option is also specified, use password and group database information when matching users and groups in the filter]'
+  {-o,--output=}'[Write the converted output to output_file]:output_file:_files'
+  {-O,--order-start=}'[]:start_point'
+  --passwd-file='[]:file:_files'
+  {-p,--prune-matches}'[When the -m option is also specified, cvtsudoers will prune out non-matching users, groups, and hosts from matching entries]'
+  {-P,--padding=}'[]:padding'
+  {-s,--suppress=}'[Suppress the output of specific sections of the security policy]:sections:_values -s , sectuib defaults aliases privileges '
+  '(- *)'{-V,--version}'[Print the cvtsudoers and sudoers grammar versions and exit]'
+  '*:file:_files'
+)
+_arguments "${(@)args}"
+
+# vim:ft=zsh
