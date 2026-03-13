@@ -114,7 +114,7 @@ _openssl() {
 'aria-256-ctr:'
 'aria-256-ecb:'
 'aria-256-ofb:'
-'base64:'
+'base64:Base64 Encoding'
 'bf:'
 'bf-cbc:'
 'bf-cfb:'
@@ -193,6 +193,17 @@ _openssl() {
     fi
     return ret
   fi
+}
+
+(( $+functions[_openssl-rand] )) || _openssl-rand() {
+typeset -ar args=(
+  '(- *)-help[]'
+  -out'[Output file]:outfile:_files'
+  '(-hex)-base64[Base64 encode output]'
+  '(-base64)-hex[Hex encode output]'
+  '1:num'
+)
+_arguments "${(@)args}"
 }
 
 : << 'EOF'
