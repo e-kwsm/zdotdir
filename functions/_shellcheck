@@ -1,10 +1,11 @@
 #compdef shellcheck
 
-# version: 0.10.0
+# version: 0.11.0
 
-typeset -ar CODE=(SC{1000..2330})
+typeset -ar CODE=(SC{1000..1146} SC{2000..2336} SC{3000..3067})
 typeset -ar OPTIONALS=(
   add-default-case
+  avoid-negated-conditions
   avoid-nullary-conditions
   check-extra-masked-returns
   check-set-e-suppressed
@@ -13,6 +14,7 @@ typeset -ar OPTIONALS=(
   quote-safe-variables
   require-double-brackets
   require-variable-braces
+  useless-use-of-cat
 )
 
 typeset -ar args=(
