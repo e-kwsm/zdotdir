@@ -1,6 +1,6 @@
 #compdef shellcheck
 
-# version: 0.10.0
+# version: 0.11.0
 
 typeset -ar CODE=(SC{1000..1146} SC{2000..2336} SC{3000..3067})
 typeset -ar OPTIONALS=(
