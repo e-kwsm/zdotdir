@@ -3,24 +3,27 @@
 # main {{{1
 _tlmgr() {
   local curcontext=$curcontext state lstate line
-  _arguments \
-    '(- *)--help[Display this help information and exit]' \
-    '(- *)--version[Gives version information]' \
-    --repository'[]:url or path' \
-    --gui'[]' \
-    --gui-lang'[]:llcode' \
-    --debug-translation'[]' \
-    --machine-readable'[]' \
-    --no-execute-actions'[]' \
-    --package-logfile'[]:logfile:_files' \
-    --pause'[]' \
-    --persistent-downloads'[]' \
-    --no-persistent-downloads'[]' \
-    --pin-file'[]' \
-    --usermode'[]' \
-    --usertree'[]:directory:_path_files -/' \
-    --verify-repo='[]: :(none main all)' \
+  local -a args=(
+    '(- *)--help[Display this help information and exit]'
+    '(- *)--version[Gives version information]'
+    --repository'[]:url or path'
+    --gui'[]'
+    --gui-lang'[]:llcode'
+    --command-logfile'[]:file:_files'
+    --debug-translation'[]'
+    --machine-readable'[]'
+    --no-execute-actions'[]'
+    --package-logfile'[]:file:_files'
+    --pause'[]'
+    --persistent-downloads'[]'
+    --no-persistent-downloads'[]'
+    --pin-file'[]'
+    --usermode'[]'
+    --usertree'[]:directory:_path_files -/'
+    --verify-repo='[]: :(none main all)'
     '*::tlmgr command:_tlmgr_command'
+  )
+  _arguments "${args[@]}"
 }
 
 # _tlmgr-command {{{1
@@ -29,6 +32,7 @@ _tlmgr() {
     'help:Display this help information and exit'
     'version:Gives version information'
     'backup:backup'
+    'bug:bug'
     'candidates:candidates'
     'check:check'
     'conf:conf'
