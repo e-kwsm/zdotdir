@@ -3,7 +3,7 @@
 [ -n "$XDG_DATA_HOME"   ] || export XDG_DATA_HOME="$HOME/.local/share"
 [ -n "$XDG_STATE_HOME"  ] || export XDG_STATE_HOME="$HOME/.local/state"
 
-ZDOTDIR=$XDG_CONFIG_HOME/zsh
+ZDOTDIR=$XDG_DATA_HOME/zsh
 
 if ! type module > /dev/null 2>&1; then
   if [ -r /etc/profile.d/modules.sh ]; then
