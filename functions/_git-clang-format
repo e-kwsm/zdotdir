@@ -1,0 +1,18 @@
+#compdef git-clang-format
+
+typeset -ar args=(
+  '(- *)'{-h,--help}'[this help message and exit]'
+  # --binary BINARY       path to clang-format
+  # --commit COMMIT       default commit to use if none is specified
+  '(--diffstat)--diff[print a diff instead of applying the changes]'
+  '(--diff)--diffstat[print a diffstat instead of applying the changes]'
+  # --extensions EXTENSIONS comma-separated list of file extensions to format, excluding the period and case-insensitive
+  # -f, --force           allow changes to unstaged files
+  # -p, --patch           select hunks interactively
+  # -q, --quiet           print less information
+  # --staged, --cached    format lines in the stage instead of the working dir
+  # --style STYLE         passed to clang-format
+  # -v, --verbose         print extra information
+  # --diff_from_common_commit diff from the last common commit for commits in separate branches rather than the exact point of the commits
+)
+_arguments "${(@)args}"
