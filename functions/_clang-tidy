@@ -1,6 +1,6 @@
 #compdef clang-tidy
 
-# LLVM version 21.1.6
+# LLVM version 22.1.1
 
 _clang-tidy() {
   local -ar checks=(
@@ -706,6 +706,9 @@ clang-tidy options:
                                      Can be used together with -line-filter.
                                      This option overrides the 'ExcludeHeaderFilterRegex'
                                      option in .clang-tidy file, if any.
+  --experimental-custom-checks     - Enable experimental clang-query based
+                                     custom checks.
+                                     see https://clang.llvm.org/extra/clang-tidy/QueryBasedCustomChecks.html.
   --explain-config                 - For each enabled check explains, where it is
                                      enabled, i.e. in clang-tidy binary, command
                                      line or a specific configuration file.
@@ -739,20 +742,27 @@ clang-tidy options:
                                      This option overrides the 'FormatStyle` option in
                                      .clang-tidy file, if any.
   --header-filter=<string>         - Regular expression matching the names of the
-                                     headers to output diagnostics from. Diagnostics
+                                     headers to output diagnostics from. The default
+                                     value is '.*', i.e. diagnostics from all non-system
+                                     headers are displayed by default. Diagnostics
                                      from the main file of each translation unit are
                                      always displayed.
                                      Can be used together with -line-filter.
                                      This option overrides the 'HeaderFilterRegex'
                                      option in .clang-tidy file, if any.
-  --line-filter=<string>           - List of files with line ranges to filter the
-                                     warnings. Can be used together with
-                                     -header-filter. The format of the list is a
-                                     JSON array of objects:
+  --line-filter=<string>           - List of files and line ranges to output diagnostics from.
+                                     The range is inclusive on both ends. Can be used together
+                                     with -header-filter. The format of the list is a JSON
+                                     array of objects. For example:
+                                     
                                        [
                                          {"name":"file1.cpp","lines":[[1,3],[5,7]]},
                                          {"name":"file2.h"}
                                        ]
+                                     
+                                     This will output diagnostics from 'file1.cpp' only for
+                                     the line ranges [1,3] and [5,7], as well as all from the
+                                     entire 'file2.h'.
   --list-checks                    - List all enabled checks and exit. Use with
                                      -checks=* to list all available checks.
   --load=<pluginfilename>          - Load the specified plugin
@@ -761,6 +771,13 @@ clang-tidy options:
                                      printing statistics about ignored warnings and
                                      warnings treated as errors if the respective
                                      options are specified.
+  --removed-arg=<string>           - List of arguments to remove from the command
+                                     line sent to the compiler. Please note that
+                                     removing arguments might change the semantic
+                                     of the analyzed code, possibly leading to
+                                     compiler errors, false positives or
+                                     false negatives. This option is applied 
+                                     before --extra-arg and --extra-arg-before
   --store-check-profile=<prefix>   - By default reports are printed in tabulated
                                      format to stderr. When this option is passed,
                                      these per-TU profiles are instead stored as JSON.
@@ -822,6 +839,8 @@ Configuration files:
   Checks                       - Same as '--checks'. Additionally, the list of
                                  globs can be specified as a list instead of a
                                  string.
+  CustomChecks                 - Array of user defined checks based on
+                                 Clang-Query syntax.
   ExcludeHeaderFilterRegex     - Same as '--exclude-header-filter'.
   ExtraArgs                    - Same as '--extra-arg'.
   ExtraArgsBefore              - Same as '--extra-arg-before'.
@@ -837,6 +856,7 @@ Configuration files:
                                  (if any exists) will be taken and the current
                                  config file will be applied on top of the
                                  parent one.
+  RemovedArgs                  - Same as '--removed-arg'.
   SystemHeaders                - Same as '--system-headers'.
   UseColor                     - Same as '--use-color'.
   User                         - Specifies the name or e-mail of the user
@@ -853,7 +873,7 @@ Configuration files:
     WarningsAsErrors:             ''
     HeaderFileExtensions:         ['', 'h','hh','hpp','hxx']
     ImplementationFileExtensions: ['c','cc','cpp','cxx']
-    HeaderFilterRegex:            ''
+    HeaderFilterRegex:            '.*'
     FormatStyle:                  none
     InheritParentConfig:          true
     User:                         user
