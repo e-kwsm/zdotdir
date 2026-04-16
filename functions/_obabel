@@ -27,6 +27,7 @@ typeset -ar outputformats=(
   inchikey
   mol
   mol2
+  molreport
   mop
   sdf
   smi
