@@ -1,7 +1,7 @@
 #compdef ctest
 
 typeset -ar args=(
-  --preset='[Read arguments from a test preset.]:preset:_files'
+  --preset='[Read arguments from a test preset.]:preset'
   '(- *)--list-presets[List available test presets.]'
   '(-C --build-config)'{-C,--build-config}'[Choose configuration to test.]:cfg:_files'
   --progress'[Enable short progress output from tests.]'
@@ -23,7 +23,9 @@ typeset -ar args=(
   --test-dir'[Specify the directory in which to look for tests.]:dir:_path_files -/'
   --test-load'[CPU load threshold for starting new parallel tests.]'
   --schedule-random'[Use a random order for scheduling tests.]'
+  --timeout'[Set the default test timeout.]:seconds'
   --print-labels'[Print all available test labels.]'
+  --no-tests="[Regard no tests found either as 'error' or 'ignore' it.]: :(error ignore)"
   '(- *)'{-h,--help}'[Show help options]'
   '(- *)--version[Show version information]'
   '(- *)--help-full[Print all help manuals and exit.]'
