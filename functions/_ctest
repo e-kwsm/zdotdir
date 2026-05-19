@@ -3,7 +3,7 @@
 typeset -ar args=(
   --preset='[Read arguments from a test preset.]:preset'
   '(- *)--list-presets[List available test presets.]'
-  '(-C --build-config)'{-C,--build-config}'[Choose configuration to test.]:cfg:_files'
+  '(-C --build-config)'{-C,--build-config}'[Choose configuration to test.]:cfg'
   --progress'[Enable short progress output from tests.]'
   '(-V -VV --verbose --extra-verbose)'{-V,--verbose}'[Enable verbose output from tests.]'
   '(-V -VV --verbose --extra-verbose)'{-VV,--extra-verbose}'[Enable more verbose output from tests.]'
@@ -21,7 +21,7 @@ typeset -ar args=(
   '(-LE --label-exclude)'{-LE,--label-exclude}'[Exclude tests with labels matching regular expression.]:regex'
   --rerun-failed'[Run only the tests that failed previously.]'
   --test-dir'[Specify the directory in which to look for tests.]:dir:_path_files -/'
-  --test-load'[CPU load threshold for starting new parallel tests.]'
+  --test-load'[CPU load threshold for starting new parallel tests.]:load'
   --schedule-random'[Use a random order for scheduling tests.]'
   --timeout'[Set the default test timeout.]:seconds'
   --print-labels'[Print all available test labels.]'
