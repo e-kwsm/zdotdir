@@ -1,0 +1,23 @@
+#compdef swig
+
+typeset -ar args=(
+  '1:language:(-csharp -d -go -javascript -lua -perl5 -php7 -python -ocaml)'
+  '-c++[Enable C++ processing]'
+  '(- :)-copyright[Display copyright notices]'
+  '(- :)-help[Display help]'
+  "-I-[Don't search the current directory]"
+  '-o[Set name of C/C++ output file to <outfile>]:outfile:_files -g "*.(c|cc|cpp)"'
+  '-oh[Set name of C++ output header file for directors to <headfile>]:headfile:_files -g "*.(h|hpp)"'
+  "-outcurrentdir[Set default output dir to current dir instead of input file's path]"
+  '-outdir[Set language specific files output directory to <dir>]:dir:_path_files -/'
+  '-small[Compile in virtual elimination and compact mode]'
+  '-std=[Set the C or C++ language <standard> for inputs]:standard:(c99 c11 c17 c23 c++11 c++14 c++17)'
+  '(- :)-swiglib[Report location of SWIG library and exit]'
+  '-templatereduce[Reduce all the typedefs in templates]'
+  '-v[Run in verbose mode]'
+  '(- :)-version[Display SWIG version number]'
+  '-Wall[Remove all warning suppression, also implies -Wextra]'
+  '-Werror[Treat warnings as errors]'
+  '-Wextra[Adds the following additional warnings: 309,403,405,512,321,322]'
+)
+_arguments "${(@)args}"
