@@ -42,8 +42,8 @@ endif
 .DELETE_ON_ERROR: functions/_meson
 functions/_meson:
 ifeq ($(wildcard /usr/share/zsh/site-functions/_meson),)
-	wget -O $@ https://raw.githubusercontent.com/mesonbuild/meson/1.10.0/data/shell-completions/zsh/_meson
-	echo 'd878fa7c6635ea93d821770d6b6ba09a162181cb28a357d11affce3f $@' | sha224sum --check -
+	wget -O $@ https://raw.githubusercontent.com/mesonbuild/meson/1.11.1/data/shell-completions/zsh/_meson
+	echo 'cf2048643efe8d87be098642d069e4363b4b2003098e8631f3e60a55 $@' | sha224sum --check -
 endif
 
 functions/_pipx: $(REGISTER_PYTHON_ARGCOMPLETE)
