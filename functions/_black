@@ -1,11 +1,11 @@
 #compdef black
 
-# black, 25.1.0
+# black, 26.5.1
 
 typeset -ar specs=(
   '(-l --line-length)'{-l,--line-length}'[How many characters per line to allow.]:INTEGER:_values INTEGER 79 88'
-  '(--ipynb)'--pyi'[Format all input files like typing stubs regardless of file extension (useful when piping source on standard input).]'
-  '(--pyi)'--ipynb'[Format all input files like Jupyter Notebooks regardless of file extension (useful when piping source on standard input).]'
+  '(--ipynb)'--pyi'[Format all input files like typing stubs regardless of file extension]'
+  '(--pyi)'--ipynb'[Format all input files like Jupyter Notebooks regardless of file extension]'
   '(-S --skip-string-normalization)'{-S,--skip-string-normalization}"[Don't normalize string quotes or prefixes.]"
   '(-C --skip-magic-trailing-comma)'{-C,--skip-magic-trailing-comma}"[Don't use trailing commas as a reason to split lines.]"
   --preview"[Enable potentially disruptive style changes that may be added to Black's main functionality in the next major release.]"
