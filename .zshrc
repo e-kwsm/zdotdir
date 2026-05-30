@@ -24,6 +24,7 @@ setopt hist_reduce_blanks
 setopt inc_append_history
 
 # Use modern completion system
+if [ -d $ZDOTDIR/site-functions ]; then fpath=($ZDOTDIR/site-functions $fpath); fi
 if [ -d $ZDOTDIR/functions ]; then fpath=($ZDOTDIR/functions $fpath); fi
 autoload -Uz compinit
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump
