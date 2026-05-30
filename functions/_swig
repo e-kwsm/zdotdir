@@ -1,7 +1,7 @@
 #compdef swig
 
 typeset -ar args=(
-  '1:language:(-csharp -d -go -javascript -lua -perl5 -php7 -python -ocaml)'
+  '1:language:(-csharp -d -go -guile -java -javascript -lua -octave -perl5 -php7 -python -r -ruby -scilab -tcl8 -xml -c -ocaml)'
   '-c++[Enable C++ processing]'
   '(- :)-copyright[Display copyright notices]'
   '(- :)-help[Display help]'
