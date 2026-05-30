@@ -1,0 +1,31 @@
+#compdef help2man
+
+#GNU help2man 1.49.3
+
+typeset -ar args=(
+  '(-s --section)'{-s,--section=}'[section number for manual page]:SECTION:(1 8)'
+  '(-i --include)'{-i,--include=}'[include material from FILE]:FILE:_files'
+  '(-I --opt-include)'{-I,--opt-include=}'[include material from FILE if it exists]:FILE:_files'
+  '(-o --output)'{-o,--output=}'[send output to FILE]:FILE:_files -g "*.[18]"'
+  '(-N --no-info})'{-N,--no-info}'[suppress pointer to Texinfo manual]'
+  '(- *)--help[print this help, then exit]'
+  '(- *)--version[print version number, then exit]'
+  '*::args: _normal'
+)
+_arguments "${(@)args}"
+
+: << 'EOF'
+ -n, --name=STRING       description for the NAME paragraph
+ -s, --section=SECTION   section number for manual page (1, 6, 8)
+ -m, --manual=TEXT       name of manual (User Commands, ...)
+ -S, --source=TEXT       source of program (FSF, Debian, ...)
+ -L, --locale=STRING     select locale (default "C")
+ -i, --include=FILE      include material from `FILE'
+ -I, --opt-include=FILE  include material from `FILE' if it exists
+ -o, --output=FILE       send output to `FILE'
+ -p, --info-page=TEXT    name of Texinfo manual
+ -N, --no-info           suppress pointer to Texinfo manual
+ -l, --libtool           exclude the `lt-' from the program name
+     --help              print this help, then exit
+     --version           print version number, then exit
+EOF
