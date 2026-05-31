@@ -19,5 +19,6 @@ typeset -ar args=(
   '-Wall[Remove all warning suppression, also implies -Wextra]'
   '-Werror[Treat warnings as errors]'
   '-Wextra[Adds the following additional warnings: 309,403,405,512,321,322]'
+  '2: :_files -g "*.i"'
 )
 _arguments "${(@)args}"
