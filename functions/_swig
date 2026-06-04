@@ -5,7 +5,10 @@ typeset -ar args=(
   '-c++[Enable C++ processing]'
   '(- :)-copyright[Display copyright notices]'
   '(- :)-help[Display help]'
-  "-I-[Don't search the current directory]"
+  '*-D-[Define symbol <symbol> (for conditional compilation)]:symbol'
+  '-E[Preprocess only, does not generate wrapper code]'
+  "-I\-[Don't search the current directory]"
+  '*-I+[Look for SWIG files in directory <dir>]:dir:_path_files -/'
   '-o[Set name of C/C++ output file to <outfile>]:outfile:_files -g "*.(c|cc|cpp)"'
   '-oh[Set name of C++ output header file for directors to <headfile>]:headfile:_files -g "*.(h|hpp)"'
   "-outcurrentdir[Set default output dir to current dir instead of input file's path]"
