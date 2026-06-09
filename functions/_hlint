@@ -20,8 +20,9 @@ typeset -ar args=(
 _arguments "${(@)args}"
 
 return
+
 : << 'EOF'
-HLint v3.6.1, (C) Neil Mitchell 2006-2023
+HLint v3.10, (C) Neil Mitchell 2006-2025
 
 hlint [OPTIONS] [FILE/DIR]
 
