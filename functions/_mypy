@@ -1,11 +1,14 @@
 #compdef mypy
 
-# mypy 1.14.0
+# mypy 1.20.2
 typeset -ar args=(
-  '(- :)'{-h,--help}'[Show this help message and exit]'
+  '(- :)'{-h,--help}'[Show help message and exit]'
   '(- :)'{-v,--verbose}'[More verbose messages]'
   '(- :)'{-V,--version}"[Show program's version number and exit]"
 
+  --config-file'[Configuration file, must have a \[mypy\] section]:CONFIG_FILE:_files -g "mypy.ini|.mypy.ini|pyproject.toml|setup.cfg"'
+
+  --python-executable'[Python executable used for finding PEP 561 compliant installed packages and stubs]:EXECUTABLE:_normal'
   --no-site-packages'[Do not search for installed PEP 561 compliant packages]'
   --no-silence-site-packages'[Do not silence errors in PEP 561 compliant installed packages]'
 
@@ -19,6 +22,7 @@ typeset -ar args=(
 _arguments "${(@)args}"
 
 return
+
 : << 'EOF'
 usage: mypy [-h] [-v] [-V] [more options; see below]
             [-m MODULE] [-p PACKAGE] [-c PROGRAM_TEXT] [files ...]
@@ -45,7 +49,7 @@ command line flags. For more details, see:
 - https://mypy.readthedocs.io/en/stable/config_file.html
 
 options:
-  --enable-incomplete-feature {InlineTypedDict,PreciseTupleTypes}
+  --enable-incomplete-feature {InlineTypedDict,PreciseTupleTypes,TypeForm}
                             Enable support of incomplete/experimental features
                             for early preview
 
@@ -62,8 +66,7 @@ Config file:
   --config-file CONFIG_FILE
                             Configuration file, must have a [mypy] section
                             (defaults to mypy.ini, .mypy.ini, pyproject.toml,
-                            setup.cfg, /home/kwsm/.config/mypy/config,
-                            ~/.config/mypy/config, ~/.mypy.ini)
+                            setup.cfg)
   --warn-unused-configs     Warn about unused '[mypy-<pattern>]' or
                             '[[tool.mypy.overrides]]' config sections
                             (inverse: --no-warn-unused-configs)
@@ -85,10 +88,6 @@ Import discovery:
   --no-silence-site-packages
                             Do not silence errors in PEP 561 compliant
                             installed packages
-  --junit-format {global,per_file}
-                            If --junit-xml is set, specifies format. global:
-                            single test with all errors; per_file: one test
-                            entry per file with failures
 
 Platform configuration:
   Type check code assuming it will be run under certain runtime conditions.
@@ -151,8 +150,7 @@ Untyped definitions and calls:
 None and Optional handling:
   Adjust how values of type 'None' are handled. For more context on how mypy
   handles values of type 'None', see:
-  https://mypy.readthedocs.io/en/stable/kinds_of_types.html#no-strict-
-  optional
+  https://mypy.readthedocs.io/en/stable/kinds_of_types.html#optional-types-and-the-none-type
 
   --implicit-optional       Assume arguments with default values of None are
                             Optional (inverse: --no-implicit-optional)
@@ -177,32 +175,45 @@ Configuring warnings:
                             Report importing or using deprecated features as
                             notes instead of errors (inverse: --no-report-
                             deprecated-as-note)
+  --deprecated-calls-exclude MODULE
+                            Disable deprecated warnings for functions/methods
+                            coming from specific package, module, or class
 
 Miscellaneous strictness flags:
   --allow-untyped-globals   Suppress toplevel errors caused by missing
                             annotations (inverse: --disallow-untyped-globals)
-  --allow-redefinition      Allow unconditional variable redefinition with a
-                            new type (inverse: --disallow-redefinition)
+  --allow-redefinition      Alias to --allow-redefinition-old; will point to
+                            --allow-redefinition-new in v2.0 (inverse:
+                            --disallow-redefinition)
+  --allow-redefinition-old  Allow restricted, unconditional variable
+                            redefinition with a new type (inverse: --disallow-
+                            redefinition-old)
+  --allow-redefinition-new  Allow more flexible variable redefinition
+                            semantics (inverse: --disallow-redefinition-new)
   --no-implicit-reexport    Treat imports as private unless aliased (inverse:
                             --implicit-reexport)
   --strict-equality         Prohibit equality, identity, and container checks
-                            for non-overlapping types (inverse: --no-strict-
-                            equality)
+                            for non-overlapping types (except `None`)
+                            (inverse: --no-strict-equality)
+  --strict-equality-for-none
+                            Extend `--strict-equality` for `None` checks
+                            (inverse: --no-strict-equality-for-none)
+  --strict-bytes            Disable treating bytearray and memoryview as
+                            subtypes of bytes (inverse: --no-strict-bytes)
   --extra-checks            Enable additional checks that are technically
                             correct but may be impractical in real code. For
                             example, this prohibits partial overlap in
                             TypedDict updates, and makes arguments prepended
                             via Concatenate positional-only (inverse: --no-
                             extra-checks)
-  --strict                  Strict mode; enables the following flags: --warn-
-                            unused-configs, --disallow-any-generics,
-                            --disallow-subclassing-any, --disallow-untyped-
-                            calls, --disallow-untyped-defs, --disallow-
-                            incomplete-defs, --check-untyped-defs, --disallow-
-                            untyped-decorators, --warn-redundant-casts,
-                            --warn-unused-ignores, --warn-return-any, --no-
-                            implicit-reexport, --strict-equality, --extra-
-                            checks
+  --strict                  Strict mode; enables the following flags:
+                            --disallow-any-generics, --disallow-subclassing-
+                            any, --disallow-untyped-calls, --disallow-untyped-
+                            defs, --disallow-incomplete-defs, --check-untyped-
+                            defs, --disallow-untyped-decorators, --warn-
+                            redundant-casts, --warn-unused-ignores, --warn-
+                            return-any, --no-implicit-reexport, --strict-
+                            equality, --strict-bytes, --extra-checks
   --disable-error-code NAME
                             Disable a specific error code
   --enable-error-code NAME  Enable a specific error code
@@ -235,7 +246,7 @@ Incremental mode:
   Adjust how mypy incrementally type checks and caches modules. Mypy caches
   type information about modules into a cache to let you speed up future
   invocations of mypy. Also see mypy's daemon mode:
-  mypy.readthedocs.io/en/stable/mypy_daemon.html#mypy-daemon
+  https://mypy.readthedocs.io/en/stable/mypy_daemon.html#mypy-daemon
 
   --no-incremental          Disable module cache (inverse: --incremental)
   --cache-dir DIR           Store module cache info in the given folder in
@@ -244,6 +255,8 @@ Incremental mode:
                             --no-sqlite-cache)
   --cache-fine-grained      Include fine-grained dependency information in the
                             cache for the mypy daemon
+  --no-fixed-format-cache   Do not use new fixed format cache (inverse:
+                            --fixed-format-cache)
   --skip-version-check      Allow using cache written by older mypy version
   --skip-cache-mtime-checks
                             Skip cache internal consistency checks based on
@@ -257,7 +270,6 @@ Advanced options:
   --raise-exceptions        Raise exception on fatal error
   --custom-typing-module MODULE
                             Use a custom typing module
-  --old-type-inference      Disable new experimental type inference algorithm
   --custom-typeshed-dir DIR
                             Use the custom typeshed in DIR
   --warn-incomplete-stub    Warn if missing type annotation in typeshed, only
@@ -283,7 +295,13 @@ Report generation:
   --xslt-txt-report DIR
 
 Miscellaneous:
-  --junit-xml JUNIT_XML     Write junit.xml to the given file
+  --junit-xml JUNIT_XML_OUTPUT_FILE
+                            Write a JUnit XML test result document with type
+                            checking results to the given file
+  --junit-format {global,per_file}
+                            If --junit-xml is set, specifies format. global
+                            (default): single test with all errors; per_file:
+                            one test entry per file with failures
   --find-occurrences CLASS.MEMBER
                             Print out all usages of a class member
                             (experimental)
@@ -296,7 +314,7 @@ Miscellaneous:
 
 Running code:
   Specify the code you want to type check. For more details, see
-  mypy.readthedocs.io/en/stable/running_mypy.html#running-mypy
+  https://mypy.readthedocs.io/en/stable/running_mypy.html#running-mypy
 
   --explicit-package-bases  Use current directory and MYPYPATH to determine
                             module names of files passed (inverse: --no-
@@ -306,6 +324,9 @@ Running code:
                             recursively discovering files to check, e.g.
                             --exclude '/setup\.py$'. May be specified more
                             than once, eg. --exclude a --exclude b
+  --exclude-gitignore       Use .gitignore file(s) to exclude files from
+                            checking (in addition to any explicit --exclude if
+                            present) (inverse: --no-exclude-gitignore)
   -m, --module MODULE       Type-check module; can repeat for more modules
   -p, --package PACKAGE     Type-check package recursively; can be repeated
   -c, --command PROGRAM_TEXT
