@@ -14,7 +14,6 @@ typeset -ar args=(
   '(- :)'{-V,--version}'[Print version information]'
   '(-v --verbose -q --quiet)'{-v,--verbose}'[Loud verbosity]'
   '(-v --verbose -q --quiet)'{-q,--quiet}'[Quiet verbosity]'
-  # '(- :)'{-h,--help}'[Show this help message and exit]'
   '*:file:_files -g "*.hs" "*.lhs"'
 )
 _arguments "${(@)args}"
