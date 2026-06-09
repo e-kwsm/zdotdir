@@ -5,7 +5,7 @@ typeset -ar args=(
   '-c++[Enable C++ processing]'
   '(- :)-copyright[Display copyright notices]'
   '(- :)-help[Display help]'
-  '*-D-[Define symbol <symbol> (for conditional compilation)]:symbol'
+  '*-D+[Define symbol <symbol> (for conditional compilation)]:symbol'
   '-E[Preprocess only, does not generate wrapper code]'
   "-I\-[Don't search the current directory]"
   '*-I+[Look for SWIG files in directory <dir>]:dir:_path_files -/'
