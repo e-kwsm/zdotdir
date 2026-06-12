@@ -1,14 +1,14 @@
 #compdef doxygen
 
 typeset -ar args=(
-  '-s[Ommit comments]'
-  '(-u)'-g'[Generate a template configuration file]'
-  '(-g)'-u'[Update an existing configuration file]'
-  '(- :)'-v'[print version string]'
-  '(- :)'-V'[print extended version information]'
+  '(-x -x_noenv)-s[Ommit comments]'
+  '(-u -x -x_noenv)-g[Generate a template configuration file]'
+  '(-g -x -x_noenv)-u[Update an existing configuration file]'
+  '(- :)-v[print version string]'
+  '(- :)-V[print extended version information]'
   '(- :)'{-h,--help}'[prints usage help information]'
-  '(-x_noenv)-x[Compare the used configuration file with the template configuration file]'
-  '(-x)-x_noenv[Compare the used configuration file with the template configuration file without replacing the environment variables or CMake type replacement variables]'
+  '(-s -g -u -x_noenv)-x[Compare the used configuration file with the template configuration file]'
+  '(-s -g -u -x)-x_noenv[Compare the used configuration file with the template configuration file without replacing the environment variables or CMake type replacement variables]'
   '1:: config:_files'
 )
 _arguments "${(@)args}"
