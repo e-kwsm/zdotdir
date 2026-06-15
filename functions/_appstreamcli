@@ -6,7 +6,7 @@ _appstreamcli() {
 
   typeset -ar args=(
     '(- *)'{-h,--help}'[Show help options]'
-    '(- *)'--version'[Display the version number of appstreamcli]'
+    '(- *)--version[Display the version number of appstreamcli]'
     '*::appstreamcli command:_appstreamcli_command'
   )
   _arguments "${(@)args}"
