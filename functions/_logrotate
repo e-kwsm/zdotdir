@@ -5,10 +5,10 @@ typeset -ar args=(
   '(-f --force)'{-f,--force}'[Force file rotation]'
   '(-s --state)'{-s,--state=}'[Path of state file]:statefile:_files'
   '(-v --verbose)'{-v,--verbose}'[Display messages during rotation]'
-  '(: -)'--version'[Display version information]'
+  '(: -)--version[Display version information]'
   '(-l --log)'{-l,--log=}"[Log file or 'syslog' to log to syslog]:logfile:_files"
   '(: -)'{'-?',--help}'[Show this help message]'
-  '(: -)'--usage'[Display brief usage message]'
+  '(: -)--usage[Display brief usage message]'
   '1:configfile:_files'
 )
 _arguments "${(@)args}"

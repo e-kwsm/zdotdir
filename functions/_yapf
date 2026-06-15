@@ -7,7 +7,7 @@ typeset -ar args=(
   '(- *)'{-v,--version}"[show program's version number and exit]"
   '(-d --diff -i --in-place)'{-d,--diff}'[print the diff for the fixed source]'
   '(-i --in-place -d --diff)'{-i,--in-place}'[make changes to files in place]'
-  '(- *)'--style-help'[show style settings and exit; this output can be saved to .style.yapf to make your settings permanent]'
+  '(- *)--style-help[show style settings and exit; this output can be saved to .style.yapf to make your settings permanent]'
   --no-local-style"[don't search for local style definition]"
   '(-p --parallel)'{-p,--parallel}'[run yapf in parallel when formatting multiple files.]'
   '(-vv --verbose)'{-vv,--verbose}'[print out file names while processing]'

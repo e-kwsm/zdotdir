@@ -11,10 +11,10 @@ typeset -ar args=(
   --hidden'[Search hidden files and directories]'
   --no-check-filenames'[Skip verifying spelling in file names]'
 
-  '(-w --write-changes)'--diff'[Print a diff of what would change]'
+  '(-w --write-changes)--diff[Print a diff of what would change]'
   '(--diff -w --write-changes)'{-w,--write-changes}'[Write fixes out]'
   --dump-config'[Write the current configuration to file with `-` for stdout]:DUMP_CONFIG:_files'
-  '(- *)'--type-list'[Show all supported file types]'
+  '(- *)--type-list[Show all supported file types]'
 
   '*:file:_files'
 )

@@ -22,7 +22,7 @@ typeset -ar args=(
   '(-i --include)'{-i,--include=}'[Consider only given types of warnings]:CODE:_values -s, CODE $CODE'
   '(-e --exclude)'{-e,--exclude=}'[Exclude types of warnings]:CODE:_values -s, CODE $CODE'
   '(-f --format)'{-f,--format=}'[Output format]:FORMAT:(checkstyle diff gcc json json1 quiet tty)'
-  '(- *)'--list-optional'[List checks disabled by default]'
+  '(- *)--list-optional[List checks disabled by default]'
   --norc"[Don't look for .shellcheckrc files]"
   '(-o --enable)'{-o,--enable=}'[List of optional checks to enable (or "all")]:checks:_values -s, checks all $OPTIONALS'
   '(-s --shell)'{-s,--shell=}'[Specify dialect]:SHELLNAME:(sh bash dash ksh busybox)'

@@ -2,13 +2,13 @@
 
 # file-5.46
 typeset -ar args=(
-  '(- :)'--help'[display this help and exit]'
+  '(- :)--help[display this help and exit]'
   '(- :)'{-v,--version}'[output version information and exit]'
   '(-b --brief -N --no-pad)'{-b,--brief}'[do not prepend filenames to output lines]'
   '(-i --mime --mime-type --mime-encoding)'{-i,--mime}'[output MIME type strings (--mime-type and --mime-encoding)]'
   --extension'[output a slash-separated list of extensions]'
-  '(-i --mime)'--mime-type'[output the MIME type]'
-  '(-i --mime)'--mime-encoding'[output the MIME encoding]'
+  '(-i --mime)--mime-type[output the MIME type]'
+  '(-i --mime)--mime-encoding[output the MIME encoding]'
   '(- :)'{-l,--list}'[list magic strength]'
   '(-b --brief -N --no-pad)'{-N,--no-pad}'[do not pad output]'
   '*:file:_files'
