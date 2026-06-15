@@ -11,7 +11,7 @@ typeset -ar args=(
   '(--hipclangpath -l)'{--hipclangpath,-l}'[print HIP_CLANG_PATH]'
   '(- :)'{--full,-f}'[print full config]'
   '(- :)'{--version,-v}'[print hip version]'
-  '(- :)'--check'[check configuration]'
+  '(- :)--check[check configuration]'
   '(- :)'{--newline,-n}'[print newline]'
   '(- :)'{--help,-h}'[print help message]'
 )
