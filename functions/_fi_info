@@ -17,7 +17,7 @@ args=(
 # -i, --info=		print fi_info structures containing substr
   '(-l --list)'{-l,--list}'[list available libfabric providers]'
   '(-v --verbose)'{-v,--verbose}'[verbose output]'
-  '(- *)'--version'[print version info and exit]'
+  '(- *)--version[print version info and exit]'
 )
 _arguments "${(@)args}"
 

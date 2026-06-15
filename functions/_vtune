@@ -13,7 +13,7 @@ _vtune() {
 #   -help'[Display help text.]' \
 #   -import'[Create a result directory by importing one or more legacy data files/directories.]' \
 #   -report'[Generate a report with the specified name.]' \
-#   '(- *)'-version'[Display product version.]' \
+#   '(- *)-version[Display product version.]' \
 }
 
 # _vtune-command {{{1
