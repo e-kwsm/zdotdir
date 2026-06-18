@@ -1,7 +1,7 @@
 #compdef biber
 
 _arguments \
-  '(- *)'--cache'[If running as a PAR::Packer binary, show the cache location and exit.]' \
+  '(- *)--cache[If running as a PAR::Packer binary, show the cache location and exit.]' \
   '(--configfile -g)'{--configfile,-g}'[Use file as configuration file for "biber".]:file:_files -g "*"' \
   '(--debug -D)'{--debug,-D}'[Turn on debugging for "biber".]' \
   '(- *)'{-h,--help}'[Show this help message.]' \

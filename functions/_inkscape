@@ -38,8 +38,8 @@ _arguments \
   --verb='[Verb to call when Inkscape opens.]:VERB-ID' \
   --select='[Object ID to select when Inkscape opens.]:OBJECT-ID' \
   --shell'[Start Inkscape in interactive shell mode.]' \
-  '(- *)'--help'[Show this help message]' \
-  '(- *)'--usage'[Display brief usage message]' \
+  '(- *)--help[Show this help message]' \
+  '(- *)--usage[Display brief usage message]' \
   '*:file:_files -g "*.svg"'
 
 # vim:ft=zsh

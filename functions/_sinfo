@@ -5,7 +5,7 @@ _arguments \
   '(-d --dead)'{-d,--dead}'[If set only report state information for non-responding (dead) nodes.]' \
   '(-e --exact)'{-e,--exact}'[If set, do not group node information on multiple nodes unless their configurations to be reported are identical.]' \
   '(-h --noheader)'{-h,--noheader}'[Do not print a header on the output.]' \
-  '(- *)'--help'[Print a message describing all sinfo options.]' \
+  '(- *)--help[Print a message describing all sinfo options.]' \
   '(-l --long)'{-l,--long}'[Print more detailed information.]' \
   '(-n --nodes)'{-n,--nodes=}'[Print information only about the specified node(s).]:nodes' \
   '(-N --Node)'{-N,--Node}'[Print information in a node-oriented format with one line per node and partition.]' \
@@ -43,7 +43,7 @@ _arguments \
     UNK
     UNKNOWN
   ' \
-  '(- *)'--usage'[Print a brief message listing the sinfo options.]' \
+  '(- *)--usage[Print a brief message listing the sinfo options.]' \
   '(-v --verbose)'{-v,--verbose}'[Provide detailed event logging through program execution.]' \
   '(- *)'{-V,--version}'[Print version information and exit.]' \
   && :

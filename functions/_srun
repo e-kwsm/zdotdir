@@ -24,7 +24,7 @@ _arguments \
   --profile='[enables  detailed data collection by the acct_gather_profile plugin.]:option:_values -s, option all none energy task filesystem network' \
   --pty'[Execute task zero in pseudo terminal mode.]' \
   '(-t --time)'{-t,--time=}'[Set a limit on the total run time of the job allocation.]:time' \
-  '(- *)'--usage'[Display brief help message and exit.]' \
+  '(- *)--usage[Display brief help message and exit.]' \
   '(- *)'{-V,--version}'[Display version information and exit.]' \
   '(-v --verbose)'{-v,--verbose}"[Increase the verbosity of srun's informational messages.]" \
   '(-w --nodelist)'{-w,--nodelist=}'[Request a specific list of hosts.]:host1,host2,... or filename' \

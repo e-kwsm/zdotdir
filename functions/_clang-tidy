@@ -474,16 +474,16 @@ _clang-tidy() {
 
   _arguments \
     '(- *)'{-h,--help}'[Display available options (--help-hidden for more)]' \
-    '(- *)'--help-hidden'[Display all available options]' \
-    '(- *)'--help-list'[Display list of available options (--help-list-hidden for more)]' \
-    '(- *)'--help-list-hidden'[Display list of all available options]' \
-    '(- *)'--print-all-options'[Print all option values after command line parsing]' \
-    '(- *)'--print-options'[Print non-default options after command line parsing]' \
-    '(- *)'--version'[Display the version of this program]' \
+    '(- *)--help-hidden[Display all available options]' \
+    '(- *)--help-list[Display list of available options (--help-list-hidden for more)]' \
+    '(- *)--help-list-hidden[Display list of all available options]' \
+    '(- *)--print-all-options[Print all option values after command line parsing]' \
+    '(- *)--print-options[Print non-default options after command line parsing]' \
+    '(- *)--version[Display the version of this program]' \
     --allow-enabling-analyzer-alpha-checkers \
     --checks="[Comma-separated list of globs with optional '-' prefix.]:string:_values -s, string $checks $(for c in $checks; do printf -- -$c\ ; done)" \
-    '(- --config-file)'--config='[Specifies a configuration in YAML/JSON format]:string' \
-    '(- --config)'--config-file='[Specify the path of .clang-tidy or custom config file]:string:_files' \
+    '(- --config-file)--config=[Specifies a configuration in YAML/JSON format]:string' \
+    '(- --config)--config-file=[Specify the path of .clang-tidy or custom config file]:string:_files' \
     --dump-config'[Dumps configuration in the YAML format to stdout.]' \
     --enable-check-profile'[Enable per-check timing profiles, and print a report to stderr.]' \
     --explain-config'[For each enabled check explains, where it is enabled, i.e. in clang-tidy binary, command line or a specific configuration file.]' \

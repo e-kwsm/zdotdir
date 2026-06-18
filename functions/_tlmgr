@@ -4,8 +4,8 @@
 _tlmgr() {
   local curcontext=$curcontext state lstate line
   _arguments \
-    '(- *)'--help'[Display this help information and exit]' \
-    '(- *)'--version'[Gives version information]' \
+    '(- *)--help[Display this help information and exit]' \
+    '(- *)--version[Gives version information]' \
     --repository'[]:url or path' \
     --gui'[]' \
     --gui-lang'[]:llcode' \
@@ -257,7 +257,7 @@ _tlmgr() {
 # TODO _tlmgr-restore {{{1
 (( $+functions[_tlmgr-restore] )) || _tlmgr-restore() {
   _arguments \
-    '(- *)'--all'[]' \
+    '(- *)--all[]' \
     --backupdir'[]:directory:_path_files -/' \
     --dry-run'[]' \
     --force'[]' \

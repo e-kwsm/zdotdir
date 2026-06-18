@@ -1,8 +1,8 @@
 #compdef pdfcrop
 
 _arguments -s -S \
-  '(- *)'--help'[print usage]' \
-  '(- *)'--version'[print version number]' \
+  '(- *)--help[print usage]' \
+  '(- *)--version[print version number]' \
   '1:input:_files -g "*.pdf"' \
   '2:output:_files -g "*.pdf"'
 

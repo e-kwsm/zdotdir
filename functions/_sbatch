@@ -17,7 +17,7 @@ _arguments \
   '(-p --partition)'{-p,--partition=}'[Request a specific partition for the resource allocation.]:partition_names' \
   '(-t --time)'{-t,--time=}'[Set a limit on the total run time of the job allocation.]:time' \
   --time-min='[Set a minimum time limit on the job allocation.]:time' \
-  '(- *)'--usage'[Display brief help message and exit.]' \
+  '(- *)--usage[Display brief help message and exit.]' \
   '(- *)'{-V,--version}'[Display version information and exit.]' \
   '(-v --verbose)'{-v,--verbose}"[Increase the verbosity of sbatch's informational messages.]" \
   '(-w --nodelist)'{-w,--nodelist=}'[Request a specific list of hosts.]:node name list' \

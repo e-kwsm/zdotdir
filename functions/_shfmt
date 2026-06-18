@@ -3,7 +3,7 @@
 # v3.6.0
 
 _arguments \
-  '(- *)'--version'[show version and exit]' \
+  '(- *)--version[show version and exit]' \
   '(- *)'--help \
   '(-l --list)'{-l,--list}"[list files whose formatting differs from shfmt's]" \
   '(-w --write)'{-w,--write}'[write result to file instead of stdout]' \

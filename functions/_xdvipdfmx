@@ -3,7 +3,7 @@
 _arguments \
   '(- *)'{--help,-h}'[Show this help message and exit]' \
   -o'[PDF output file name]:PDF:_files -g "*.pdf"' \
-  '(- *)'--version'[Output version information and exit]' \
+  '(- *)--version[Output version information and exit]' \
   '*:file:_files -g "*.(dvi|xdv)"'
 
 # vim:ft=zsh

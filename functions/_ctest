@@ -2,7 +2,7 @@
 
 _arguments \
   --preset='[Read arguments from a test preset.]:preset:_files' \
-  '(- *)'--list-presets'[List available test presets.]' \
+  '(- *)--list-presets[List available test presets.]' \
   '(-C --build-config)'{-C,--build-config}'[Choose configuration to test.]:cfg:_files' \
   --progress'[Enable short progress output from tests.]' \
   '(-V -VV --verbose --extra-verbose)'{-V,--verbose}'[Enable verbose output from tests.]' \
@@ -24,8 +24,8 @@ _arguments \
   --schedule-random'[Use a random order for scheduling tests.]' \
   --print-labels'[Print all available test labels.]' \
   '(- *)'{-h,--help}'[Show help options]' \
-  '(- *)'--version'[Show version information]' \
-  '(- *)'--help-full'[Print all help manuals and exit.]' \
+  '(- *)--version[Show version information]' \
+  '(- *)--help-full[Print all help manuals and exit.]' \
   && :
 
 # vim:ft=zsh
