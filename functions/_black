@@ -8,16 +8,16 @@ typeset -ar specs=(
   '(--pyi)--ipynb[Format all input files like Jupyter Notebooks regardless of file extension]'
   '(-S --skip-string-normalization)'{-S,--skip-string-normalization}"[Don't normalize string quotes or prefixes.]"
   '(-C --skip-magic-trailing-comma)'{-C,--skip-magic-trailing-comma}"[Don't use trailing commas as a reason to split lines.]"
-  --preview"[Enable potentially disruptive style changes that may be added to Black's main functionality in the next major release.]"
-  '(--diff)'--check"[Don't write the files back, just return the status.]"
+  "--preview[Enable potentially disruptive style changes that may be added to Black's main functionality in the next major release.]"
+  "(--diff)--check[Don't write the files back, just return the status.]"
   '(--safe)--fast[skip temporary sanity checks.]'
   '(--fast)--safe[enable temporary sanity checks.]'
-  '(--check)'--diff"[Don't write the files back, just output a diff for each file on stdout.]"
+  "(--check)--diff[Don't write the files back, just output a diff for each file on stdout.]"
   '(-W --workers)'{-W,--workers}'[Number of parallel workers]:INTEGER RANGE:_values "INTEGER RANGE" 1 "$(nproc --all)"'
   '(-q --quiet)'{-q,--quiet}"[Don't emit non-error messages to stderr.]"
   '(-v --verbose)'{-v,--verbose}'[Also emit messages to stderr about files that were not changed or were ignored due to exclusion patterns.]'
   '(- *)--version[Show the version and exit.]'
-  --config'[Read configuration from FILE path.]:FILE:_files'
+  '--config[Read configuration from FILE path.]:FILE:_files'
   '(- *)'{-h,--help}'[Show this message and exit.]'
   '*:files:_files -g "*.py"'
 )
