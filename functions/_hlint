@@ -1,14 +1,17 @@
 #compdef hlint
 
 typeset -ar args=(
-  {-g,--git}'[Run on files tracked by git]'
-  {-s,--show}'[Show all ignored ideas]'
+  '(-r --report)'{-r,--report=}'-[Generate a report in HTML]:FILE:_files -g "*.html"'
+  '(-h --hint)'{-h,--hint=}'[Hint/ignore file to use]:FILE:_files'
+  '(-g --git)'{-g,--git}'[Run on files tracked by git]'
+  '(-j --threads)'{-j,--threads=}'-[Number of threads to use (-j for all)]:INT'
+  '(-s --show)'{-s,--show}'[Show all ignored ideas]'
   --ignore-suggestions'[Ignore suggestions, only show warnings and errors]'
-  {-d,--default}'[Print a default file to stdout]'
+  '(-d --default)'{-d,--default}'[Print a default file to stdout]'
   --json'[Display hint data as JSON]'
   --refactor'[Automatically invoke `refactor` to apply hints]'
   --refactor-options='[Options to pass to the `refactor` executable]:OPTIONS:(--inplace --step)'
-  --generate-config='[Generate a .hlint.yaml config file with all hints set to the specified severity level ]:LEVEL:(ignore suggest warn error)'
+  --generate-config='-[Generate a .hlint.yaml config file with all hints set to the specified severity level ]:LEVEL:(ignore suggest warn error)'
   --test'[Run the test suite]'
   '(- :)'{'-?',--help}'[Display help message]'
   '(- :)'{-V,--version}'[Print version information]'
