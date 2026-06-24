@@ -1,0 +1,17 @@
+#compdef cabal-fmt
+
+# cabal-fmt 0.1.9
+
+typeset -ar args=(
+  # --Werror                 Treat warnings as errors
+  '--indent[Indentation]:N'
+  '--tabular[Tabular formatting]'
+  '(-n --no-cabal-file)'{-n,--no-cabal-file}"[Don't parse as .cabal file]"
+  # --stdout                 Write output to stdout (default)
+  '(-i --inplace)'{-i,--inplace}'[Process files in-place]'
+  '(-c --check)'{-c,--check}'[Fail with non-zero exit code if input is not formatted]'
+  '*: :_files -g "*.cabal"'
+  '(- *)'{-h,--help}'[Show help text]'
+  '(- *)--version[Show version]'
+)
+_arguments "${(@)args}"
