@@ -1,6 +1,6 @@
 #compdef file
 
-# file-5.46
+# file-5.48
 typeset -ar args=(
   '(- :)--help[display this help and exit]'
   '(- :)'{-v,--version}'[output version information and exit]'
@@ -60,7 +60,7 @@ Determine type of FILEs.
                                elf_shsize 134217728 max ELF section size
                                 encoding   65536 max bytes to scan for encoding
                                    indir      50 recursion limit for indirection
-                                    name     100 use limit for name/use magic
+                                    name     150 use limit for name/use magic
                                    regex    8192 length limit for REGEX searches
                                  magwarn      64 maximum number of magic warnings
   -r, --raw                  don't translate unprintable chars to \ooo
