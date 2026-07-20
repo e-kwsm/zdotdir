@@ -3,7 +3,7 @@
 # main {{{1
 _tlmgr() {
   local curcontext=$curcontext state lstate line
-  local -a args=(
+  local -ar args=(
     '(- *)--help[Display this help information and exit]'
     '(- *)--version[Gives version information]'
     --repository'[]:url or path'
@@ -28,7 +28,7 @@ _tlmgr() {
 
 # _tlmgr-command {{{1
 (( $+functions[_tlmgr_command] )) || _tlmgr_command() {
-  local -a _tlmgr_cmds=(
+  local -ar _tlmgr_cmds=(
     'help:Display this help information and exit'
     'version:Gives version information'
     'backup:backup'
@@ -77,7 +77,7 @@ _tlmgr() {
     if (( $#cmd )); then
       curcontext="${curcontext%:*:*}:tlmgr-${cmd}:"
 
-      local -a _tlmgr_cmds_wo_arg=(
+      local -ar _tlmgr_cmds_wo_arg=(
         'gui'
         'help'
         'init-usertree'
