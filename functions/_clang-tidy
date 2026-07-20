@@ -609,7 +609,13 @@ _clang-tidy() {
     readability-use-std-min-max
     zircon-temporary-objects
   )
-
+  local -a negchecks
+  local c
+  for c in $checks; do
+    negchecks=($negchecks "-$c")
+  done
+  local -r negchecks
+  
   local -ar args=(
     '(- *)'{-h,--help}'[Display available options (--help-hidden for more)]'
     '(- *)--help-hidden[Display all available options]'
@@ -619,7 +625,7 @@ _clang-tidy() {
     '(- *)--print-options[Print non-default options after command line parsing]'
     '(- *)--version[Display the version of this program]'
     --allow-enabling-analyzer-alpha-checkers
-    --checks="[Comma-separated list of globs with optional '-' prefix.]:string:_values -s, string $checks $(for c in $checks; do printf -- -$c\ ; done)"
+    --checks="[Comma-separated list of globs with optional '-' prefix.]:string:_values -s, string $checks $negchecks"
     '(- --config-file)--config=[Specifies a configuration in YAML/JSON format]:string'
     '(- --config)--config-file=[Specify the path of .clang-tidy or custom config file]:string:_files'
     --dump-config'[Dumps configuration in the YAML format to stdout.]'
@@ -641,7 +647,8 @@ _clang-tidy() {
     --store-check-profile='[By default reports are printed in tabulated format to stderr. When this option is passed, these per-TU profiles are instead stored as JSON.]:prefix:_files -g "*.json"'
     --system-headers'[Display the errors from system headers]'
     --use-color'[Use colors in diagnostics]'
-    --warnings-as-errors="[Upgrades warnings to errors.]:string:_values -s, string $checks"
+    --verify-config'[Check the config files to ensure each check and option is recognized without running any checks.]'
+    --warnings-as-errors='[Upgrades warnings to errors.]:string:_values -s, string $checks'
     '*:file:_files -g "*.(cc|cpp|h|hpp)"'
   )
   _arguments "${(@)args}"
