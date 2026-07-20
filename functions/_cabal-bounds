@@ -1,0 +1,78 @@
+#compdef cabal-bounds
+
+_cabal-bounds() {
+  typeset curcontext=$curcontext state lstate line
+  typeset -ar args=(
+   '(- *)'{-h,--help}'[Display help message]'
+   '(- *)'{-v,--version}'[Print version information]'
+   '(- *)--numeric-version[Print just the version number]'
+    '*::cabal-bounds command:_cabal-bounds_command'
+  )
+  _arguments "${(@)args}"
+}
+
+(( $+functions[_cabal-bounds_command] )) || _cabal-bounds_command() {
+  typeset -ar _cabal-bounds_cmds=(
+    drop
+    update
+    dump
+    libs
+    format
+  )
+  if (( CURRENT == 1 )); then
+    _describe -t commands 'cabal-bounds command' _cabal-bounds_cmds
+  else
+    typeset curcontext="$curcontext" ret=1
+
+    cmd="${${_cabal-bounds_cmds[(r)$words[1]:*]%%:*}}"
+
+    if (( $#cmd )); then
+      curcontext="${curcontext%:*:*}:cabal-bounds-${cmd}:"
+
+      if [ $cmd = 'help' ]; then
+        _message 'no more arguments'
+      elif ! _call_function ret _cabal-bounds-$cmd; then
+        _default && ret=0
+      fi
+    else
+      _default && ret=0
+    fi
+    return ret
+  fi
+}
+
+(( $+functions[_cabal-bounds-update] )) || _cabal-bounds-update() {
+  typeset -ar args=(
+  # -L --lower                     Only the lower bound is updated. The same as
+  #                                using '--lowercomp=minor'.
+  # -U --upper                     Only the upper bound is updated. The same as
+  #                                using '--uppercomp=major2'.
+  #    --lowercomp=VERSIONCOMP     Only the lower bound is updated with the
+  #                                specified version component. (major1, major2
+  #                                or minor)
+  #    --uppercomp=VERSIONCOMP     Only the upper bound is updated with the
+  #                                specified version component. (major1, major2
+  #                                or minor)
+  # -l --library                   Only the bounds of the library are modified.
+  # -e --executable=NAME           Only the bounds of the executable are
+  #                                modified.
+  # -t --testsuite=NAME            Only the bounds of the test suite are
+  #                                modified.
+  # -b --benchmark=NAME            Only the bounds of the benchmark are
+  #                                modified.
+  # -O --only=DEPENDENCY           Only the bounds of the dependency are
+  #                                modified.
+  # -I --ignore=DEPENDENCY         This dependency is ignored, not modified in
+  #                                any way.
+  # -m --missing                   Only the dependencies having missing bounds
+  #                                are updated.
+  {-o,--output=}'[Save modified cabal file to file, if empty, the cabal file is modified inplace]:FILE:_files'
+  # -f --fromfile=FILE             Update bounds by the library versions
+  #                                specified in the given file.
+  #    --haskell-platform=VERSION  Update bounds by the library versions of the
+  #                                specified haskell platform version
+  )
+  _arguments "${(@)args}"
+}
+
+# vim:ft=zsh

@@ -1,0 +1,106 @@
+#compdef shuck
+
+_shuck() {
+  typeset curcontext=$curcontext state lstate line
+  typeset -ar args=(
+   '(- *)--version'
+   '(- *)'{-h,--help}''
+    '*::shuck command:_shuck_command'
+  )
+  _arguments "${(@)args}"
+}
+
+(( $+functions[_shuck_command] )) || _shuck_command() {
+  typeset -ar _shuck_cmds=(
+    'check:Lint shell files and supported embedded shell scripts'
+    'server:Start the language server over stdio'
+    'run:Run a shell script with a managed interpreter'
+    'install:Pre-install a managed shell interpreter or list available versions'
+    'shell:Spawn a shell session using a managed interpreter'
+    'format:Format shell files'
+    "clean:Remove shuck cache entries for the provided paths' projects"
+    'help:Print this message or the help of the given subcommand(s)'
+  )
+  if (( CURRENT == 1 )); then
+    _describe -t commands 'shuck command' _shuck_cmds
+  else
+    typeset curcontext="$curcontext" ret=1
+
+    cmd="${${_shuck_cmds[(r)$words[1]:*]%%:*}}"
+
+    if (( $#cmd )); then
+      curcontext="${curcontext%:*:*}:shuck-${cmd}:"
+
+      if [ $cmd = 'help' ]; then
+        _message 'no more arguments'
+      elif ! _call_function ret _shuck-$cmd; then
+        _default && ret=0
+      fi
+    else
+      _default && ret=0
+    fi
+    return ret
+  fi
+}
+
+(( $+functions[_shuck-check] )) || _shuck-check() {
+  typeset -ar args=(
+    '--fix[Apply safe fixes]'
+    '--unsafe-fixes[Apply unsafe fixes]'
+    '(- *)'{-h,--help}'[Print help]'
+
+    '--no-cache[Disable cache reads and writes]'
+
+    '*: :_files'
+  )
+  _arguments "${(@)args}"
+}
+
+# typeset -ar args=(
+# )
+# _arguments "${(@)args}"
+return
+
+: << 'EOF'
+Shell checker CLI for shuck
+
+Usage: shuck [OPTIONS] <COMMAND>
+
+Commands:
+  check    Lint shell files and supported embedded shell scripts
+  server   Start the language server over stdio
+  run      Run a shell script with a managed interpreter
+  install  Pre-install a managed shell interpreter or list available versions
+  shell    Spawn a shell session using a managed interpreter
+  format   Format shell files
+  clean    Remove shuck cache entries for the provided paths' projects
+  help     Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help
+          Print help (see a summary with '-h')
+
+  -V, --version
+          Print version
+
+Global options:
+      --config <CONFIG_OPTION>
+          Either a path to a TOML configuration file (`shuck.toml`), or a TOML `<KEY> = <VALUE>` pair (such as you might find in a `shuck.toml` configuration file) overriding a specific configuration option. Overrides of individual settings using this option always take precedence over all configuration files, including configuration files that were also specified using `--config`
+
+      --isolated
+          Ignore all configuration files
+
+      --color <WHEN>
+          Control when colored output is used
+
+          Possible values:
+          - auto:   Display colors if the output goes to an interactive terminal
+          - always: Always display colors
+          - never:  Never display colors
+
+Miscellaneous:
+      --cache-dir <PATH>
+          Path to the cache directory
+          
+          [env: SHUCK_CACHE_DIR=]
+EOF
