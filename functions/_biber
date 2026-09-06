@@ -1,6 +1,6 @@
 #compdef biber
 
-typeset -ar args=(
+local -ar args=(
   '(- *)--cache[If running as a PAR::Packer binary, show the cache location and exit.]'
   '(--configfile -g)'{--configfile,-g}'[Use file as configuration file for "biber".]:file:_files -g "*"'
   '(--debug -D)'{--debug,-D}'[Turn on debugging for "biber".]'

@@ -2,7 +2,7 @@
 
 # v3.6.0
 
-typeset -ar args=(
+local -ar args=(
   '(- *)--version[show version and exit]'
   '(- *)'--help
   '(-l --list)'{-l,--list}"[list files whose formatting differs from shfmt's]"

@@ -1,6 +1,6 @@
 #compdef obabel
 
-typeset -ar inputformats=(
+local -ar inputformats=(
   can
   cif
   cml
@@ -15,7 +15,7 @@ typeset -ar inputformats=(
   vasp
   xyz
 )
-typeset -ar outputformats=(
+local -ar outputformats=(
   ascii
   can
   cif
@@ -36,7 +36,7 @@ typeset -ar outputformats=(
   xyz
 )
 
-typeset -ar args=(
+local -ar args=(
   --addtotitle'[Append text to the current molecule title]:title'
   --addformula'[Append the molecular formula after the current molecule title]'
   -c'[Center atomic coordinates at (0,0,0)]'

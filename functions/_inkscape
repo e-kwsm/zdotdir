@@ -1,6 +1,6 @@
 #compdef inkscape
 
-typeset -ar args=(
+local -ar args=(
   '(- *)'{-V,--version}'[Print the Inkscape version number]'
   {-z,--without-gui}'[Do not use X server (only process files from console)]'
   {-g,--with-gui}'[Try to use X server (even if $DISPLAY is not set)]'

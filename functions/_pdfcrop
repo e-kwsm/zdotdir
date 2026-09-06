@@ -1,6 +1,6 @@
 #compdef pdfcrop
 
-typeset -ar args=(
+local -ar args=(
   '(- *)--help[print usage]'
   '(- *)--version[print version number]'
   '1:input:_files -g "*.pdf"'

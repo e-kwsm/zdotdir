@@ -1,6 +1,6 @@
 #compdef munge
 
-typeset -ar args=(
+local -ar args=(
   '(- *)'{-h,--help}'[Display this help]'
   '(- *)'{-L,--license}'[Display license information]'
   '(- *)'{-V,--version}'[Display version information]'

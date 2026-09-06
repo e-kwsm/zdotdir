@@ -608,7 +608,7 @@ _clang-tidy() {
     zircon-temporary-objects
   )
 
-  typeset -ar args=(
+  local -ar args=(
     '(- *)'{-h,--help}'[Display available options (--help-hidden for more)]'
     '(- *)--help-hidden[Display all available options]'
     '(- *)--help-list[Display list of available options (--help-list-hidden for more)]'

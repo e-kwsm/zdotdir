@@ -1,7 +1,7 @@
 #compdef shellcheck
 
-typeset -ar CODE=(SC{1000..1146} SC{2000..2336} SC{3000..3067})
-typeset -ar OPTIONALS=(
+local -ar CODE=(SC{1000..1146} SC{2000..2336} SC{3000..3067})
+local -ar OPTIONALS=(
   add-default-case
   avoid-negated-conditions
   avoid-nullary-conditions
@@ -15,7 +15,7 @@ typeset -ar OPTIONALS=(
   useless-use-of-cat
 )
 
-typeset -ar args=(
+local -ar args=(
   '(-a --check-sourced)'{-a,--check-sourced}'[Include warnings from sourced files]'
   '(-i --include)'{-i,--include=}'[Consider only given types of warnings]:CODE:_values -s, CODE $CODE'
   '(-e --exclude)'{-e,--exclude=}'[Exclude types of warnings]:CODE:_values -s, CODE $CODE'

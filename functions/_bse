@@ -2,9 +2,9 @@
 
 # main {{{1
 _bse() {
-  typeset curcontext=$curcontext state lstate line
+  local curcontext=$curcontext state lstate line
 
-  typeset -ar basissets=(
+  local -ar basissets=(
     '3-21G'
     '6-31++G'
     '6-31++G\*'
@@ -179,7 +179,7 @@ _bse() {
     'Stuttgart\ RLC\ ECP'
   )
 
-  typeset -ar elements=(
+  local -ar elements=(
     H                    He
     Li Be B  C  N  O  F  Ne
     Na Mg Al Si P  S  Cl Ar
@@ -187,7 +187,7 @@ _bse() {
                       I  Xe
   )
 
-  typeset -ar families=(
+  local -ar families=(
     acvxz-j
     ahlrichs
     ahlrichs_dhf
@@ -247,7 +247,7 @@ _bse() {
     zorrilla
   )
 
-  typeset -ar formats=(
+  local -ar formats=(
     bsedebug
     cp2k
     gamess_uk
@@ -263,13 +263,13 @@ _bse() {
     turbomole
   )
 
-  typeset -ar reffmts=(
+  local -ar reffmts=(
     bib
     json
     txt
   )
 
-  typeset -ar roles=(
+  local -ar roles=(
     orbital
     jfit
     jkfit
@@ -291,7 +291,7 @@ _bse() {
 
 # _bse-command {{{1
 (( $+functions[_bse_command] )) || _bse_command() {
-  typeset -ar _bse_cmds=(
+  local -ar _bse_cmds=(
     'autoabs-basis:Form AutoABS auxiliary basis'
     'autoaux-basis:Form AutoAux auxiliary basis'
     'convert-basis:Convert basis set files from one format to another'
@@ -317,7 +317,7 @@ _bse() {
   if (( CURRENT == 1 )); then
     _describe -t commands 'bse command' _bse_cmds
   else
-    typeset curcontext="$curcontext" ret=1
+    local curcontext="$curcontext" ret=1
 
     cmd="${${_bse_cmds[(r)$words[1]:*]%%:*}}"
 

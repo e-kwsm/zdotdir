@@ -1,6 +1,6 @@
 #compdef pkgconf
 
-typeset -ar args=(
+local -ar args=(
   '--cflags[print required CFLAGS to stdout]'
   '--cflags-only-I[print required include-dir CFLAGS to stdout]'
   '--cflags-only-other[print required non-include-dir CFLAGS to stdout]'

@@ -1,6 +1,6 @@
 #compdef srun
 
-typeset -ar args=(
+local -ar args=(
   '(-b --begin)'{-b,--begin=}'[Defer initiation of this job until the specified time.]:time'
   --comment='[An arbitrary comment.]:string'
   '(-c --cpus-per-task)'{-c,--cpus-per-task=}'[Request  that  ncpus be allocated per process.]:ncpus'

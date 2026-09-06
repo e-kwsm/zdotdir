@@ -1,7 +1,7 @@
 #compdef kpsewhich
 
 _kpsewhich() {
-  typeset -ar variables=(
+  local -ar variables=(
     FONTCONFIG_FILE
     FONTCONFIG_PATH
     FONTFEATURES
@@ -32,7 +32,7 @@ _kpsewhich() {
     stack_size
   )
 
-  typeset -ar args=(
+  local -ar args=(
     -all'[output all matches, one per line (no effect with pk/gf).]'
     -debug='[set debugging flags.]:NUM'
     '(-D -dpi)'{-D,-dpi}='[use a base resolution of NUM; default 600.]:NUM'
