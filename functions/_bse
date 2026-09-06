@@ -301,7 +301,7 @@ _bse() {
     guess
   )
 
-  typeset -ar args=(
+  local -ar args=(
     '(- *)'{-h,--help}'[show this help message and exit]'
     '(- *)'-V"[show program's version number and exit]"
     '(-d --data)'{-d,--data}'[Override which data directory to use]:PATH:_files -/'
@@ -391,7 +391,7 @@ _bse() {
 }
 
 (( $+functions[_bse-get-basis] )) || _bse-get-basis() {  # {{{1
-  typeset -ar args=(
+  local -ar args=(
     '(- *)'{-h,--help}
     --elements"[Which elements of the basis set to output. Default is all defined in the given basis]:ELEMENTS:_values -s, ELEMENTS $elements"
     --version'[Which version of the basis set to output. Default is the latest version]:VERSION'
@@ -436,7 +436,7 @@ _bse() {
 }
 
 (( $+functions[_bse-get-family] )) || _bse-get-family() {  # {{{1
-  typeset -ar args=(
+  local -ar args=(
     '(- *)'{-h,--help}
     "1:basis:_values basis $basissets"
   )

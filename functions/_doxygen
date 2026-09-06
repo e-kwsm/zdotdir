@@ -1,6 +1,6 @@
 #compdef doxygen
 
-typeset -ar args=(
+local -ar args=(
   '(-x -x_noenv)-s[Ommit comments]'
   '(-u -x -x_noenv)-g[Generate a template configuration file]'
   '(-g -x -x_noenv)-u[Update an existing configuration file]'

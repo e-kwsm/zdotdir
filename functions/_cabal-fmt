@@ -2,7 +2,7 @@
 
 # cabal-fmt 0.1.9
 
-typeset -ar args=(
+local -ar args=(
   # --Werror                 Treat warnings as errors
   '--indent[Indentation]:N'
   '--tabular[Tabular formatting]'

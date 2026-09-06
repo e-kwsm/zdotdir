@@ -1,6 +1,6 @@
 #compdef cvtsudoers
 
-typeset -ar args=(
+local -ar args=(
   {-b,--base=}'[The base DN (distinguished name) that will be used when performing LDAP queries]:dn'
   {-c,--config=}'[Specify the path to the configuration file]:file:_files'
   {-d,--defaults=}'[Only convert Defaults entries of the specified types]:deftypes:_values -s , deftype all global user runas host command'

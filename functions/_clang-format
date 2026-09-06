@@ -2,7 +2,7 @@
 
 # clang-format version 20.1.6
 
-typeset -ar styles=(
+local -ar styles=(
   LLVM
   GNU
   Google

@@ -3,8 +3,8 @@
 # 3.7.0
 
 _dftd4() {
-  typeset curcontext=$curcontext state lstate line
-  typeset -ar args=(
+  local curcontext=$curcontext state lstate line
+  local -ar args=(
    '(- *)--version[Print program version and exit]'
    '(- *)--citation[Print citation information and exit]'
    '(- *)--license[Print license header and exit]'
@@ -15,14 +15,14 @@ _dftd4() {
 }
 
 (( $+functions[_dftd4_command] )) || _dftd4_command() {
-  typeset -ar _dftd4_cmds=(
+  local -ar _dftd4_cmds=(
     'run:Evaluate dispersion correction on the provided input structure.'
     'param:Inspect damping parameters.'
   )
   if (( CURRENT == 1 )); then
     _describe -t commands 'dftd4 command' _dftd4_cmds
   else
-    typeset curcontext="$curcontext" ret=1
+    local curcontext="$curcontext" ret=1
 
     cmd="${${_dftd4_cmds[(r)$words[1]:*]%%:*}}"
 
@@ -42,7 +42,7 @@ _dftd4() {
 }
 
 (( $+functions[_dftd4-run] )) || _dftd4-run() {
-  typeset -ar methods=(
+  local -ar methods=(
     'AM05'
     'B-LYP' 'BLYP'
     'B-P' 'BP86' 'BP' 'B-P86'
@@ -162,7 +162,7 @@ _dftd4() {
     'X3-LYP' 'X3LYP'
   )
 
-  typeset -ar args=(
+  local -ar args=(
     '(-c --charge)'{-c,--charge}'[Set charge to molecule, overwrites .CHRG file]:charge'
     '(-f --func)'{-f,--func}'[Use damping parameters for given functional]:method:_values method $methods'
     {-g,--grad}'[Evaluate molecular gradient and virial, write results to file (default: dftd4.txt)]:file:_files'
@@ -180,7 +180,7 @@ _dftd4() {
 }
 
 (( $+functions[_dftd4-param] )) || _dftd4-param() {
-  typeset -ar args=(
+  local -ar args=(
     '(- *)'{-h,--help}'[Show help message]'
     '(- *)'{-l,--list,--funcs}'[List all supported functionals]'
   )

@@ -1,6 +1,6 @@
 #compdef git-clang-format
 
-typeset -ar args=(
+local -ar args=(
   '(- *)'{-h,--help}'[this help message and exit]'
   # --binary BINARY       path to clang-format
   # --commit COMMIT       default commit to use if none is specified

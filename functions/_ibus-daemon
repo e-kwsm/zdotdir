@@ -2,7 +2,7 @@
 
 # ibus-daemon - Version 1.5.32
 
-typeset -ar args=(
+local -ar args=(
   '(- *)'{-h,--help}'[Show help options]'
   '(- *)'{-V,--version}"[Show the application's version.]"
   '(-d --daemonize)'{-d,--daemonize}'[run ibus as background process.]'

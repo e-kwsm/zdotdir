@@ -1,8 +1,8 @@
 #compdef cabal-bounds
 
 _cabal-bounds() {
-  typeset curcontext=$curcontext state lstate line
-  typeset -ar args=(
+  local curcontext=$curcontext state lstate line
+  local -ar args=(
    '(- *)'{-h,--help}'[Display help message]'
    '(- *)'{-v,--version}'[Print version information]'
    '(- *)--numeric-version[Print just the version number]'
@@ -12,7 +12,7 @@ _cabal-bounds() {
 }
 
 (( $+functions[_cabal-bounds_command] )) || _cabal-bounds_command() {
-  typeset -ar _cabal-bounds_cmds=(
+  local -ar _cabal-bounds_cmds=(
     drop
     update
     dump
@@ -22,7 +22,7 @@ _cabal-bounds() {
   if (( CURRENT == 1 )); then
     _describe -t commands 'cabal-bounds command' _cabal-bounds_cmds
   else
-    typeset curcontext="$curcontext" ret=1
+    local curcontext="$curcontext" ret=1
 
     cmd="${${_cabal-bounds_cmds[(r)$words[1]:*]%%:*}}"
 
@@ -42,7 +42,7 @@ _cabal-bounds() {
 }
 
 (( $+functions[_cabal-bounds-update] )) || _cabal-bounds-update() {
-  typeset -ar args=(
+  local -ar args=(
   # -L --lower                     Only the lower bound is updated. The same as
   #                                using '--lowercomp=minor'.
   # -U --upper                     Only the upper bound is updated. The same as

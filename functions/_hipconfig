@@ -1,7 +1,7 @@
 #compdef hipconfig
 
 # 6.3.42134-a9a80e791
-typeset -ar args=(
+local -ar args=(
   '(--path -p)'{--path,-p}'[print HIP_PATH (use env var if set, else determine from hipconfig path)]'
   '(--rocmpath -R)'{--rocmpath,-R}'[print ROCM_PATH (use env var if set, else determine from hip path or /opt/rocm)]'
   '(--cpp_config -C)'{--cpp_config,-C}'[print C++ compiler options]'

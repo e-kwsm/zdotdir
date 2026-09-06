@@ -1,8 +1,8 @@
 #compdef shuck
 
 _shuck() {
-  typeset curcontext=$curcontext state lstate line
-  typeset -ar args=(
+  local curcontext=$curcontext state lstate line
+  local -ar args=(
    '(- *)--version'
    '(- *)'{-h,--help}''
     '*::shuck command:_shuck_command'
@@ -11,7 +11,7 @@ _shuck() {
 }
 
 (( $+functions[_shuck_command] )) || _shuck_command() {
-  typeset -ar _shuck_cmds=(
+  local -ar _shuck_cmds=(
     'check:Lint shell files and supported embedded shell scripts'
     'server:Start the language server over stdio'
     'run:Run a shell script with a managed interpreter'
@@ -24,7 +24,7 @@ _shuck() {
   if (( CURRENT == 1 )); then
     _describe -t commands 'shuck command' _shuck_cmds
   else
-    typeset curcontext="$curcontext" ret=1
+    local curcontext="$curcontext" ret=1
 
     cmd="${${_shuck_cmds[(r)$words[1]:*]%%:*}}"
 
@@ -44,7 +44,7 @@ _shuck() {
 }
 
 (( $+functions[_shuck-check] )) || _shuck-check() {
-  typeset -ar args=(
+  local -ar args=(
     '--fix[Apply safe fixes]'
     '--unsafe-fixes[Apply unsafe fixes]'
     '(- *)'{-h,--help}'[Print help]'
@@ -56,7 +56,7 @@ _shuck() {
   _arguments "${(@)args}"
 }
 
-# typeset -ar args=(
+# local -ar args=(
 # )
 # _arguments "${(@)args}"
 return

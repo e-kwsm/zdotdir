@@ -1,6 +1,6 @@
 #compdef msgmerge
 
-typeset -ar args=(
+local -ar args=(
   {-U,--update}'[update def.po, do nothing if def.po already up to date]'
   {-o,--output-file=}'[write output to specified file]:FILE:_files'
   '--backup=[make a backup of def.po]:CONTROL'

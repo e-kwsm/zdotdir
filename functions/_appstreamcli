@@ -2,9 +2,9 @@
 
 # main {{{1
 _appstreamcli() {
-  typeset curcontext=$curcontext state lstate line
+  local curcontext=$curcontext state lstate line
 
-  typeset -ar args=(
+  local -ar args=(
     '(- *)'{-h,--help}'[Show help options]'
     '(- *)--version[Display the version number of appstreamcli]'
     '*::appstreamcli command:_appstreamcli_command'
@@ -14,7 +14,7 @@ _appstreamcli() {
 
 # _appstreamcli-command {{{1
 (( $+functions[_appstreamcli_command] )) || _appstreamcli_command() {
-  typeset -ar _appstreamcli_cmds=(
+  local -ar _appstreamcli_cmds=(
     'validate:Validate AppStream XML files for issues.'
     'status:Display status information about available AppStream metadata.'
     'sysinfo:Show information about the current device and used operating system.'
@@ -23,7 +23,7 @@ _appstreamcli() {
   if (( CURRENT == 1 )); then
     _describe -t commands 'appstreamcli command' _appstreamcli_cmds
   else
-    typeset curcontext="$curcontext" ret=1
+    local curcontext="$curcontext" ret=1
 
     cmd="${${_appstreamcli_cmds[(r)$words[1]:*]%%:*}}"
 

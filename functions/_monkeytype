@@ -2,7 +2,7 @@
 
 # main {{{1
 _monkeytype() {
-  typeset -ar args=(
+  local -ar args=(
     '*::monkeytype command:_monkeytype_command'
   )
   _arguments "${(@)args}"
@@ -10,7 +10,7 @@ _monkeytype() {
 
 # _monkeytype-command {{{1
 (( $+functions[_monkeytype_command] )) || _monkeytype_command() {
-  typeset -ar _monkeytype_cmds=(
+  local -ar _monkeytype_cmds=(
     'run:Run a Python script under MonkeyType tracing'
     'apply:Generate and apply a stub'
     'stub:Generate a stub'
@@ -19,7 +19,7 @@ _monkeytype() {
   if (( CURRENT == 1 )); then
     _describe -t commands 'monkeytype command' _monkeytype_cmds
   else
-    typeset curcontext="$curcontext" ret=1
+    local curcontext="$curcontext" ret=1
 
     cmd="${${_monkeytype_cmds[(r)$words[1]:*]%%:*}}"
 
@@ -40,7 +40,7 @@ _monkeytype() {
 
 # apply {{{1
 (( $+functions[_monkeytype-apply] )) || _monkeytype-apply() {
-  typeset -ar args=(
+  local -ar args=(
     '(- *)'{-h,--help}'[show help]'
     '--sample-count[Print to stderr the numbers of traces stubs are based on]'
     '--ignore-existing-annotations[Ignore existing annotations when applying stubs from traces.]'
@@ -51,7 +51,7 @@ _monkeytype() {
 
 # run {{{1
 (( $+functions[_monkeytype-run] )) || _monkeytype-run() {
-  typeset -ar args=(
+  local -ar args=(
     '(- *)'{-h,--help}'[show help]'
     '*:script_path:_file'
   )
@@ -60,7 +60,7 @@ _monkeytype() {
 
 # stub {{{1
 (( $+functions[_monkeytype-stub] )) || _monkeytype-stub() {
-  typeset -ar args=(
+  local -ar args=(
     '(- *)'{-h,--help}'[show help]'
     '--sample-count[Print to stderr the numbers of traces stubs are based on]'
     '--ignore-existing-annotations[Ignore existing annotations and generate stubs only from traces.]'

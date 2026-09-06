@@ -3,7 +3,7 @@
 # keychain 3.0.0
 
 _keychain() {
-  typeset curcontext=$curcontext state lstate line
+  local curcontext=$curcontext state lstate line
   local -ar args=(
     '(- *)'{-h,--help}'[Print the top-level help cheat sheet, or action-specific help when followed by an action path]'
     '(- *)'{-V,--version}'[Print the version banner and exit]'
@@ -33,7 +33,7 @@ _keychain() {
   if (( CURRENT == 1 )); then
     _describe -t commands 'keychain command' _keychain_cmds
   else
-    typeset curcontext="$curcontext" ret=1
+    local curcontext="$curcontext" ret=1
 
     cmd="${${_keychain_cmds[(r)$words[1]:*]%%:*}}"
 

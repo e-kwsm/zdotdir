@@ -1,6 +1,6 @@
 #compdef hlint
 
-typeset -ar args=(
+local -ar args=(
   '(-r --report)'{-r,--report=}'-[Generate a report in HTML]:FILE:_files -g "*.html"'
   '(-h --hint)'{-h,--hint=}'[Hint/ignore file to use]:FILE:_files'
   '(-g --git)'{-g,--git}'[Run on files tracked by git]'

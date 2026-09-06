@@ -2,7 +2,7 @@
 
 # main {{{1
 _vtune() {
-  typeset curcontext=$curcontext state lstate line
+  local curcontext=$curcontext state lstate line
 
   _arguments \
     '*::vtune command:_vtune_command'
@@ -18,7 +18,7 @@ _vtune() {
 
 # _vtune-command {{{1
 (( $+functions[_vtune_command] )) || _vtune_command() {
-  typeset -ar _vtune_cmds=(
+  local -ar _vtune_cmds=(
     '-collect:Choose an analysis type.'
     '-collect-with:Choose a collector.'
     '-command:Issue a command to a running collection.'
@@ -32,7 +32,7 @@ _vtune() {
   if (( CURRENT == 1 )); then
     _describe -t commands 'vtune command' _vtune_cmds
   else
-    typeset curcontext="$curcontext" ret=1
+    local curcontext="$curcontext" ret=1
 
     cmd="${${_vtune_cmds[(r)$words[1]:*]%%:*}}"
 
