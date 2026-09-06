@@ -1,4 +1,4 @@
-#compdef clang-format clang-format-9 clang-format-10 clang-format-11
+#compdef -P clang-format(|-[0-9]#)
 
 typeset -ar args=(
   --Werror'[If set, changes formatting warnings to errors]'
