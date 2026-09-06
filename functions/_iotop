@@ -1,5 +1,7 @@
 #compdef iotop
 
+# iotop 0.6
+
 _iotop() {
   local -ar args=(
     '(- *)'--version"[show program's version number and exit]"
