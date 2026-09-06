@@ -1,6 +1,6 @@
 #compdef dot
 
-# dot - graphviz version 12.2.1 (0)
+# dot - graphviz version 16.0.0 (0)
 
 local -ar formats=(
   canon
@@ -141,16 +141,17 @@ local -ar args=(
 _arguments "${(@)args}"
 
 : << 'EOF'
-Usage: dot [-Vv?] [-(GNE)name=val] [-(KTlso)<val>] <dot files>
+Usage: dot [-Vv?] [-(GNEA)name=val] [-(KTlso)<val>] <dot files>
 (additional options for neato)    [-x] [-n<v>]
 (additional options for fdp)      [-L(gO)] [-L(nUCT)<val>]
 (additional options for config)  [-cv]
 
  -V          - Print version and exit
- -v          - Enable verbose mode 
+ -v[n]       - Enable verbose mode at level 1, or set to the level 'n' if provided
  -Gname=val  - Set graph attribute 'name' to 'val'
  -Nname=val  - Set node attribute 'name' to 'val'
  -Ename=val  - Set edge attribute 'name' to 'val'
+ -Aname=val  - Set attribute 'name' to 'val' for graph, node, and edge
  -Tv         - Set output format to 'v'
  -Kv         - Set layout engine to 'v' (overrides default based on command name)
  -lv         - Use external library 'v'
@@ -166,6 +167,7 @@ Usage: dot [-Vv?] [-(GNE)name=val] [-(KTlso)<val>] <dot files>
 
  -Lg         - Don't use grid
  -LO         - Use old attractive force
+ -Lm<l>      - Set m-limit to l
  -Ln<i>      - Set number of iterations to i
  -LU<i>      - Set unscaled factor to i
  -LC<v>      - Set overlap expansion factor to v
