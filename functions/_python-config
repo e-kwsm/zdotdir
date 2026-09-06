@@ -1,0 +1,20 @@
+#compdef -P python[0-9.]#-config
+
+_python-config() {
+  local -ar flags=(
+    '--prefix'
+    '--exec-prefix'
+    '--includes'
+    '--libs'
+    '--cflags'
+    '--ldflags'
+    '--extension-suffix'
+    '--help'
+    '--abiflags'
+    '--configdir'
+    '--embed'
+  )
+  _values flags "${(@)flags}"
+}
+
+# vim:ft=zsh
