@@ -1,18 +1,22 @@
 #compdef vermin
 
-local -ar args=(
-  '(--dump -d --no-dump)'{--dump,-d}'[Dump AST node visits.]'
-  '(--dump -d --no-dump)'--no-dump"[Don't dump AST node visits.]"
-  '(- *)'{--help,-h}'[Shows this information and exits.]'
-  '(- *)'{--version,-V}'[Shows version number and exits.]'
-  --versions'[In the end, print all unique versions required by the analysed code.]'
-  '*:files:_files -g "*.(py|pyi)"'
-)
-_arguments "${(@)args}"
+_vermin() {
+  local -ar args=(
+    '(--dump -d --no-dump)'{--dump,-d}'[Dump AST node visits]'
+    '(--dump -d --no-dump)'--no-dump"[Don't dump AST node visits]"
+    '(- *)'{--help,-h}'[Shows this information and exits]'
+    '(- *)'{--version,-V}'[Shows version number and exits]'
+    '(--config-file -c --no-config-file)'{--config-file,-c}'[Loads config file]:path:_files'
+    '(--config-file -c)--no-config-file[No automatic config file detection and --config-file argument is disallowed]'
+    '--versions[In the end, print all unique versions required by the analysed code]'
+    '*:files:_files -g "*.(py|pyi)"'
+  )
+  _arguments "${(@)args}"
+}
 
 : << 'EOF'
-Vermin 1.6.0
-Usage: vermin [options] <python source files and folders..>
+Vermin 1.8.0
+Usage: /usr/bin/vermin [options] <python source files and folders..>
 
 Concurrently detect the minimum Python versions needed to run code.
 
@@ -73,7 +77,7 @@ Options:
 
   --processes=N | -p=N
         Use N concurrent processes to detect and analyze files. Defaults to all
-        cores (8).
+        cores (16).
 
   --ignore | -i
         Ignore incompatible versions and warnings. However, if no compatible
@@ -170,11 +174,16 @@ Options:
         Format to show results and output in.
         Supported formats:
           default  - Default formatting.
+          colored  - Same as default, but prints with ANSI styling.
           parsable - Each result is on form 'file:line:column:py2:py3:feature'. The
                      last line has no path or line/column numbers and contains the
                      minimum py2 and py3 versions. Minimum verbosity level is set to
                      3 but can be increased. Tips, hints, incompatible versions, and
                      `--versions` are disabled. File paths containing ':' are ignored.
+          github   - Same as parsable format, but each result is formatted as a GitHub
+                     Actions annotation. Minimum version messages are annotated as
+                     errors, and all other verbose messages as notices. The intent is
+                     that it be used for linting in a GitHub Actions pipeline.
 
   [--exclude <name>] ...
         Exclude full names, like 'email.parser.FeedParser', from analysis. Useful to
