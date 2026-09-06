@@ -83,7 +83,7 @@ Global options
   --no-gui, --nogui          global:no-gui                     don't use GUI passphrase prompts
   --absolute                 global:absolute                   treat --dir as the literal pidfile dir
   --dir                      global:dir                        pidfile directory (default: ~/.keychain)
-  --host                     global:host                       override hostname used for pidfile naming
+  --host, --hostname         global:host                       override hostname used for pidfile naming
 
 Actions
   keychain add               action:add                        Add keys to the agent (auto-start one if needed).
@@ -97,21 +97,20 @@ Actions
   keychain list              action:list                       List keys currently held by ssh-agent.
   keychain man               action:man                        Full documentation.
   keychain version           action:version                    Print version banner.
-  keychain wipe              action:wipe                       Wipe loaded keys (default: both ssh and gpg).
+  keychain wipe              action:wipe                       Clear SSH identities by default, or explicitly clear the gpg-agent cache.
 
 Action options
 keychain add
   --eval                     option:eval                       emit shell env for eval $(keychain ...)
   --systemd                  option:systemd                    push agent env to systemctl --user
   --quick, -Q                option:quick                      short-circuit if an agent already has any key
-  --no-passphrase, --noask   option:no-passphrase              don't prompt for passphrases
+  --immediate                option:immediate                  begin coordinated SSH key activation without waiting for Enter
+  --no-passphrase, --noask   option:no-passphrase              set up ssh-agent without loading keys
   --confirm                  option:confirm                    ssh-add -c: prompt per use
   --timeout                  option:timeout                    auto-expire keys after MIN minutes
   --ignore-missing           option:ignore-missing             skip keys that don't exist
-  --clear                    option:clear                      wipe before adding -- use chained verbs
+  --clear                    option:clear                      wipe SSH identities before adding
   --confallhosts             option:confallhosts               load every IdentityFile in ~/.ssh/config
-  --ssh-allow-gpg            option:ssh-allow-gpg              use a running gpg-agent for SSH
-  --ssh-spawn-gpg            option:ssh-spawn-gpg              spawn gpg-agent with SSH support
   --ssh-allow-forwarded      option:ssh-allow-forwarded        adopt a forwarded SSH agent
   --no-inherit, --noinherit  option:no-inherit                 ignore inherited SSH_AUTH_SOCK / PID
   --ssh-agent-socket         option:ssh-agent-socket           use PATH as the ssh-agent endpoint
@@ -121,8 +120,6 @@ keychain add
 keychain agent start
   --eval                     option:eval                       emit shell env for eval $(keychain ...)
   --systemd                  option:systemd                    push agent env to systemctl --user
-  --ssh-allow-gpg            option:ssh-allow-gpg              use a running gpg-agent for SSH
-  --ssh-spawn-gpg            option:ssh-spawn-gpg              spawn gpg-agent with SSH support
   --ssh-allow-forwarded      option:ssh-allow-forwarded        adopt a forwarded SSH agent
   --no-inherit, --noinherit  option:no-inherit                 ignore inherited SSH_AUTH_SOCK / PID
   --ssh-agent-socket         option:ssh-agent-socket           use PATH as the ssh-agent endpoint
@@ -153,28 +150,26 @@ keychain version
   --json                     option:version-json               emit JSON
 
 keychain wipe
-  --ssh                      option:wipe-ssh                   wipe SSH agent only
-  --gpg                      option:wipe-gpg                   wipe GPG agent only
+  --ssh                      option:wipe-ssh                   remove SSH-agent identities only
+  --gpg                      option:wipe-gpg                   flush the existing gpg-agent's entire in-memory secret cache
 
 Reference Topics
   topic:windows              topic:windows                     Windows-specific notes
-  topic:agents               topic:agents                      How keychain discovers, attaches, and spawns agents
+  topic:agents               topic:agents                      How keychain discovers, attaches, and spawns ssh-agent
   topic:config               topic:config                      ~/.keychainrc preference file
   topic:env                  topic:env                         Environment emission and shell integration
   topic:extkeys              topic:extkeys                     Extended key syntax
   topic:pidfile              topic:pidfile                     Pidfile location and contents
 
 Config keys (~/.keychainrc)
-  agent.clear                config:agent.clear                wipe before adding -- use chained verbs
+  agent.clear                config:agent.clear                wipe SSH identities before adding
   agent.confirm              config:agent.confirm              ssh-add -c: prompt per use
+  agent.immediate            config:agent.immediate            begin coordinated SSH key activation without waiting for Enter
   agent.inherit              config:agent.inherit              ignore inherited SSH_AUTH_SOCK / PID
   agent.ssh_agent_socket     config:agent.ssh_agent_socket     use PATH as the ssh-agent endpoint
   agent.ssh_allow_forwarded  config:agent.ssh_allow_forwarded  adopt a forwarded SSH agent
-  agent.ssh_allow_gpg        config:agent.ssh_allow_gpg        use a running gpg-agent for SSH
-  agent.ssh_spawn_gpg        config:agent.ssh_spawn_gpg        spawn gpg-agent with SSH support
   agent.systemd              config:agent.systemd              push agent env to systemctl --user
   agent.timeout              config:agent.timeout              auto-expire keys after MIN minutes
-  agent.env.gpg_args         config:agent.env.gpg_args         extra args passed to spawned gpg-agent
   agent.env.ssh_args         config:agent.env.ssh_args         extra args passed to spawned ssh-agent
   keys.confallhosts          config:keys.confallhosts          load every IdentityFile in ~/.ssh/config
   keys.ignore_missing        config:keys.ignore_missing        skip keys that don't exist
