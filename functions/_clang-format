@@ -1,6 +1,6 @@
 #compdef -P clang-format(|-[0-9]#)
 
-# clang-format version 20.1.6
+# clang-format version 22.1.8
 
 local -ar styles=(
   LLVM
@@ -67,7 +67,7 @@ Clang-format options:
                                      CSharp: .cs
                                      Java: .java
                                      JavaScript: .js .mjs .cjs .ts
-                                     Json: .json
+                                     JSON: .json .ipynb
                                      Objective-C: .m .mm
                                      Proto: .proto .protodevel
                                      TableGen: .td
