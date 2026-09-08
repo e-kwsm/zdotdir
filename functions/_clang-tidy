@@ -615,7 +615,7 @@ _clang-tidy() {
     negchecks=($negchecks "-$c")
   done
   local -r negchecks
-  
+
   local -ar args=(
     '(- *)'{-h,--help}'[Display available options (--help-hidden for more)]'
     '(- *)--help-hidden[Display all available options]'
