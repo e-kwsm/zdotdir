@@ -2,6 +2,7 @@
 
 # 3.0.7
 
+_pkgconf() {
 local -ar args=(
   '(- *)--help[this message]'
   '(- *)--about[print pkgconf version and license to stdout]'
@@ -21,9 +22,16 @@ local -ar args=(
   '--libs-only-l[print required LIBNAME linker flags to stdout]'
   '--libs-only-other[print required other linker flags to stdout]'
   "--license[print the specified module's license to stdout if known]"
-  '*:LIBRARIES:_files -g "*.pc"'
+  '*:LIBRARIES:_pkgconf-pcs'
 )
 _arguments "${(@)args}"
+}
+
+(( $+functions[_pkgconf-pcs] )) ||
+_pkgconf-pcs() {
+  local -r pcs=($(pkgconf --list-package-names 2> /dev/null))
+  compadd "$@" -a pcs
+}
 
 : << EOF
 usage: pkgconf [OPTIONS] [LIBRARIES]
