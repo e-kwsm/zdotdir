@@ -31,7 +31,7 @@ _kpsewhich() {
     param_size
     stack_size
   )
-  
+
   local -ar args=(
     -all'[output all matches, one per line (no effect with pk/gf).]'
     -debug='[set debugging flags.]:NUM'
