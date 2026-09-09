@@ -17,7 +17,7 @@ _arguments -s : "${(@)args}"
 
 : << EOF
 Usage:
-  ibus-daemon [OPTION?] - ibus daemon
+  ibus-daemon [OPTION…] - ibus daemon
 
 Help Options:
   -h, --help                                   Show help options
