@@ -1,5 +1,6 @@
 #compdef sbatch
 
+_sbatch() {
 local -ar MAIL_TYPES=(
   NONE
   BEGIN
@@ -39,5 +40,6 @@ local -ar args=(
   '*:script:_files -g "*.(bash|sh)"'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

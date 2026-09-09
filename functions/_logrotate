@@ -2,6 +2,7 @@
 
 # logrotate 3.22.0
 
+_logrotate() {
 local -ar args=(
   '(-d --debug)'{-d,--debug}"[Don't do anything, just test and print debug messages]"
   '(-f --force)'{-f,--force}'[Force file rotation]'
@@ -14,6 +15,7 @@ local -ar args=(
   '1:configfile:_files'
 )
 _arguments "${(@)args}"
+}
 
 : << 'EOF'
 Usage: logrotate [OPTION...] <configfile>

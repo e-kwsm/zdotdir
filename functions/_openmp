@@ -1,5 +1,6 @@
 #compdef -value-,OMP_DISPLAY_AFFINITY,-default- -value-,OMP_DISPLAY_ENV,-default- -value-,OMP_NUM_THREADS,-default- -value-,OMP_STACKSIZE,-default-
 
+_openmp() {
 case $service in
 *OMP_DISPLAY_AFFINITY*)
   compadd -- true false
@@ -17,5 +18,6 @@ case $service in
   return 1
   ;;
 esac
+}
 
 # vim:ft=zsh

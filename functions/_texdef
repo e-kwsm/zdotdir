@@ -1,5 +1,6 @@
 #compdef texdef latexdef
 
+_texdef() {
 local -ar engines=(
   {,lua,pdf,xe}{,la}tex{,-dev}
   context
@@ -24,6 +25,7 @@ local -ar args=(
   '*:commandname:'
 )
 _arguments "${(@)args}"
+}
 
 : << 'EOF'
 texdef -- Show definitions of TeX commands

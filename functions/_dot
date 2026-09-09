@@ -2,6 +2,7 @@
 
 # dot - graphviz version 16.0.0 (0)
 
+_dot() {
 local -ar formats=(
   canon
   cmap
@@ -139,6 +140,7 @@ local -ar args=(
   '(- *)-?[Print usage and exit]'
 )
 _arguments "${(@)args}"
+}
 
 : << 'EOF'
 Usage: dot [-Vv?] [-(GNEA)name=val] [-(KTlso)<val>] <dot files>

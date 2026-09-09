@@ -1,5 +1,6 @@
 #compdef swig
 
+_swig() {
 local -ar args=(
   '1:language:(-csharp -d -go -guile -java -javascript -lua -octave -perl5 -php7 -python -r -ruby -scilab -tcl8 -xml -c -ocaml)'
   '-c++[Enable C++ processing]'
@@ -25,3 +26,4 @@ local -ar args=(
   '2: :_files -g "*.i"'
 )
 _arguments "${(@)args}"
+}

@@ -1,5 +1,6 @@
 #compdef dircolors
 
+_dircolors() {
 local -ar args=(
   '(-b --sh --bourne-shell -p --print-database --print-ls-colors)'{-b,--sh,--bourne-shell}'[output Bourne shell code to set LS_COLORS]'
   '(- *)'{-p,--print-database}'[output defaults]'
@@ -9,5 +10,6 @@ local -ar args=(
   1:FILE:_files
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

@@ -1,5 +1,6 @@
 #compdef msgmerge
 
+_msgmerge() {
 local -ar args=(
   {-U,--update}'[update def.po, do nothing if def.po already up to date]'
   {-o,--output-file=}'[write output to specified file]:FILE:_files'
@@ -16,6 +17,7 @@ local -ar args=(
   '2:pot:_files -g "*.pot"'
 )
 _arguments "${(@)args}"
+}
 
 : << 'EOF'
 Usage: msgmerge [OPTION] def.po ref.pot

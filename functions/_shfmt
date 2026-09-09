@@ -2,6 +2,7 @@
 
 # v3.13.1
 
+_shfmt() {
 local -ar args=(
   '(- *)--version[show version and exit]'
   '(- *)'--help
@@ -25,7 +26,7 @@ local -ar args=(
   '*:file:_files -g "*.(bash|sh)"'
 )
 _arguments "${(@)args}"
-return
+}
 
 : << EOF
 usage: shfmt [flags] [path ...]

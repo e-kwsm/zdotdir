@@ -2,6 +2,7 @@
 
 # pdfcrop 2023/04/15 v1.42
 
+_pdfcrop() {
 local -ar args=(
   '(- *)--help[print usage]'
   '(- *)--version[print version number]'
@@ -13,5 +14,6 @@ local -ar args=(
   '2:output:_files -g "*.pdf"'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

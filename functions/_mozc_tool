@@ -1,5 +1,6 @@
 #compdef /usr/lib/mozc/mozc_tool
 
+_mozc_tool() {
 _arguments \
   --mode='[]:mode:(
     about_dialog
@@ -9,5 +10,6 @@ _arguments \
     hand_writing
     word_register_dialog
   )'
+}
 
 # vim:ft=zsh

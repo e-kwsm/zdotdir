@@ -2,6 +2,7 @@
 
 # black, 26.5.1
 
+_black() {
 local -ar specs=(
   '(-l --line-length)'{-l,--line-length}'[How many characters per line to allow.]:INTEGER:_values INTEGER 79 88'
   '(--ipynb)--pyi[Format all input files like typing stubs regardless of file extension]'
@@ -22,8 +23,7 @@ local -ar specs=(
   '*:files:_files -g "*.py"'
 )
 _arguments "${(@)specs}"
-
-return
+}
 
 : << 'EOF'
 Usage: black [OPTIONS] SRC ...

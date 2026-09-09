@@ -1,5 +1,6 @@
 #compdef fi_info
 
+_fi_info() {
 args=(
   '(- *)'{-h,--help}'[display this help and exit]'
 # -s, --src_addr=ADDR		source name or address
@@ -20,6 +21,7 @@ args=(
   '(- *)--version[print version info and exit]'
 )
 _arguments "${(@)args}"
+}
 
 : << EOF
 Usage: fi_info

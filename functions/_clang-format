@@ -2,6 +2,7 @@
 
 # clang-format version 22.1.8
 
+_clang-format() {
 local -ar styles=(
   LLVM
   GNU
@@ -31,8 +32,7 @@ local -ar args=(
   '*:file:_files -g "*.(c|cc|cpp|h|hpp)"'
 )
 _arguments "${(@)args}"
-
-return
+}
 
 : << EOF
 OVERVIEW: A tool to format C/C++/Java/JavaScript/JSON/Objective-C/Protobuf/C# code.

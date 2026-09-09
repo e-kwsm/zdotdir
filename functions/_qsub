@@ -1,5 +1,6 @@
 #compdef qsub
 
+_qsub() {
 local -ar args=(
   '(- *)'--help
   '(- *)'--version
@@ -8,5 +9,6 @@ local -ar args=(
   '1:script:_files -g "*.(bash|sh)"'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

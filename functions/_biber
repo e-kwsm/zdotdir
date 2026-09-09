@@ -2,6 +2,7 @@
 
 # biber version: 2.20
 
+_biber() {
 local -ar args=(
   '(- *)--cache[If running as a PAR::Packer binary, show the cache location and exit.]'
   '(--configfile -g --noconf)'{--configfile,-g}'[Use file as configuration file for "biber".]:file:_files -g "*"'
@@ -18,6 +19,7 @@ local -ar args=(
   '*:BibLaTeX control file:_files -g "*.bcf"'
 )
 _arguments "${(@)args}"
+}
 
 : << 'EOF'
 NAME

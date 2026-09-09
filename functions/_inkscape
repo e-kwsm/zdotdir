@@ -1,5 +1,6 @@
 #compdef inkscape
 
+_inkscape() {
 local -ar args=(
   '(- *)--help[Show this help message]'
   '(- *)'{-V,--version}'[Print the Inkscape version number]'
@@ -38,5 +39,6 @@ local -ar args=(
   '*:file:_files -g "*.svg"'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

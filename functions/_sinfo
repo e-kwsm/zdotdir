@@ -1,5 +1,6 @@
 #compdef sinfo
 
+_sinfo() {
 local -ar states=(
   ALLOC
   ALLOCATED
@@ -50,5 +51,6 @@ local -ar args=(
   '(- *)'{-V,--version}'[Print version information and exit.]'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

@@ -1,5 +1,6 @@
 #compdef git-clang-format
 
+_git-clang-format() {
 local -ar args=(
   '(- *)'{-h,--help}'[this help message and exit]'
   # --binary BINARY       path to clang-format
@@ -16,3 +17,4 @@ local -ar args=(
   # --diff_from_common_commit diff from the last common commit for commits in separate branches rather than the exact point of the commits
 )
 _arguments "${(@)args}"
+}

@@ -1,5 +1,6 @@
 #compdef xdvipdfmx
 
+_xdvipdfmx() {
 local -ar args=(
   '(- *)'{--help,-h}'[Show this help message and exit]'
   -o'[PDF output file name]:PDF:_files -g "*.pdf"'
@@ -7,5 +8,6 @@ local -ar args=(
   '*:file:_files -g "*.(dvi|xdv)"'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

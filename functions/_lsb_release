@@ -1,5 +1,6 @@
 #compdef lsb_release
 
+_lsb_release() {
 local -ar args=(
   '(- *)'{-v,--version}'[Show the version of the LSB against which your current installation is compliant.]'
   '(- *)'{-i,--id}"[Display the distributor's ID.]"
@@ -11,5 +12,6 @@ local -ar args=(
   '(- *)'{-h,--help}'[Show summary of options.]'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

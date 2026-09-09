@@ -2,6 +2,7 @@
 
 # typos-cli 1.40.0
 
+_typos() {
 local -ar args=(
   '(- *)'{-h,--help}'[Print help]'
   '(- *)'{-V,--version}'[Print version]'
@@ -19,6 +20,7 @@ local -ar args=(
   '*:file:_files'
 )
 _arguments -S "${(@)args}"
+}
 
 : << EOF
 Source Code Spelling Correction

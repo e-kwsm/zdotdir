@@ -1,5 +1,6 @@
 #compdef munge
 
+_munge() {
 local -ar ciphers=(
   none
   default
@@ -47,5 +48,6 @@ local -ar args=(
   '(-S --socket=)'{-S,--socket=}'[Specify local domain socket for munged]:STRING'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

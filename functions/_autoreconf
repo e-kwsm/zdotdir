@@ -2,6 +2,7 @@
 
 # 2.71
 
+_autoreconf() {
 local -ar args=(
   '(- *)'{-h,--help}'[print this help, then exit]'
   '(- *)'{-V,--version}'[print version number, then exit]'
@@ -15,6 +16,7 @@ local -ar args=(
   '*:directory:_path_files -/'
 )
 _arguments "${(@)args}"
+}
 
 : << EOF
 Usage: /usr/bin/autoreconf [OPTION]... [DIRECTORY]...

@@ -2,6 +2,7 @@
 
 # sphinx-build 7.2.6
 
+_sphinx-build() {
 local -ar builders=(
   html
   dirhtml
@@ -40,6 +41,7 @@ local -ar args=(
   "*:filenames:"
 )
 _arguments "${(@)args}"
+}
 
 : << EOF
 usage: sphinx-build [OPTIONS] SOURCEDIR OUTPUTDIR [FILENAMES...]

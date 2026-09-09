@@ -1,5 +1,6 @@
 #compdef cvtsudoers
 
+_cvtsudoers() {
 local -ar args=(
   {-b,--base=}'[The base DN (distinguished name) that will be used when performing LDAP queries]:dn'
   {-c,--config=}'[Specify the path to the configuration file]:file:_files'
@@ -23,5 +24,6 @@ local -ar args=(
   '*:file:_files'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

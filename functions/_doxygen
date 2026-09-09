@@ -1,5 +1,6 @@
 #compdef doxygen
 
+_doxygen() {
 local -ar args=(
   '(-x -x_noenv)-s[Ommit comments]'
   '(-u -x -x_noenv)-g[Generate a template configuration file]'
@@ -12,5 +13,6 @@ local -ar args=(
   '1:: config:_files'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

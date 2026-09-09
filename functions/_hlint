@@ -1,5 +1,6 @@
 #compdef hlint
 
+_hlint() {
 local -ar args=(
   '(-r --report)'{-r,--report=}'-[Generate a report in HTML]:FILE:_files -g "*.html"'
   '(-h --hint)'{-h,--hint=}'[Hint/ignore file to use]:FILE:_files'
@@ -20,8 +21,7 @@ local -ar args=(
   '*:file:_files -g "*.hs" "*.lhs"'
 )
 _arguments "${(@)args}"
-
-return
+}
 
 : << 'EOF'
 HLint v3.10, (C) Neil Mitchell 2006-2025

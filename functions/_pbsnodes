@@ -1,5 +1,6 @@
 #compdef pbsnodes
 
+_pbsnodes() {
 local -ar args=(
   -a'[All attributes of a node or all nodes are listed.]:node'
   -x'[Same as -a, but the output has an XML-like format.]:node'
@@ -13,5 +14,6 @@ local -ar args=(
   -s'[Specify the PBS server’s hostname or IP address.]'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

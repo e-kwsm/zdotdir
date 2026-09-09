@@ -1,5 +1,6 @@
 #compdef srun
 
+_srun() {
 local -ar PROFILES=(
   all
   none
@@ -40,5 +41,6 @@ local -ar args=(
   '*::args: _normal'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh

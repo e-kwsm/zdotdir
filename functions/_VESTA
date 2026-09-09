@@ -1,6 +1,8 @@
 #compdef VESTA
 
+_VESTA() {
 _arguments \
   '*:files:_files -g "(CONTCAR|POSCAR|*.(cif|cml|mol|sdf|vasp|vesta|xyz))"'
+}
 
 # vim:ft=zsh

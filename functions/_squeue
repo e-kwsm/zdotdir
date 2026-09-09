@@ -1,5 +1,6 @@
 #compdef squeue
 
+_squeue() {
 local -ar args=(
   '(-A --account)'{-A,--account=}'[Specify the accounts of the jobs to view.]:account_list'
   '(-a --all)'{-a,--all}'[Display information about jobs and job steps in all partitions.]'
@@ -20,5 +21,6 @@ local -ar args=(
   '(-w --nodelist)'{-w,--nodelist=}'[Report only on jobs allocated to the specified node or list of nodes.]:hostlist'
 )
 _arguments "${(@)args}"
+}
 
 # vim:ft=zsh
