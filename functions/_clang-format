@@ -14,14 +14,14 @@ local -ar styles=(
 )
 
 local -ar args=(
-  --Werror'[If set, changes formatting warnings to errors]'
+  '--Werror[If set, changes formatting warnings to errors]'
   '(--dry-run -n)'{--dry-run,-n}'[If set, do not actually make the formatting changes]'
-  --dump-config'[Dump configuration options to stdout and exit.]'
-  --fcolor-diagnostics'[If set, and on a color-capable terminal controls whether or not to print diagnostics in color]'
-  -i'[Inplace edit <file>s, if specified.]'
-  --sort-includes'[If set, overrides the include sorting behavior determined by the SortIncludes style flag]'
-  --style='[Coding style]:style:(LLVM Google Chromium Microsoft Mozilla WebKit)'
-  --verbose'[If set, shows the list of processed files]'
+  '--dump-config[Dump configuration options to stdout and exit.]'
+  '--fcolor-diagnostics[If set, and on a color-capable terminal controls whether or not to print diagnostics in color]'
+  '-i[Inplace edit <file>s, if specified.]'
+  '--sort-includes[If set, overrides the include sorting behavior determined by the SortIncludes style flag]'
+  '--style=[Coding style]:style:(LLVM Google Chromium Microsoft Mozilla WebKit)'
+  '--verbose[If set, shows the list of processed files]'
   '(- *)--help[Display available options (--help-hidden for more)]'
   '(- *)--help-hidden[Display all available options]'
   '(- *)--help-list[Display list of available options (--help-list-hidden for more)]'
