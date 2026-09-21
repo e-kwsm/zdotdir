@@ -1,0 +1,33 @@
+#compdef stylish-haskell
+
+_stylish-haskell() {
+  local -ar specs=(
+    '(- *)'{-h,--help}'[Show this help text]'
+    '(- *)'--version'[Show version information]'
+    '(-c --config)'{-c,--config}'[Configuration file]:CONFIG:_files'
+    # -r,--recursive           Recursive file search
+    '(-v --verbose)'{-v,--verbose}'[Run in verbose mode]'
+    '(- *)'{-d,--defaults}'[Dump default config and exit]'
+    '(-i --inplace)'{-i,--inplace}'[Overwrite the given files in place]'
+    # --no-utf8                Don't force UTF-8 stdin/stdout
+    '*:files:_files -g "*.hs"'
+  )
+  _arguments "${(@)specs}"
+}
+
+: << EOF
+stylish-haskell 0.14.5.0
+
+Usage: stylish-haskell [FILENAME]
+
+Available options:
+  -h,--help                Show this help text
+  --version                Show version information
+  -c,--config CONFIG       Configuration file
+  -r,--recursive           Recursive file search
+  -v,--verbose             Run in verbose mode
+  -d,--defaults            Dump default config and exit
+  -i,--inplace             Overwrite the given files in place
+  --no-utf8                Don't force UTF-8 stdin/stdout
+  FILENAME                 Input file(s)
+EOF
