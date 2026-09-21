@@ -1,0 +1,101 @@
+#compdef fourmolu
+
+_fourmolu() {
+  local -ar specs=(
+    '(- *)'{-h,--help}'[Show this help text]'
+    '(- *)'{-v,--version}'[Print version of the program]'
+    '(- *)--print-defaults[Print default configuration options that can be used in fourmolu.yaml]'
+    '(-i -m --mode)-i[A shortcut for --mode inplace]'
+    '(-i -m --mode)'{-m,--mode}"[Mode of operation: 'stdout' (the default), 'inplace', or 'check']:MODE:(stdout inplace check)"
+    '*:files:_files -g "*.hs"'
+  )
+  _arguments "${(@)specs}"
+}
+
+: << EOF
+Usage: fourmolu [-v|--version] [--manual-exts] [--print-defaults] 
+                [-i | (-m|--mode MODE)] [-q|--quiet] [-o|--ghc-opt OPT] 
+                [-f|--fixity FIXITY] [-r|--reexport REEXPORT] 
+                [-p|--package PACKAGE] [-u|--unsafe] [-d|--debug] 
+                [-c|--check-idempotence] [--color WHEN] [--start-line START] 
+                [--end-line END] [--indentation INT] [--column-limit OPTION] 
+                [--function-arrows OPTION] [--comma-style OPTION] 
+                [--import-export-style OPTION] [--indent-wheres BOOL] 
+                [--record-brace-space BOOL] [--newlines-between-decls INT] 
+                [--haddock-style OPTION] [--haddock-style-module OPTION] 
+                [--let-style OPTION] [--in-style OPTION] 
+                [--single-constraint-parens OPTION] [--unicode OPTION] 
+                [--respectful BOOL] [--no-cabal] [--stdin-input-file ARG] 
+                [-t|--source-type TYPE] [FILE]
+
+Available options:
+  -h,--help                Show this help text
+  -v,--version             Print version of the program
+  --manual-exts            Display extensions that need to be enabled manually
+  --print-defaults         Print default configuration options that can be used
+                           in fourmolu.yaml
+  -i                       A shortcut for --mode inplace
+  -m,--mode MODE           Mode of operation: 'stdout' (the default), 'inplace',
+                           or 'check'
+  -q,--quiet               Make output quieter
+  -o,--ghc-opt OPT         GHC options to enable (e.g. language extensions)
+  -f,--fixity FIXITY       Fixity declaration to use (an override)
+  -r,--reexport REEXPORT   Module re-export that Fourmolu should know about
+  -p,--package PACKAGE     Explicitly specified dependency (for operator
+                           fixity/precedence only)
+  -u,--unsafe              Do formatting faster but without automatic detection
+                           of defects
+  -d,--debug               Output information useful for debugging
+  -c,--check-idempotence   Fail if formatting is not idempotent
+  --color WHEN             Colorize the output; WHEN can be 'never', 'always',
+                           or 'auto' (the default)
+  --start-line START       Start line of the region to format (starts from 1)
+  --end-line END           End line of the region to format (inclusive)
+  --indentation INT        Number of spaces per indentation step (default: 4)
+  --column-limit OPTION    Max line length for automatic line breaking (default:
+                           none)
+  --function-arrows OPTION Styling of arrows in type signatures (choices:
+                           "trailing", "leading", or "leading-args") (default:
+                           trailing)
+  --comma-style OPTION     How to place commas in multi-line lists, records,
+                           etc. (choices: "leading" or "trailing") (default:
+                           leading)
+  --import-export-style OPTION
+                           Styling of import/export lists (choices: "leading",
+                           "trailing", or "diff-friendly") (default:
+                           diff-friendly)
+  --indent-wheres BOOL     Whether to full-indent or half-indent 'where'
+                           bindings past the preceding body (default: false)
+  --record-brace-space BOOL
+                           Whether to leave a space before an opening record
+                           brace (default: false)
+  --newlines-between-decls INT
+                           Number of spaces between top-level declarations
+                           (default: 1)
+  --haddock-style OPTION   How to print Haddock comments (choices:
+                           "single-line", "multi-line", or "multi-line-compact")
+                           (default: multi-line)
+  --haddock-style-module OPTION
+                           How to print module docstring (default: same as
+                           'haddock-style')
+  --let-style OPTION       Styling of let blocks (choices: "auto", "inline",
+                           "newline", or "mixed") (default: auto)
+  --in-style OPTION        How to align the 'in' keyword with respect to the
+                           'let' keyword (choices: "left-align", "right-align",
+                           or "no-space") (default: right-align)
+  --single-constraint-parens OPTION
+                           Whether to put parentheses around a single constraint
+                           (choices: "auto", "always", or "never") (default:
+                           always)
+  --unicode OPTION         Output Unicode syntax (choices: "detect", "always",
+                           or "never") (default: never)
+  --respectful BOOL        Give the programmer more choice on where to insert
+                           blank lines (default: true)
+  --no-cabal               Do not extract default-extensions and dependencies
+                           from .cabal files
+  --stdin-input-file ARG   Path which will be used to find the .cabal file when
+                           using input from stdin
+  -t,--source-type TYPE    Set the type of source; TYPE can be 'module', 'sig',
+                           or 'auto' (the default)
+  FILE                     Haskell source files to format or stdin (the default)
+EOF
