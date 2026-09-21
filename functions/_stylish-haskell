@@ -9,7 +9,7 @@ _stylish-haskell() {
     '(-v --verbose)'{-v,--verbose}'[Run in verbose mode]'
     '(- *)'{-d,--defaults}'[Dump default config and exit]'
     '(-i --inplace)'{-i,--inplace}'[Overwrite the given files in place]'
-    # --no-utf8                Don't force UTF-8 stdin/stdout
+    "--no-utf8[Don't force UTF-8 stdin/stdout]"
     '*:files:_files -g "*.hs"'
   )
   _arguments "${(@)specs}"
