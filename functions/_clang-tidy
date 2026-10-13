@@ -3,7 +3,7 @@
 # LLVM version 22.1.1
 
 _clang-tidy() {
-  local -ar checks=($(_call_program optionals "$service" '--checks=*' --list-checks 2> /dev/null | sed -e 1d -e '/^\s*$/d' -e 'p; s/^\s*/-/'))
+  local -ar checks=($(_call_program optionals "$service" --config-file=/dev/null '--checks=*' --list-checks 2> /dev/null | sed -e 1d -e '/^\s*$/d' -e 'p; s/^\s*/-/'))
 
   local -ar args=(
     '(- *)'{-h,--help}'[Display available options (--help-hidden for more)]'
