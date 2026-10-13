@@ -15,8 +15,10 @@ _shellcheck() {
     "(--rcfile)--norc[Don't look for .shellcheckrc files]"
     '(--norc)--rcfile=[Prefer the specified configuration file over searching for one]:RCFILE:_files'
     '(-o --enable)'{-o,--enable=}'[List of optional checks to enable (or "all")]:checks:_values -s, checks $OPTIONALS'
-    '(-s --shell)'{-s,--shell=}'[Specify dialect]:SHELLNAME:(sh bash dash ksh busybox)'
+    '(-s --shell)'{-s,--shell=}'[Specify dialect]:SHELLNAME:(sh bash dash ksh busybox bats)'
+    '(-S --severity)'{-S,--severity=}'[Minimum severity of errors to consider]:SEVERITY:(error warning info style)'
     '(- *)'{-V,--version}'[Print version information]'
+    '(-x --external-sources)'{-x,--external-sources}"[Allow 'source' outside of FILES]"
     '(- *)--help[Show this usage summary and exit]'
     '*:files:_files -g "*.(bash|sh)"'
   )
