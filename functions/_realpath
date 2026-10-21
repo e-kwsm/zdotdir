@@ -2,9 +2,9 @@
 
 _realpath() {
   local -ar args=(
-    '(-E --canonicalize)'{-E,--canonicalize}'[all but the last component must exist (default)]'
-    '(-e --canonicalize-existing)'{-e,--canonicalize-existing}'[all components of the path must exist]'
-    '(-m --canonicalize-missing)'{-m,--canonicalize-missing}'[no path components need exist or be a directory]'
+    '(-E --canonicalize -m --canonicalize-missing -e --canonicalize-existing)'{-E,--canonicalize}'[all but the last component must exist (default)]'
+    '(-E --canonicalize -m --canonicalize-missing -e --canonicalize-existing)'{-e,--canonicalize-existing}'[all components of the path must exist]'
+    '(-E --canonicalize -m --canonicalize-missing -e --canonicalize-existing)'{-m,--canonicalize-missing}'[no path components need exist or be a directory]'
     '(-L --logical)'{-L,--logical}"[resolve '..' components before symlinks]"
     '(-P --physical)'{-P,--physical}'[resolve symlinks as encountered (default)]'
     '(-q --quiet)'{-q,--quiet}'[suppress most error messages]'
