@@ -38,7 +38,7 @@ _clang-tidy() {
     '--use-color[Use colors in diagnostics]'
     '--verify-config[Check the config files to ensure each check and option is recognized without running any checks.]'
     '--warnings-as-errors=[Upgrades warnings to errors.]:string:_values -s, string $checks'
-    '*:file:_files -g "*.(cc|cpp|h|hpp)"'
+    '*:file:_files -g "*.(c|cc|cpp|cxx|h|hpp)"'
   )
   _arguments "${(@)args}"
 }
