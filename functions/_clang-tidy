@@ -3,7 +3,7 @@
 # LLVM version 22.1.1
 
 _clang-tidy() {
-  local -ar checks=($(_call_program optionals "$service" --config-file=/dev/null '--checks=*' --list-checks 2> /dev/null | sed -e 1d -e '/^\s*$/d' -e 'p; s/^\s*/-/'))
+  local -ar checks=(${(f)"$("$service" '--checks=*' --config-file=/dev/null --list-checks | sed -n -e 1d -e 's/\s*//g' -e '/^\s*$/d' -e 'p' -e 's/^/-/p')"})
 
   local -ar args=(
     '(- *)'{-h,--help}'[Display available options (--help-hidden for more)]'
@@ -14,7 +14,7 @@ _clang-tidy() {
     '(- *)--print-options[Print non-default options after command line parsing]'
     '(- *)--version[Display the version of this program]'
     --allow-enabling-analyzer-alpha-checkers
-    "--checks=[Comma-separated list of globs with optional '-' prefix.]:string:_values -s, string $checks"
+    '--checks=[Comma-separated list of globs with optional '-' prefix.]:string:_values -s, string $checks'
     '(- --config-file)--config=[Specifies a configuration in YAML/JSON format]:string'
     '(- --config)--config-file=[Specify the path of .clang-tidy or custom config file]:string:_files'
     '--dump-config[Dumps configuration in the YAML format to stdout.]'
